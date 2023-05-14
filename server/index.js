@@ -1,17 +1,22 @@
 const express = require('express');
 const http = require('http');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-const mysql = require('mysql');
 
-const PORT = process.env.PORT || 3001;
 
 const app = express();
-app.use(express.json());
 
-const server = http.createServer();
 
-server.listen(PORT, () => {
-	console.log(`Server is running on http://localhost:${PORT} `);
+app.use(bodyParser.json());
+
+app.use(cors({
+	credentials: true,
+}));
+
+const server = http.createServer(app);
+
+server.listen(PORT = 3001, () => {
+	console.log(`Server is running on http://localhost:${PORT}/ `);
 });
 
 
