@@ -20,6 +20,19 @@
 	border: 1px solid #000;
 	border-radius: 10px;
 	padding: 1rem;
+	text-align: center;
+}
+.passwd-form > p{
+	font-size: .6rem;
+	color: #eee;
+	width: 75%;
+	margin: 0 auto;
+	line-height: 15px;
+}
+.passwd-form > label {
+	margin: 1rem auto .6rem;
+	color: #fff;
+	font-size: 1.3rem;
 }
 
 .passwd-form > button {
@@ -28,6 +41,12 @@
 	height: 2.5rem;
 	border: 1px solid #000;
 	border-radius: 15px;
+	font-size: 1.1rem;
 }
 
-
+@media (min-width: 1000px) {
+	.passwd-form {
+		width: 500px;
+		height: 400px;
+	}
+}
