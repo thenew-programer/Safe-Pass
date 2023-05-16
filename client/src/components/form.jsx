@@ -15,7 +15,7 @@ const addPass = (password, website, emailUser) => {
 
 const clearThis = target => {
 	if (target.value != null)
-	target.value = "";
+		target.value = "";
 }
 
 
@@ -49,8 +49,8 @@ const Form = () => {
 				addPass(password, website, email_user);
 				clearThis(document.getElementById('email'));
 				clearThis(document.getElementById('pass'));
-			}}>Save Credential
-
+			}}>
+				Save Credential
 			</button>
 		</div>
 	)
