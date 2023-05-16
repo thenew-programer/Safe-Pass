@@ -10,8 +10,8 @@ const app = express();
 // Connect to db
 export const db = mysql.createConnection({
 	user: 'jos',
-	password: 'jos@mysqlMachine.34',
 	host: 'localhost',
+	password: 'jos@mysqlMachine.34',
 	database: 'passwordManager'
 });
 
