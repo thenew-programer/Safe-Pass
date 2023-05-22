@@ -3,7 +3,7 @@ import Axios from "axios";
 import { useState } from 'react';
 import './addPassword.css';
 
-const server = 'https://pass-manager-58t7.onrender.com/';
+const server = 'https://passwordmanager-l5wn.onrender.com/';
 
 
 const addPass = (password, website, emailUser) => {

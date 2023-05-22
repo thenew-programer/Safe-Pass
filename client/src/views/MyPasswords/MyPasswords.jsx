@@ -2,12 +2,11 @@ import './MyPasswords.css';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const SERVER = "https://pass-manager-58t7.onrender.com/";
+const SERVER = "https://passwordmanager-l5wn.onrender.com/";
 
 const MyPasswords = () => {
 
 	const [passwordList, setPasswordList] = useState([]);
-	const [password, setPass] = useState('unknown');
 	useEffect(() => {
 		Axios.get(SERVER + 'showpasswords').then((response) => {
 			setPasswordList(response.data);
