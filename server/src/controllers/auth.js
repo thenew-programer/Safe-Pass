@@ -17,7 +17,7 @@ export const addPass = (req, res) => {
 };
 
 export const showPass = (req, res) => {
-	db.query("SELECT * FROM PasswordUserSite;", (err, result) => {
+	db.query(`SELECT * FROM ${process.env.DB_NAME};`, (err, result) => {
 		if (err) {
 			console.log(err);
 		} else {
