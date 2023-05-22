@@ -1,7 +1,7 @@
 import { insertToDB } from '../db/users.js';
 import { encrypt, decrypt } from '../utils/index.js';
 import { db } from '../index.js';
-import './config.js';
+import '../config.js';
 
 
 export const addPass = (req, res) => {
