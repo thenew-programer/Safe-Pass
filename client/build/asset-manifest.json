@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pass-manager/static/css/main.0d7aa2dc.css",
+    "main.js": "/pass-manager/static/js/main.44e4dc3c.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/pass-manager/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/pass-manager/index.html",
+    "main.0d7aa2dc.css.map": "/pass-manager/static/css/main.0d7aa2dc.css.map",
+    "main.44e4dc3c.js.map": "/pass-manager/static/js/main.44e4dc3c.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/pass-manager/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0d7aa2dc.css",
+    "static/js/main.44e4dc3c.js"
+  ]
+}
