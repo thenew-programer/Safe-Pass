@@ -23,7 +23,13 @@
 	height: 20px;
 }
 
-.icon:hover {
+.footer .icon:hover {
 	width: 25px;
 	height: 25px;
+}
+
+@media (max-width: 750px){
+	.footer ul li {
+		display: block;
+	}
 }
