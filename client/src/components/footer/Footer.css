@@ -1,0 +1,29 @@
+.footer {
+	width: 80%;
+	margin: auto;
+	color: #fff;
+	position: absolute;
+	bottom: 10%;
+	left: 10%;
+	display: flex;
+	justify-content: space-around;
+}
+.footer ul li {
+	list-style: none;
+	display: inline-block;
+	margin: 0 1rem;
+}
+.footer ul li a {
+	color: #fff;
+	cursor: pointer;
+}
+
+.footer .icon {
+	width: 20px;
+	height: 20px;
+}
+
+.icon:hover {
+	width: 25px;
+	height: 25px;
+}

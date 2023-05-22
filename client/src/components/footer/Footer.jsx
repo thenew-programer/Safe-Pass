@@ -1,0 +1,25 @@
+import React from "react"
+import './Footer.css';
+import { TbBrandGithub, TbBrandTwitter, TbBrandLinkedin } from 'react-icons/tb'
+
+const Footer = () => {
+	return (
+		<div>
+			<div className='footer'>
+				<div className='links'>
+					<ul>
+						<li><a href='https://github.com/the-new-programmer' target={'_blank'}><TbBrandGithub className='icon' /></a></li>
+						<li><a href='https://twitter.com/youssef_bouryal' target={'_blank'}><TbBrandTwitter className='icon' /></a></li>
+						<li><a href='https://www.linkedin.com/in/youssef-bouryal/' target={'_blank'}><TbBrandLinkedin className='icon' /></a></li>
+					</ul>
+				</div>
+				<div>
+					2023 &copy; all right Reserved.
+				</div>
+			</div>
+
+		</div>
+	)
+}
+
+export default Footer;
