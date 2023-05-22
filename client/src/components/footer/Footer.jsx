@@ -8,7 +8,7 @@ const Footer = () => {
 			<div className='footer'>
 				<div className='links'>
 					<ul>
-						<li><a href='https://github.com/the-new-programmer' target={'_blank'}><TbBrandGithub className='icon' /></a></li>
+						<li><a href='https://github.com/thenew-programer' target={'_blank'}><TbBrandGithub className='icon' /></a></li>
 						<li><a href='https://twitter.com/youssef_bouryal' target={'_blank'}><TbBrandTwitter className='icon' /></a></li>
 						<li><a href='https://www.linkedin.com/in/youssef-bouryal/' target={'_blank'}><TbBrandLinkedin className='icon' /></a></li>
 					</ul>
