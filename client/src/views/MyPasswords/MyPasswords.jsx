@@ -35,6 +35,7 @@ const MyPasswords = () => {
 
 	return (
 		<div className='container'>
+			<h5>Click to show password</h5>
 			<div className="passwords">
 				<div className="password">
 					{
