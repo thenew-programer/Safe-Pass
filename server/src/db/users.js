@@ -4,7 +4,7 @@ import '../config.js';
 
 export const insertToDB = (passwd, user, site, iv) => {
 
-	db.query(`INSERT INTO ${process.env.DB_TABLE}(Password, User, Site, Iv) VALUES (?, ?, ?, ?)`,
+	db.query(`INSERT INTO passwordManager(Password, User, Site, Iv) VALUES (?, ?, ?, ?)`,
 		[passwd, user, site, iv],
 		(err) => {
 			if (err) return false;
@@ -13,7 +13,7 @@ export const insertToDB = (passwd, user, site, iv) => {
 };
 
 export const getAll = () => {
-	db.query(`SELECT * FROM ${process.env.DB_TABLE};`, (err, result) => {
+	db.query(`SELECT * FROM passwordManager;`, (err, result) => {
 		if (err) {
 			console.log(err);
 		} else {
