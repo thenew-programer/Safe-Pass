@@ -1,6 +1,7 @@
 import { insertToDB } from '../db/users.js';
 import { encrypt, decrypt } from '../utils/index.js';
 import { db } from '../index.js';
+import './config.js';
 
 
 export const addPass = (req, res) => {
@@ -17,7 +18,7 @@ export const addPass = (req, res) => {
 };
 
 export const showPass = (req, res) => {
-	db.query(`SELECT * FROM ${process.env.DB_NAME};`, (err, result) => {
+	db.query(`SELECT * FROM ${process.env.DB_TABLE};`, (err, result) => {
 		if (err) {
 			console.log(err);
 		} else {
