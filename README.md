@@ -6,7 +6,7 @@ it's an app that manages your password, and store them in an sql db. I built it 
 
 
 ## Usage
-**[Go to this Link]()**
+**[Go to this Link](https://thenew-programer.github.io/pass-manager/) >>**
 ### Add password
 provede the `website`, `email or username`, and `password` and click save credentials.
 ### My Password
