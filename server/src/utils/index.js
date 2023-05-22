@@ -1,4 +1,4 @@
-import crypto, { randomBytes } from 'crypto';
+import crypto from 'crypto';
 
 
 const KEY = '1234567890qwertyuipo324567891023';
