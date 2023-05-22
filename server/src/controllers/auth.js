@@ -18,7 +18,7 @@ export const addPass = (req, res) => {
 };
 
 export const showPass = (req, res) => {
-	db.query(`SELECT * FROM ${process.env.DB_TABLE};`, (err, result) => {
+	db.query(`SELECT * FROM ${process.env.DATABASE_TABLE};`, (err, result) => {
 		if (err) {
 			console.log(err);
 		} else {
