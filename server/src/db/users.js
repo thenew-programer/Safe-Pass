@@ -1,5 +1,5 @@
 import { db } from '../index.js';
-import './config.js';
+import '../config.js';
 
 
 export const insertToDB = (passwd, user, site, iv) => {
