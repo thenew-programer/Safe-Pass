@@ -1,7 +1,9 @@
 import crypto from 'crypto';
+import config from 'dotenv';
 
 
-const KEY = '1234567890qwertyuipo324567891023';
+config.config();
+const KEY = process.env.ENCRYPTION_KEY;
 
 export const encrypt = (password) => {
 	const iv = Buffer.from(crypto.randomBytes(16));
