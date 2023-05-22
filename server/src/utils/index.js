@@ -1,8 +1,7 @@
 import crypto from 'crypto';
-import config from 'dotenv';
+import '../config.js';
 
 
-config.config();
 const KEY = process.env.ENCRYPTION_KEY;
 
 export const encrypt = (password) => {
