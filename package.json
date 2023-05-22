@@ -1,11 +1,15 @@
 {
+	"homepage": "http://thenew-programer.github.io/pass-manager/",
 	"name": "pass-manager",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon"
+		"start": "nodemon",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build",
+		"build": "react-script build"
 	},
 	"keywords": [],
 	"author": "",
