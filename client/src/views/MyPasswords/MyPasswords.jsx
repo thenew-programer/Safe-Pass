@@ -2,7 +2,7 @@ import './MyPasswords.css';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const SERVER = "http://localhost:3001/";
+const SERVER = "https://pass-manager-58t7.onrender.com";
 
 const MyPasswords = () => {
 
