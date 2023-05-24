@@ -21,9 +21,21 @@ const AddPassword = () => {
 	}
 
 
+	const fieldFailure = () => {
+		if (document.getElementById('error') !== null) return;
+		if (document.getElementById('errorF') !== null) {
+			document.getElementById('errorF').remove();
+		}
+
+		const email = document.getElementById('err');
+		email.insertAdjacentHTML('afterend', '<div id="error" class="failure-alert" >Fill all the fields</div>');
+	}
 
 	const failure = () => {
 		if (document.getElementById('errorF') !== null) return;
+		if (document.getElementById('error') !== null) {
+			document.getElementById('error').remove();
+		}
 
 		const email = document.getElementById('email');
 		email.insertAdjacentHTML('afterend', '<div id="errorF" class="failure-alert" >Email is already taken!</div>');
@@ -32,8 +44,11 @@ const AddPassword = () => {
 
 	const success = () => {
 		if (document.getElementById('errorS') !== null) return;
+		if (document.getElementById('error') !== null) {
+			document.getElementById('error').remove();
+		}
 
-		const btn = document.getElementById('btn');
+		const btn = document.getElementById('err');
 		btn.insertAdjacentHTML('afterend', '<div id="errorS" class="success-alert" >/ Password Added successfully.</div >');
 	}
 
@@ -57,17 +72,30 @@ const AddPassword = () => {
 
 	const addPasswordFunc = (event) => {
 		if (event.key === 'Enter') {
-			addPass();
-			if (addPassReturn === 1) {
-				setTimeout(clearThis(document.getElementById('site')), 800);
-				setTimeout(clearThis(document.getElementById('email')), 900);
-				setTimeout(clearThis(document.getElementById('pass')), 1000);
-				success();
-			} else if (addPassReturn === 0) {
-				failure();
+			isEmpty();
+			if (addPassReturn === -100) {
+				fieldFailure();
+			}
+			else {
+
+				addPass();
+				if (addPassReturn === 1) {
+					setTimeout(clearThis(document.getElementById('site')), 800);
+					setTimeout(clearThis(document.getElementById('email')), 900);
+					setTimeout(clearThis(document.getElementById('pass')), 1000);
+					success();
+				} else if (addPassReturn === 0) {
+					failure();
+				}
 			}
 		}
 	};
+
+	const isEmpty = () => {
+		if (website.length === 0 || email_user.length === 0 || password.length === 0) {
+			setAddPassReturn(-100);
+		}
+	}
 
 
 	useEffect(() => {
@@ -80,6 +108,7 @@ const AddPassword = () => {
 
 		<div className='passwd-form' >
 
+			<div className="none" id="err"></div>
 			<label htmlFor="site">Website</label>
 			<input type="text" id="site"
 				placeholder='e.g. linkedIn'
@@ -103,14 +132,21 @@ const AddPassword = () => {
 			<p>Passwords must contain at least eight characters, including at least 1 letter and 1 number. </p>
 
 			<button type="submit" onClick={() => {
-				addPass();
-				if (addPassReturn === 1) {
-					setTimeout(clearThis(document.getElementById('site')), 800);
-					setTimeout(clearThis(document.getElementById('email')), 900);
-					setTimeout(clearThis(document.getElementById('pass')), 1000);
-					success();
-				} else if (addPassReturn == 0) {
-					failure();
+				isEmpty();
+				if (addPassReturn === -100) {
+					fieldFailure();
+				}
+				else {
+
+					addPass();
+					if (addPassReturn === 1) {
+						setTimeout(clearThis(document.getElementById('site')), 800);
+						setTimeout(clearThis(document.getElementById('email')), 900);
+						setTimeout(clearThis(document.getElementById('pass')), 1000);
+						success();
+					} else if (addPassReturn == 0) {
+						failure();
+					}
 				}
 			}} id='btn'>
 				Save Credential
