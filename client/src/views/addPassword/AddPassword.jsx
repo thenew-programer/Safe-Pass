@@ -41,7 +41,7 @@ const AddPassword = () => {
 			passwd: password,
 			site: website
 		}).then((response) => {
-			if (response.data === 'Success') {
+			if (response.data == 'Success') {
 				console.log(response.data);
 				return 1;
 			} else {
