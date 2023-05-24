@@ -27,20 +27,22 @@ export const getAll = () => {
 };
 
 export const isExist = (data) => {
-	const query = `SELECT * FROM ${process.env.DATABASE_TABLE} WHERE USER = ? AND Site = ?`;
-	let returnValue = false;
-	db.query(query, [data.emailUser, data.website], (err, result) => {
-		if (err) console.error(err);
-		else {
-			if (result.length > 0) {
-				console.log('User exist');
-				returnValue = true;
+	return new Promise((resolve, reject) => {
+		const query = `SELECT * FROM ${process.env.DATABASE_TABLE} WHERE USER = ? AND Site = ?`;
+		db.query(query, [data.emailUser, data.website], (err, result) => {
+			if (err) {
+				console.error(err);
+				reject(err);
+			} else {
+				if (result.length > 0) {
+					console.log('User exist');
+					resolve(true);
+				}
+				else {
+					console.log('User doesn\'t exist');
+					resolve(false)
+				}
 			}
-			else {
-				console.log('User doesn\'t exist');
-				returnValue = false;
-			}
-		}
+		});
 	});
-	return returnValue;
-}
+};

@@ -4,7 +4,7 @@ import { db } from '../index.js';
 import '../config.js';
 
 
-export const addPass = (req, res) => {
+export const addPass = async (req, res) => {
 	const encryptedObj = encrypt(req.body.passwd);
 
 	const password = encryptedObj.password;
@@ -13,22 +13,31 @@ export const addPass = (req, res) => {
 	website.toUpperCase();
 	const iv = encryptedObj.iv;
 
-	let isElementExist = isExist({
-		emailUser: emailUser,
-		website: website,
-	});
-	console.log('isElementExist = ' + isElementExist)
-	// if the user doen't exist
-	if (isElementExist === false) {
-		const state = insertToDB(password, emailUser, website, iv);
+	try {
 
-		if (state === false) console.log("An Error accured! in db");
-		else res.send(JSON.stringify('Success'));
-		console.log('Success | User does\'nt exist');
+		let isElementExist = await isExist({
+			emailUser: emailUser,
+			website: website,
+		});
 
-	} else{ 	// if the user exist
-		res.send(JSON.stringify("Email already taken."));
-		console.log("failure | User exist");
+
+		console.log('isElementExist = ' + isElementExist)
+
+		// if the user doen't exist
+		if (isElementExist === false) {
+			const state = insertToDB(password, emailUser, website, iv);
+
+			if (state === false) console.log("An Error accured! in db");
+			else {
+				res.send(JSON.stringify('Success'));
+				console.log('Success | User does\'nt exist');
+			}
+		} else { 	// if the user exist
+			res.send(JSON.stringify("Email already taken."));
+			console.log("failure | User exist");
+		}
+	} catch (err) {
+		console.log(err);
 	}
 };
 
