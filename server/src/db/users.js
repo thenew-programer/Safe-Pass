@@ -15,7 +15,7 @@ export const insertToDB = (passwd, user, site, iv) => {
 
 export const getAll = () => {
 	const query = `SELECT * FROM ${process.env.DATABASE_TABLE};`;
-	const returnValue = 0;
+	let returnValue = 0;
 	db.query(query, (err, result) => {
 		if (err) {
 			console.log(err);
