@@ -42,7 +42,7 @@ export const showPass = (req, res) => {
 	// 	}
 	// });
 	const result = getAll();
-	res.send(result);
+	res.send(JSON.stringify(result));
 };
 
 export const decryptPass = (req, res) => {
