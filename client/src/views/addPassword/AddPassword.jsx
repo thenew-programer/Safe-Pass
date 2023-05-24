@@ -42,8 +42,10 @@ const AddPassword = () => {
 			site: website
 		}).then((response) => {
 			if (response.data === 1) {
+				console.log(response.data);
 				return 1;
 			} else {
+				console.log(response.data);
 				return 0;
 			}
 		});
