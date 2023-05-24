@@ -1,4 +1,4 @@
-import { insertToDB, isExist } from '../db/users.js';
+import { getAll, insertToDB, isExist } from '../db/users.js';
 import { encrypt, decrypt } from '../utils/index.js';
 import { db } from '../index.js';
 import '../config.js';
@@ -19,7 +19,7 @@ export const addPass = (req, res) => {
 	});
 	console.log('isElementExist = ' + isElementExist)
 	// if the user doen't exist
-	if (isElementExist == 0) {
+	if (isElementExist === false) {
 		const state = insertToDB(password, emailUser, website, iv);
 
 		if (state === false) console.log("An Error accured! in db");
@@ -34,13 +34,15 @@ export const addPass = (req, res) => {
 
 
 export const showPass = (req, res) => {
-	db.query(`SELECT * FROM ${process.env.DATABASE_TABLE};`, (err, result) => {
-		if (err) {
-			console.log(err);
-		} else {
-			res.send(result);
-		}
-	})
+	// db.query(`SELECT * FROM ${process.env.DATABASE_TABLE};`, (err, result) => {
+	// 	if (err) {
+	// 		console.log(err);
+	// 	} else {
+	// 		res.send(result);
+	// 	}
+	// });
+	const result = getAll();
+	res.send(result);
 };
 
 export const decryptPass = (req, res) => {

@@ -15,28 +15,32 @@ export const insertToDB = (passwd, user, site, iv) => {
 
 export const getAll = () => {
 	const query = `SELECT * FROM ${process.env.DATABASE_TABLE};`;
+	const returnValue = 0;
 	db.query(query, (err, result) => {
 		if (err) {
 			console.log(err);
 		} else {
-			return result;
+			returnValue = result;
 		}
 	});
+	return returnValue;
 };
 
 export const isExist = (data) => {
 	const query = `SELECT * FROM ${process.env.DATABASE_TABLE} WHERE USER = ? AND Site = ?`;
+	let returnValue = false;
 	db.query(query, [data.emailUser, data.website], (err, result) => {
 		if (err) console.error(err);
 		else {
 			if (result.length > 0) {
 				console.log('User exist');
-				return 1;
+				returnValue = true;
 			}
 			else {
 				console.log('User doesn\'t exist');
-				return 0;
+				returnValue = false;
 			}
 		}
-	})
+	});
+	return returnValue;
 }
