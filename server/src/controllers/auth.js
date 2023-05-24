@@ -9,7 +9,8 @@ export const addPass = (req, res) => {
 
 	const password = encryptedObj.password;
 	const emailUser = req.body.email_user;
-	const website = toUpperCase(req.body.site);
+	const website = req.body.site;
+	website.toUpperCase();
 	const iv = encryptedObj.iv;
 
 	const isElementExist = isExist({
