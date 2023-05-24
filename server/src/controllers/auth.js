@@ -17,6 +17,7 @@ export const addPass = (req, res) => {
 		emailUser: emailUser,
 		website: website,
 	});
+	console.log('isElementExist = ' + isElementExist)
 	// if the user doen't exist
 	if (isElementExist == 0) {
 		const state = insertToDB(password, emailUser, website, iv);
@@ -25,7 +26,7 @@ export const addPass = (req, res) => {
 		else res.send(JSON.stringify('Success'));
 		console.log('Success | User does\'nt exist');
 
-	} else if (isElementExist == 1){ 	// if the user exist
+	} else{ 	// if the user exist
 		res.send(JSON.stringify("Email already taken."));
 		console.log("failure | User exist");
 	}
