@@ -13,15 +13,19 @@ export const addPass = (req, res) => {
 	website.toUpperCase();
 	const iv = encryptedObj.iv;
 
+	let isElementExist = isExist({
+		emailUser: emailUser,
+		website: website,
+	});
 	// if the user doen't exist
-	if (isExist({emailUser: emailUser,website: website}) == 0) {
+	if (isElementExist == 0) {
 		const state = insertToDB(password, emailUser, website, iv);
 
 		if (state === false) console.log("An Error accured! in db");
 		else res.send(JSON.stringify('Success'));
 		console.log('Success | User does\'nt exist');
 
-	} else { 	// if the user exist
+	} else if (isElementExist == 1){ 	// if the user exist
 		res.send(JSON.stringify("Email already taken."));
 		console.log("failure | User exist");
 	}
