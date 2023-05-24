@@ -5,27 +5,6 @@ import './addPassword.css';
 
 const server = 'https://passwordmanager-l5wn.onrender.com/addPass';
 
-const clearThis = target => {
-	if (target.value != null)
-		target.value = "";
-}
-
-
-
-const failure = () => {
-	if (document.getElementById('errorF') !== null) return;
-
-	const email = document.getElementById('email');
-	email.insertAdjacentHTML('afterend', '<div id="errorF" class="failure-alert" >Email is already taken!</div>');
-}
-
-
-const success = () => {
-	if (document.getElementById('errorS') !== null) return;
-
-	const btn = document.getElementById('btn');
-	btn.insertAdjacentHTML('afterend', '<div id="errorS" class="success-alert" >Password Added successfully.</div >');
-}
 
 
 const AddPassword = () => {
@@ -33,7 +12,30 @@ const AddPassword = () => {
 	let [password, setPassword] = useState('');
 	let [website, setWebsite] = useState('');
 	let [email_user, setEmail_user] = useState('');
-	let [addPassReturn, setAddPassReturn ] = useState(0);
+	let [addPassReturn, setAddPassReturn] = useState(-1);
+
+
+	const clearThis = target => {
+		if (target.value != null)
+			target.value = "";
+	}
+
+
+
+	const failure = () => {
+		if (document.getElementById('errorF') !== null) return;
+
+		const email = document.getElementById('email');
+		email.insertAdjacentHTML('afterend', '<div id="errorF" class="failure-alert" >Email is already taken!</div>');
+	}
+
+
+	const success = () => {
+		if (document.getElementById('errorS') !== null) return;
+
+		const btn = document.getElementById('btn');
+		btn.insertAdjacentHTML('afterend', '<div id="errorS" class="success-alert" >/ Password Added successfully.</div >');
+	}
 
 
 	const addPass = () => {
@@ -57,12 +59,11 @@ const AddPassword = () => {
 		if (event.key === 'Enter') {
 			addPass();
 			if (addPassReturn === 1) {
-				addPass(password, website, email_user);
 				setTimeout(clearThis(document.getElementById('site')), 800);
 				setTimeout(clearThis(document.getElementById('email')), 900);
 				setTimeout(clearThis(document.getElementById('pass')), 1000);
 				success();
-			} else if (addPassReturn === 0){
+			} else if (addPassReturn === 0) {
 				failure();
 			}
 		}
@@ -108,7 +109,7 @@ const AddPassword = () => {
 					setTimeout(clearThis(document.getElementById('email')), 900);
 					setTimeout(clearThis(document.getElementById('pass')), 1000);
 					success();
-				} else if (addPassReturn == 0){
+				} else if (addPassReturn == 0) {
 					failure();
 				}
 			}} id='btn'>
