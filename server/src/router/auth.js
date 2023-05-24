@@ -1,4 +1,3 @@
-import  express  from 'express';
 import { addPass, root, showPass, decryptPass } from '../controllers/auth.js';
 
 

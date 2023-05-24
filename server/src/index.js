@@ -1,6 +1,6 @@
-import  express  from 'express';
+import express from 'express';
 import http from 'http';
-import bodyParser  from 'body-parser';
+import bodyParser from 'body-parser';
 import mysql from 'mysql2';
 import cors from 'cors';
 import router from './router/index.js';
@@ -10,8 +10,13 @@ const app = express();
 
 // Connect to db
 export const db = mysql.createConnection(process.env.DATABASE_URL);
-console.log('Connected to PlanetScale');
 
+db.connect((err) => {
+	if (err) {
+		console.error('Error connection to MYSQL db:', err);
+	}
+	else console.log("Connected to sql successfully");
+})
 
 app.use(cors());
 app.use(bodyParser.json());
