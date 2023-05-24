@@ -34,15 +34,15 @@ export const addPass = (req, res) => {
 
 
 export const showPass = (req, res) => {
-	// db.query(`SELECT * FROM ${process.env.DATABASE_TABLE};`, (err, result) => {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		res.send(result);
-	// 	}
-	// });
-	const result = getAll();
-	res.send(JSON.stringify(result));
+	db.query(`SELECT * FROM ${process.env.DATABASE_TABLE};`, (err, result) => {
+		if (err) {
+			console.log(err);
+		} else {
+			res.send(result);
+		}
+	});
+	// const result = getAll();
+	// res.send(JSON.stringify(result));
 };
 
 export const decryptPass = (req, res) => {
