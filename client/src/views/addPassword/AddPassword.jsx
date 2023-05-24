@@ -33,6 +33,7 @@ const AddPassword = () => {
 	let [password, setPassword] = useState('');
 	let [website, setWebsite] = useState('');
 	let [email_user, setEmail_user] = useState('');
+	let [addPassReturn, setAddPassReturn ] = useState(0);
 
 
 	const addPass = () => {
@@ -43,10 +44,10 @@ const AddPassword = () => {
 		}).then((response) => {
 			if (response.data == 'Success') {
 				console.log(response.data);
-				return 1;
+				setAddPassReturn(1);
 			} else {
 				console.log(response.data);
-				return 0;
+				setAddPassReturn(0);
 			}
 		});
 	};
@@ -54,14 +55,14 @@ const AddPassword = () => {
 
 	const addPasswordFunc = (event) => {
 		if (event.key === 'Enter') {
-			let validity = addPass();
-			if (validity === 1) {
+			addPass();
+			if (addPassReturn === 1) {
 				addPass(password, website, email_user);
 				setTimeout(clearThis(document.getElementById('site')), 800);
 				setTimeout(clearThis(document.getElementById('email')), 900);
 				setTimeout(clearThis(document.getElementById('pass')), 1000);
 				success();
-			} else {
+			} else if (addPassReturn === 0){
 				failure();
 			}
 		}
@@ -101,13 +102,13 @@ const AddPassword = () => {
 			<p>Passwords must contain at least eight characters, including at least 1 letter and 1 number. </p>
 
 			<button type="submit" onClick={() => {
-				let validity = addPass();
-				if (validity === 1) {
+				addPass();
+				if (addPassReturn === 1) {
 					setTimeout(clearThis(document.getElementById('site')), 800);
 					setTimeout(clearThis(document.getElementById('email')), 900);
 					setTimeout(clearThis(document.getElementById('pass')), 1000);
 					success();
-				} else {
+				} else if (addPassReturn == 0){
 					failure();
 				}
 			}} id='btn'>
