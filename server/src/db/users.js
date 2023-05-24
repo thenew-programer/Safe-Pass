@@ -31,11 +31,11 @@ export const isExist = (data) => {
 		else {
 			if (result.length > 0) {
 				console.log('User exist');
-				return true;
+				return 1;
 			}
 			else {
 				console.log('User doesn\'t exist');
-				return false;
+				return 0;
 			}
 		}
 	})
