@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Routes, NavLink } from 'react-router-dom';
 import AddPassword from '../../views/addPassword/AddPassword';
 import MyPasswords from '../../views/MyPasswords/MyPasswords';
 import RmPassword from '../../views/RmPassword/RmPassword';
@@ -65,13 +65,13 @@ const Sidebar = () => {
 					}
 				</div>
 			</div>
-			<Switch>
+			<Routes>
 				<Route exact path='/' element={<Profile />} />
 				<Route path='/home' element={<Profile />} />
 				<Route path='/add' element={<AddPassword />} />
 				<Route path='/show' element={<MyPasswords />} />
 				<Route path='/remove' element={<RmPassword />} />
-			</Switch>
+			</Routes>
 		</div>
 	);
 };
