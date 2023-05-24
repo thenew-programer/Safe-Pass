@@ -1,4 +1,4 @@
-import { insertToDB } from '../db/users.js';
+import { insertToDB, isExist } from '../db/users.js';
 import { encrypt, decrypt } from '../utils/index.js';
 import { db } from '../index.js';
 import '../config.js';
@@ -9,12 +9,20 @@ export const addPass = (req, res) => {
 
 	const password = encryptedObj.password;
 	const emailUser = req.body.email_user;
-	const website = req.body.site;
+	const website = toUpperCase(req.body.site);
 	const iv = encryptedObj.iv;
 
-	const state = insertToDB(password, emailUser, website, iv);
-	if (state === false) res.send("An Error accured!");
-	else res.send("Success");
+	const isElementExist = isExist({
+		emailUser: emailUser,
+		website: website,
+	});
+	if (isElementExist === false) {
+		const state = insertToDB(password, emailUser, website, iv);
+		if (state === false) console.log("An Error accured! in db");
+		else res.send(1);
+	} else {
+		res.send(JSON.stringify("Email already taken."));
+	}
 };
 
 export const showPass = (req, res) => {
@@ -36,3 +44,4 @@ export const decryptPass = (req, res) => {
 export const root = (req, res) => {
 	res.send("Hello world");
 };
+
