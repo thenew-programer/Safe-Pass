@@ -30,6 +30,12 @@
 
 @media (max-width: 750px){
 	.footer ul li {
-		display: block;
+		margin: 0 2rem;
+	}
+	.footer {
+		left: 20%;
+	}
+	.allRight {
+		display: none;
 	}
 }

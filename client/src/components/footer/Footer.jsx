@@ -13,7 +13,7 @@ const Footer = () => {
 						<li><a href='https://www.linkedin.com/in/youssef-bouryal/' target={'_blank'}><TbBrandLinkedin className='icon' /></a></li>
 					</ul>
 				</div>
-				<div>
+				<div className="allRight">
 					2023 &copy; all right Reserved.
 				</div>
 			</div>
