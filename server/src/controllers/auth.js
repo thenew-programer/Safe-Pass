@@ -17,14 +17,18 @@ export const addPass = (req, res) => {
 		emailUser: emailUser,
 		website: website,
 	});
+	// if the user doen't exist
 	if (isElementExist === false) {
 		const state = insertToDB(password, emailUser, website, iv);
+
 		if (state === false) console.log("An Error accured! in db");
-		else res.send(1);
-	} else {
+		else res.send(JSON.stringify(1));
+
+	} else { // if the user exist
 		res.send(JSON.stringify("Email already taken."));
 	}
 };
+
 
 export const showPass = (req, res) => {
 	db.query(`SELECT * FROM ${process.env.DATABASE_TABLE};`, (err, result) => {
@@ -38,7 +42,6 @@ export const showPass = (req, res) => {
 
 export const decryptPass = (req, res) => {
 	const password = decrypt(req.body);
-	console.log(password);
 	res.send(JSON.stringify(password));
 }
 
