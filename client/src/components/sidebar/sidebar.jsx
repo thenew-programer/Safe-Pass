@@ -4,6 +4,7 @@ import AddPassword from '../../views/addPassword/AddPassword';
 import MyPasswords from '../../views/MyPasswords/MyPasswords';
 import RmPassword from '../../views/RmPassword/RmPassword';
 import Profile from '../../views/profile/Profile';
+import Dashboard from '../../views/Dashboard/Dashboard';
 import { CgAddR, CgRemoveR } from 'react-icons/cg';
 import { FaBars, FaHome } from 'react-icons/fa'
 import { BiShow } from 'react-icons/bi'
@@ -67,7 +68,7 @@ const Sidebar = () => {
 			</div>
 			<Routes>
 				<Route exact path='/' element={<Profile />} />
-				<Route path='/home' element={<Profile />} />
+				<Route path='/home' element={<Dashboard />} />
 				<Route path='/add' element={<AddPassword />} />
 				<Route path='/show' element={<MyPasswords />} />
 				<Route path='/remove' element={<RmPassword />} />
