@@ -7,9 +7,10 @@ import router from './router/index.js';
 import './config.js'
 
 const app = express();
+let PORT = 0;
 
 // Connect to db
-export const db = mysql.createConnection(process.env.DATABASE_URL);
+export const db = mysql.createPool(process.env.DATABASE_URL);
 
 db.connect((err) => {
 	if (err) {
@@ -25,8 +26,8 @@ app.use(bodyParser.json());
 const server = http.createServer(app);
 
 
-server.listen(3001, () => {
-	console.log(`Server is running on http://localhost:3001/`);
+server.listen(PORT = (process.env.PORT || 3001), () => {
+	console.log(`Server is running on http://localhost:${PORT}/`);
 });
 
 
