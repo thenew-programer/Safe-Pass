@@ -3,10 +3,11 @@
 	margin: auto;
 	color: #fff;
 	position: absolute;
-	bottom: 10%;
+	bottom: 1%;
 	left: 10%;
 	display: flex;
 	justify-content: space-around;
+	z-index: 10;
 }
 .footer ul li {
 	list-style: none;
@@ -19,13 +20,14 @@
 }
 
 .footer .icon {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
+	animation: blink 10s infinite;
 }
 
 .footer .icon:hover {
-	width: 25px;
-	height: 25px;
+	width: 27px;
+	height: 27px;
 }
 
 @media (max-width: 750px){
