@@ -3,7 +3,7 @@ import { Route, Routes, NavLink } from 'react-router-dom';
 import AddPassword from '../../views/addPassword/AddPassword';
 import MyPasswords from '../../views/MyPasswords/MyPasswords';
 import RmPassword from '../../views/RmPassword/RmPassword';
-import Profile from '../../views/profile/Profile';
+// import Profile from '../../views/profile/Profile';
 import Dashboard from '../../views/Dashboard/Dashboard';
 import { CgAddR, CgRemoveR } from 'react-icons/cg';
 import { FaBars, FaHome } from 'react-icons/fa'
@@ -67,7 +67,7 @@ const Sidebar = () => {
 				</div>
 			</div>
 			<Routes>
-				<Route exact path='/' element={<Profile />} />
+				<Route exact path='/' element={<Dashboard />} />
 				<Route path='/home' element={<Dashboard />} />
 				<Route path='/add' element={<AddPassword />} />
 				<Route path='/show' element={<MyPasswords />} />
