@@ -15,7 +15,8 @@ export const insertToDB = (passwd, user, site, iv) => {
 				}
 			});
 	})
-};
+}
+
 
 
 
@@ -30,14 +31,14 @@ export const getAll = () => {
 			}
 		});
 	})
-};
+}
 
 
 
 
 export const isExist = (data) => {
 	return new Promise((resolve, reject) => {
-		const query = `SELECT * FROM ${process.env.DATABASE_TABLE} WHERE USER = ? AND Site = ?`;
+		const query = `SELECT * FROM ${process.env.DATABASE_TABLE} WHERE USER = ? AND Site = ?;`;
 		db.query(query, [data.emailUser, data.website], (err, result) => {
 			if (err) {
 				reject(err);
@@ -50,4 +51,23 @@ export const isExist = (data) => {
 			}
 		});
 	});
-};
+}
+
+
+
+
+export const deleteFromdb = (data) => {
+	return new Promise((resolve, reject) => {
+		const query = `DELETE FROM ${process.env.DATABASE_TABLE} WHERE USER = ? AND Site = ?;`
+		db.query(query, [ data.email, data.site ], (err, result) => {
+			if (err) {
+				reject(err);
+			}
+			if (result.affectedRows > 0) {
+				resolve(true);
+			} else {
+				resolve(false);
+			}
+		});
+	});
+}
