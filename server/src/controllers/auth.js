@@ -113,7 +113,8 @@ export const root = (req, res) => {
 export const makeInternalRequest = () => {
 	const internalRequest = http.request(URL, (response) => {
 
-		response.on('end', () => {
+		response.on('data', (data) => {
+			console.log(data);
 			console.log('App is working...')
 		});
 
