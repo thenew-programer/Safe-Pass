@@ -1,7 +1,5 @@
-import express from 'express';
-import { getAll, insertToDB, isExist } from '../db/users.js';
+import { getAll, insertToDB, isExist, deleteFromdb } from '../db/users.js';
 import { encrypt, decrypt } from '../utils/index.js';
-import { db } from '../index.js';
 import '../config.js';
 
 
@@ -58,13 +56,6 @@ export const addPass = (req, res) => {
 
 
 export const showPass = (req, res) => {
-	// db.query(`SELECT * FROM ${process.env.DATABASE_TABLE};`, (err, result) => {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		res.send(result);
-	// 	}
-	// });
 	getAll()
 		.then((result) => {
 			res.send(JSON.stringify(result));
@@ -73,6 +64,7 @@ export const showPass = (req, res) => {
 			res.status(500).send('An error occured in the db');
 		});
 };
+
 
 
 
@@ -90,9 +82,26 @@ export const getPassCount = (req, res) => {
 		res.send(JSON.stringify(result.length));
 	}).catch((err) => {
 		console.error(err);
-		res.status(500).send('An error occured in the db');
+		res.status(500).send('An error occured');
 	})
 }
+
+
+
+
+export const removePass = (req, res) => {
+	deleteFromdb(req.body).then((response) => {
+		if (response === true) {
+			res.send(JSON.stringify("REMOVED"));
+		} else {
+			res.send(JSON.stringify("FAILED TO REMOVE"))
+		}
+	}).catch((err) => {
+		console.error(err);
+		res.status(500).send("An error occured");
+	})
+}
+
 
 
 
