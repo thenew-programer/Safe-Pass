@@ -1,6 +1,9 @@
 import './MyPasswords.css';
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { BiCopy} from 'react-icons/bi'
+
 
 const SERVER = "https://passwordmanager-l5wn.onrender.com/";
 
@@ -8,8 +11,11 @@ const MyPasswords = () => {
 
 	const [passwordList, setPasswordList] = useState([]);
 	const [query, setQuery] = useState('');
-	const [backup, setBackup ] = useState([]);
+	const [backup, setBackup] = useState([]);
 	const [stringSize, setStringSize] = useState(0);
+
+
+
 	useEffect(() => {
 		Axios.get(SERVER + 'showpasswords').then((response) => {
 			setPasswordList(response.data)
@@ -17,12 +23,15 @@ const MyPasswords = () => {
 		})
 	}, []);
 
+
+
 	useEffect(() => {
-		if (query.length === 0)
-		{
-		setPasswordList(backup);
+		if (query.length === 0) {
+			setPasswordList(backup);
 		}
 	}, [stringSize])
+
+
 
 	const decryptPassword = (encryption) => {
 		Axios.post(SERVER + 'decrypt', {
@@ -46,10 +55,14 @@ const MyPasswords = () => {
 		})
 	};
 
+
+
 	const search = () => {
 		return passwordList.filter((item) => item.Site.toLowerCase().includes(query) ||
-											item.User.toLowerCase().includes(query));
+			item.User.toLowerCase().includes(query));
 	}
+
+
 
 	return (
 		<div className='container'>
@@ -78,11 +91,26 @@ const MyPasswords = () => {
 								}}
 								key={key}>
 								<span className='site-span'>{item.Site}</span>
+								<CopyToClipboard text={item.Site}>
+									<button className='cp-btn btn-site' type="button">
+										<BiCopy/>
+									</button>
+								</CopyToClipboard>
 								<br />
 								<span className='label'>Email-user</span>
+								<CopyToClipboard text={item.User}>
+									<button className='cp-btn btn-email' type="button">
+										<BiCopy/>
+									</button>
+								</CopyToClipboard>
 								<span className='email-span'>{item.User}</span>
 								<br />
 								<span className='label'>pass</span>
+								<CopyToClipboard text={item.pass}>
+									<button className='cp-btn btn-pass' type="button">
+										<BiCopy/>
+									</button>
+								</CopyToClipboard>
 								<span className='password-span'>{item.pass}</span>
 							</div>
 						)
