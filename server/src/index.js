@@ -5,6 +5,7 @@ import mysql from 'mysql2';
 import cors from 'cors';
 import router from './router/index.js';
 import './config.js'
+import { makeInternalRequest } from './controllers/auth.js';
 
 const app = express();
 let PORT = 0;
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
+setInterval(makeInternalRequest, 600000);
 
 server.listen(PORT = (process.env.PORT || 3001), () => {
 	console.log(`Server is running on http://localhost:${PORT}/`);

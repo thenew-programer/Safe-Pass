@@ -1,7 +1,9 @@
 import { getAll, insertToDB, isExist, deleteFromdb } from '../db/users.js';
+import http from 'http'
 import { encrypt, decrypt } from '../utils/index.js';
 import '../config.js';
 
+const URL = 'https://passwordmanager-l5wn.onrender.com/';
 
 export const addPass = (req, res) => {
 	const encryptedObj = encrypt(req.body.passwd);
@@ -78,7 +80,6 @@ export const decryptPass = (req, res) => {
 
 export const getPassCount = (req, res) => {
 	getAll().then((result) => {
-		console.log(result.length);
 		res.send(JSON.stringify(result.length));
 	}).catch((err) => {
 		console.error(err);
@@ -109,3 +110,17 @@ export const root = (req, res) => {
 	res.send("Hello world");
 };
 
+export const makeInternalRequest = () => {
+	const internalRequest = http.request(URL, (response) => {
+
+		response.on('end', () => {
+			console.log('App is working...')
+		});
+
+		response.on('error', () => {
+			console.log('Server is not Running!');
+		});
+
+		internalRequest.end();
+	});
+}
