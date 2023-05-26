@@ -1,5 +1,4 @@
 import { getAll, insertToDB, isExist, deleteFromdb } from '../db/users.js';
-import http from 'http'
 import { encrypt, decrypt } from '../utils/index.js';
 import '../config.js';
 
@@ -13,28 +12,6 @@ export const addPass = (req, res) => {
 	website.toUpperCase();
 	const iv = encryptedObj.iv;
 
-	// try {
-	// 	let isElementExist = isExist({
-	// 		emailUser: emailUser,
-	// 		website: website,
-	// 	});
-	// 	console.log('isElementExist = ' + isElementExist)
-	// 	// if the user doen't exist
-	// 	if (isElementExist === false) {
-	// 		const state = insertToDB(password, emailUser, website, iv);
-	//
-	// 		if (state === false) console.log("An Error accured! in db");
-	// 		else {
-	// 			res.send(JSON.stringify('Success'));
-	// 			console.log('Success | User does\'nt exist');
-	// 		}
-	// 	} else { 	// if the user exist
-	// 		res.send(JSON.stringify("Email already taken."));
-	// 		console.log("failure | User exist");
-	// 	}
-	// } catch (err) {
-	// 	console.log(err);
-	// }
 
 	isExist({ emailUser: emailUser, website: website })
 		.then((response) => {
@@ -110,18 +87,3 @@ export const root = (req, res) => {
 	res.send("Hello world");
 };
 
-export const makeInternalRequest = () => {
-	const internalRequest = http.request(URL, (response) => {
-
-		response.on('data', (data) => {
-			console.log(data);
-			console.log('App is working...')
-		});
-
-		response.on('error', () => {
-			console.log('Server is not Running!');
-		});
-
-		internalRequest.end();
-	});
-}
