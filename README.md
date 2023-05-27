@@ -10,4 +10,4 @@ it's an app that manages your password, and store them in an sql db. I built it 
 - See how many passwords you have
 
 ## App Architecture
-![app architecture]([Thanks to this tutorial it helped me a lot](https://excalidraw.com/#json=sYWqKqU4AS_082Yd3aZiB,O_bv47FmSZzygDOYhgOUGg))
+![app architecture](https://excalidraw.com/#json=sYWqKqU4AS_082Yd3aZiB,O_bv47FmSZzygDOYhgOUGg)
