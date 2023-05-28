@@ -109,8 +109,8 @@ export const updatePass = (req, res) => {
 
 export const downloadPass = async (req, res) => {
 	try {
-		let data = await getAll();
-		data = await data.map(item => {
+		const raw = await getAll();
+		data = await raw.map(item => {
 			item.Password = decrypt({ password: item.Password, iv: item.Iv })
 			item.Iv = 0;
 		});
