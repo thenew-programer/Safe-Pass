@@ -8,7 +8,7 @@ const SERVER = 'https://passwordmanager-l5wn.onrender.com/';
 
 const Dashboard = () => {
 
-	const [ passwordCount, setPasswordCount ] = useState();
+	const [passwordCount, setPasswordCount] = useState();
 
 
 
@@ -21,7 +21,9 @@ const Dashboard = () => {
 
 
 	useEffect(() => {
-		getpasswordCount();
+		if (typeof passwordCount === 'undefined') {
+			getpasswordCount();
+		}
 	}, [])
 
 	return (
@@ -34,9 +36,9 @@ const Dashboard = () => {
 				<div className="card">
 					<h4>Password</h4>
 					<div className="pass-number">
-						<h1>
+						<h4>
 							<CountUp start={0} end={passwordCount} duration={2} delay={0} />
-						</h1>
+						</h4>
 					</div>
 					<div className='pass-msg'></div>
 				</div>
