@@ -1,3 +1,6 @@
 node_modules
 nodemon.json
 build
+firebase.json
+.firebaserc
+.firebase
