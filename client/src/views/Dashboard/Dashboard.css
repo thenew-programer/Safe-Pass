@@ -2,10 +2,10 @@
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	top: 0;
+	top: 20px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: start;
 }
 
 .dash-header {
@@ -17,37 +17,18 @@
 }
 .dash-header > h1 {
 	box-sizing: border-box;
-	font-size: 2.3rem;
-	color: #fff;
+	font-size: 2.8rem;
+	color: var(--fg-color);
 	font-weight: 800;
 	padding: 5px 10px;
 }
 
-.dash-title > span  {
-	color: #eee;
-}
-.dash-header > button {
-	height: 55px;
-	width: 200px;
-	border: 0;
-	border-radius: 10px;
-	background: #fff;
-	box-sizing: border-box;
-	padding: 5px 10px;
-	font-size: 1.5rem;
-	font-weight: 800;
-	animation: move 1s infinite;
-}
-a {
-	text-decoration: none;
-	color: #000;
-}
 
 .dash-main {
 	width: 500px;
 	height: 400px;
 	margin: 100px auto;
-	color: #fff;
+	color: var(--fg-color);
 }
 .dash-main .card {
 	width: 80%;
@@ -63,14 +44,18 @@ a {
 
 .card > h4 {
 	flex: 1;
-	font-size: 3rem;
+	border: 1px solid var(--fg-color);
+	font-size: 2.5rem;
+	font-weight: 700;
+	padding: 10px;
+	border-radius: 10px;
 }
 .card .pass-number h4{
 	flex: 2;
 	font-size: 10rem;
-	color: #fff;
+	font-weight: 800;
+	color: var(--fg-color);
 }
-
 @media (max-width: 716px){
 	.dash-header {
 		flex-direction: column;
@@ -88,6 +73,10 @@ a {
 		height: 220px;
 		margin-top: 20px;
 	}
+	p {
+		font-size: .8rem;
+		width: 20ch;
+	}
 	.dash-main .card{
 		width: 100px;
 		height: 100px;
@@ -98,6 +87,9 @@ a {
 	}
 	.card .pass-number  h4{
 		font-size: 5rem;
+	}
+	.button {
+		display: none;
 	}
 }
 @media (min-width: 1000px) {

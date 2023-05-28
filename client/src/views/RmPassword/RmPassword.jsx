@@ -134,16 +134,17 @@ const RmPassword = () => {
 	return (
 		<div className='rm-container'>
 			<div className="rm-form">
-				<h4 style={{ color: 'white' }}>Remove Password</h4>
+				<h4 >Remove Password</h4>
 				<hr />
-				<label htmlFor="site">Website</label>
+				<hr />
+				<label htmlFor="site" id='lsite'>Website</label>
 				<input type="text" id="site"
 					placeholder='e.g. linkedIn'
 					onChange={(event) => {
 						setWebsite(event.target.value);
 					}} required='required' />
 
-				<label htmlFor="email">Email/Username</label>
+				<label htmlFor="email" id='lemail'>Email/Username</label>
 				<input type="text" id="email"
 					placeholder="email/username"
 					onChange={(event) => {

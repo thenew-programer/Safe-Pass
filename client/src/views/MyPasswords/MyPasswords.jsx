@@ -3,6 +3,8 @@ import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { BiCopy } from 'react-icons/bi'
+import { ToastContainer } from 'react-toastify';
+import { notifySuccess } from '../../utils/notifacations';
 
 
 const SERVER = "https://passwordmanager-l5wn.onrender.com/";
@@ -19,6 +21,21 @@ const MyPasswords = () => {
 			setPasswordList(response.data)
 		})
 	}, []);
+
+
+
+	const downloadPass = () => {
+		Axios.get(SERVER + 'downloadPass', {responseType: 'blob'}).then((response) => {
+			const url = window.URL.createObjectURL(new Blob([response.data]));
+			const link = document.createElement('a');
+			link.href = url;
+			link.setAttribute('download', 'my-passwords.csv');
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+			notifySuccess('Downloaded successfully!');
+		}).catch(console.log);
+	}
 
 
 
@@ -46,21 +63,16 @@ const MyPasswords = () => {
 
 
 
-	const search = () => {
-		return passwordList.filter((item) => item.Site.toLowerCase().includes(query) ||
-			item.User.toLowerCase().includes(query));
-	}
-
-
-
 	return (
 		<div className='container'>
-			<h5>Search using website or email</h5>
+			<ToastContainer/>
 			<div className="search-field">
 				<input type="text" placeholder='search..'
 					onChange={event => {
 						setQuery(event.target.value);
 					}} />
+				<button type="button" className='button'
+				onClick={downloadPass}>Download</button>
 			</div>
 			<div className="passwords">
 				{
@@ -84,14 +96,14 @@ const MyPasswords = () => {
 								<span className='site-span'>{item.Site}</span>
 								<CopyToClipboard text={item.Site}>
 									<button className='cp-btn btn-site' type="button">
-										<BiCopy />
+										<BiCopy size={20}/>
 									</button>
 								</CopyToClipboard>
 								<br />
 								<span className='label'>Email-user</span>
 								<CopyToClipboard text={item.User}>
 									<button className='cp-btn btn-email' type="button">
-										<BiCopy />
+										<BiCopy size={20}/>
 									</button>
 								</CopyToClipboard>
 								<span className='email-span'>{item.User}</span>
@@ -99,7 +111,7 @@ const MyPasswords = () => {
 								<span className='label'>pass</span>
 								<CopyToClipboard text={item.pass}>
 									<button className='cp-btn btn-pass' type="button">
-										<BiCopy />
+										<BiCopy size={20}/>
 									</button>
 								</CopyToClipboard>
 								<span className='password-span'>{item.pass}</span>
