@@ -1,0 +1,120 @@
+
+
+
+.up-form > h4 {
+	font-size: 2rem;
+	margin: 30px auto;
+}
+hr {
+	display: none;
+	margin-bottom: 10px;
+}
+.up-form {
+	width: 500px;
+	height: 550px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin: 20px auto;
+	background: #000;
+	border: 1px solid #fff;
+	outline: none;
+	position: absolute;
+	top: 15%;
+	left: 35%;
+}
+.up-form > input {
+	width: 80%;
+	height: 3rem;
+	box-sizing: border-box;
+	margin: 1.2rem auto;
+	border: none;
+	border-bottom: 1px solid #fff;
+	padding: 1rem;
+	text-align: center;
+	background: #000001;
+	color: #fff;
+	font-size: 1rem;
+}
+
+.up-form > input:hover {
+	border: 1px solid #fff;
+}
+.up-form > label {
+	margin: 1rem auto .6rem;
+	color: #fff;
+	font-size: 1rem;
+	background: #000;
+}
+.up-label{
+	position: absolute;
+	left: 10%;
+}
+.up-label.site{
+	top: 17%;
+}
+.up-label.email{
+	top: 33%;
+}
+.up-label.passs{
+	top: 48%;
+	border: 0;
+}
+.up-label.npass{
+	top: 64%;
+}
+
+
+.up-form > button {
+	width: 55%;
+	margin: .6rem auto;
+	height: 3rem;
+	border: 1px solid #fff;
+	color: #fff;
+	font-size: 1.5rem;
+	background: #000;
+	cursor: pointer;
+}
+
+.up-form button:hover {
+	background: #fff;
+	color: #000;
+}
+
+.up-form > p{
+	font-size: .8rem;
+	color: #eee;
+	width: 75%;
+	margin: auto;
+}
+@media (max-width: 1000px) {
+	.up-form {
+		left: 27%;
+	}
+}
+
+@media (max-width: 700px) {
+	.up-form {
+		min-width: 200px;
+		max-width: 300px;
+		height: 540px;
+		top: 10%;
+		left: 25%;
+	}
+	.up-form > p {
+		font-size: .6rem;
+	}
+	.up-form > h4 {
+		font-size: 1.5rem;
+	}
+	.up-form > button  {
+		font-size: 1rem;
+	}
+	.up-label.site {
+		top: 17.5%;
+	}
+	.up-label.email {
+		top: 33.5%;
+	}
+}
+
