@@ -1,12 +1,11 @@
 import express from 'express';
-
-import  auth from './auth.js';
+import  routes from './auth.js';
 
 
 const router = express.Router();
 
 export default () => {
-	auth(router);
+	routes(router);
 
 	return router;
 }
