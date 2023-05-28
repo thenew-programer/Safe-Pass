@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import Axios from 'axios';
 import './Updatepass.css';
+import {
+	notifySuccess, notifyFailure,
+	notifyFieldFailure, clear
+} from '../../utils/notifacations'
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/updatePass';
 
@@ -43,27 +47,21 @@ const Updatepass = () => {
 				if (response === 1) {
 					setTimeout(() => {
 						clear(document.getElementById('up-site'));
-						notifySuccess();
+						notifySuccess("Password update successfully!");
 					}, 800);
 					setTimeout(clear(document.getElementById('up-email')), 900);
 					setTimeout(clear(document.getElementById('up-pass')), 1000);
 					setTimeout(clear(document.getElementById('up-npass')), 1000);
 				} else {
-					notifyFailure()
+					notifyFailure('Password doesn\'t exist!')
 				}
 			}).catch((err) => {
-					console.error('error' + err)
-					notifyFailure();
+				console.error('error' + err)
+				notifyFailure('All fields are required!');
 			});
-		}).catch(() => notifyFieldFailure());
+		}).catch(() => notifyFieldFailure('All fields are required!'));
 	}
 
-
-
-	const clear = target => {
-		if (target.value != null)
-			target.value = "";
-	}
 
 
 
@@ -88,79 +86,35 @@ const Updatepass = () => {
 
 
 
-
-	const notifyFieldFailure = () => {
-		toast.warn('All fields are required!', {
-			position: "top-center",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
-		});
-		setTimeout(setIsClicked(false), 2000);
-	}
-
-
-
-
-	const notifyFailure = () => {
-		toast.error('Password doesn\'t exist!', {
-			position: "top-center",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
-		});
-	}
-
-
-
-	const notifySuccess = () => {
-		toast.success("Password update successfully!", {
-			position: "top-center",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
-		});
-	}
-
-
-
 	return (
 		<div className='rm-container'>
 			<div className="up-form">
-				<h4 style={{ color: 'white' }}>Update Password</h4>
+				<h4>Update Password</h4>
 				<hr />
 				<label htmlFor="site" className='up-label site'>Website</label>
 				<input type="text" id="up-site"
+					placeholder='i.g. LinkedIn'
 					onChange={(event) => {
 						setWebsite(event.target.value);
 					}} required='required' />
 
 				<label htmlFor="email" className='up-label email'>Email</label>
 				<input type="text" id="up-email"
+					placeholder='i.g. jos@home.com'
 					onChange={(event) => {
 						setEmail(event.target.value);
 					}} required='required' />
 
 				<label htmlFor="pass" className='up-label passs'>Old Password</label>
 				<input type="password" id="up-pass"
+					placeholder='....'
 					onChange={(event) => {
 						setOldPass(event.target.value);
 					}} required='required' />
 
 				<label htmlFor="n-pass" className='up-label npass'>New Password</label>
 				<input type="password" id="up-npass"
+					placeholder='....'
 					onChange={(event) => {
 						setNewPass(event.target.value);
 					}} required='required' />

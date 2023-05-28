@@ -1,9 +1,7 @@
-
-
-
 .up-form > h4 {
 	font-size: 2rem;
 	margin: 30px auto;
+	font-weight: 800;
 }
 hr {
 	display: none;
@@ -16,12 +14,14 @@ hr {
 	flex-direction: column;
 	justify-content: space-between;
 	margin: 20px auto;
-	background: #000;
-	border: 1px solid #fff;
+	background: var(--bg-color);
+	border: 1px solid var(--fg-color);
+	border-radius: 20px;
 	outline: none;
 	position: absolute;
 	top: 15%;
 	left: 35%;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, .7);
 }
 .up-form > input {
 	width: 80%;
@@ -29,22 +29,32 @@ hr {
 	box-sizing: border-box;
 	margin: 1.2rem auto;
 	border: none;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid var(--fg-color);
 	padding: 1rem;
+	font-style: italic;
 	text-align: center;
-	background: #000001;
-	color: #fff;
+	background: var(--bg-color);
+	color: var(--bg-color);
 	font-size: 1rem;
 }
 
+.up-form > button {
+	border-radius: 10px;
+	font-weight: 800;
+}
+.up-form > h4 {
+	color: var(--fg-color);
+}
 .up-form > input:hover {
-	border: 1px solid #fff;
+	border: 1px solid var(--fg-color);
+	color: var(--fg-color);
 }
 .up-form > label {
 	margin: 1rem auto .6rem;
-	color: #fff;
+	color: var(--fg-color);
 	font-size: 1rem;
-	background: #000;
+	font-weight: 800;
+	background: var(--bg-color);
 }
 .up-label{
 	position: absolute;
@@ -69,23 +79,24 @@ hr {
 	width: 55%;
 	margin: .6rem auto;
 	height: 3rem;
-	border: 1px solid #fff;
-	color: #fff;
+	border: 1px solid var(--fg-color);
+	color: var(--fg-color);
 	font-size: 1.5rem;
-	background: #000;
+	background: var(--bg-color);
 	cursor: pointer;
 }
 
 .up-form button:hover {
-	background: #fff;
-	color: #000;
+	background: var(--fg-color);
+	color: var(--bg-color);
 }
 
 .up-form > p{
-	font-size: .8rem;
-	color: #eee;
-	width: 75%;
+	font-size: .9rem;
+	color: var(--label-color);
+	width: 40ch;
 	margin: auto;
+	font-style: italic;
 }
 @media (max-width: 1000px) {
 	.up-form {
@@ -98,7 +109,7 @@ hr {
 		min-width: 200px;
 		max-width: 300px;
 		height: 540px;
-		top: 10%;
+		top: 15%;
 		left: 25%;
 	}
 	.up-form > p {
