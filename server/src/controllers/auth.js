@@ -7,8 +7,6 @@ import path from 'path';
 import '../config.js';
 
 
-const __dirname = path.resolve(path.dirname(''));
-
 export const addPass = (req, res) => {
 	const encryptedObj = encrypt(req.body.passwd);
 	const password = encryptedObj.password;
@@ -111,7 +109,7 @@ export const downloadPass = async (req, res) => {
 	try {
 		const arr = await getAll();
 		await toCSV(arr);
-		res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
+		res.sendFile(path.resolve('../../my-passwords.csv'))
 	} catch (err) {
 		console.error(err);
 		res.status(501).send('Failed to download file');

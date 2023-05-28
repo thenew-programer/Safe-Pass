@@ -1,11 +1,9 @@
 import crypto from 'crypto';
 import '../config.js';
 import { writeFile } from 'fs';
-import path from 'path';
 
 
 const KEY = process.env.ENCRYPTION_KEY;
-const __dirname = path.resolve(path.dirname(''));
 
 export const encrypt = (password) => {
 	const iv = Buffer.from(crypto.randomBytes(16));
@@ -45,10 +43,14 @@ export const decrypt = (encryption) => {
 
 export const toCSV = (arr) => {
 	return new Promise((resolve, reject) => {
+		// const data = arr.map(item => {
+		// 	item.Password = decrypt({ password: item.Password, iv: item.Iv });
+		// 	delete item.Iv;
+		// });
 		const csvData = arr.map(item => Object.values(item).join(','));
 		const csvContent = csvData.join('\n');
 		console.log(csvContent);
-		writeFile(path.join(__dirname, '../../my-passwords.csv'), csvContent, 'utf8', err => {
+		writeFile('../../my-passwords.csv', csvContent, 'utf8', err => {
 			if (err) {
 				reject(err);
 			} else {
