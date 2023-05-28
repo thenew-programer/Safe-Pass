@@ -110,8 +110,7 @@ export const updatePass = (req, res) => {
 export const downloadPass = async (req, res) => {
 	try {
 		const arr = await getAll();
-		console.log(arr);
-		await toCSV(...arr);
+		await toCSV(arr);
 		res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
 	} catch (err) {
 		console.error(err);
