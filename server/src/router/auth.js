@@ -1,5 +1,5 @@
 import { addPass, root, showPass, decryptPass,
-		getPassCount, removePass, updatePass } from '../controllers/auth.js';
+		getPassCount, removePass, updatePass, downloadPass } from '../controllers/auth.js';
 
 
 export default (router) => {
@@ -9,5 +9,6 @@ export default (router) => {
 	router.get('/getpasswordcount', getPassCount);
 	router.post('/removePass', removePass);
 	router.post('/updatePass', updatePass);
+	router.get('/downloadPass', downloadPass);
 	router.get('/', root);
 };
