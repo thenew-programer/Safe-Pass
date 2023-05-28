@@ -1,18 +1,30 @@
+:root{
+	--bg-color: #000;
+	--fg-color: #fff;
+	--label-color: #eee;
+}
+[data-theme='light'] {
+	--bg-color: #fff;
+	--fg-color: #000;
+	--label-color: #595050;
+}
 * {
 	margin: 0;
 	padding: 0;
-	font-family: 'Monteserat', sans-serif;
+	font-family: 'Inter', sans-serif;
 	text-decoration: none;
+	transition: all 0.4s ease-in-out;
+}
+html, body {
+	background: var(--bg-color);
 }
 
-:root{
-	background: #000;
-}
 #root {
   width: 80%;
   margin: auto;
   position: relative;
   text-align: center;
+  box-sizing: border-box;
 }
 
 
