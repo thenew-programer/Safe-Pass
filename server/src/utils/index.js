@@ -45,7 +45,8 @@ export const toCSV = (arr, delimiter = ',') => {
 	return new Promise((resolve, reject) => {
 		const csvData = arr.map(item => Object.values(item).join(delimiter));
 		const csvContent = csvData.join('\n');
-		writeFile(__dirname + '../../my-passwords.csv', csvContent, 'utf8', err => {
+		console.log(csvContent);
+		writeFile('../../my-passwords.csv', csvContent, 'utf8', err => {
 			if (err) {
 				reject();
 			} else {
