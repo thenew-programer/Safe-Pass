@@ -51,7 +51,10 @@ const Updatepass = () => {
 				} else {
 					notifyFailure()
 				}
-			}).catch((err) => console.error('error' + err));
+			}).catch((err) => {
+					console.error('error' + err)
+					notifyFailure();
+			});
 		}).catch(() => notifyFieldFailure());
 	}
 
