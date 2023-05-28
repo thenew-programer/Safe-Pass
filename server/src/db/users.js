@@ -1,5 +1,7 @@
 import { db } from '../index.js';
 import '../config.js';
+import { encrypt } from '../utils/index.js';
+
 
 
 export const insertToDB = (passwd, user, site, iv) => {
@@ -19,7 +21,6 @@ export const insertToDB = (passwd, user, site, iv) => {
 
 
 
-
 export const getAll = () => {
 	return new Promise((resolve, reject) => {
 		const query = `SELECT * FROM ${process.env.DATABASE_TABLE};`;
@@ -35,7 +36,6 @@ export const getAll = () => {
 
 
 
-
 export const isExist = (data) => {
 	return new Promise((resolve, reject) => {
 		const query = `SELECT * FROM ${process.env.DATABASE_TABLE} WHERE USER = ? AND Site = ?;`;
@@ -44,7 +44,7 @@ export const isExist = (data) => {
 				reject(err);
 			} else {
 				if (result.length > 0) {
-					resolve(true);
+					resolve(result);
 				} else {
 					resolve(false)
 				}
@@ -52,7 +52,6 @@ export const isExist = (data) => {
 		});
 	});
 }
-
 
 
 
@@ -70,4 +69,23 @@ export const deleteFromdb = (data) => {
 			}
 		});
 	});
+}
+
+
+
+export const updatePassdb = (data) => {
+	return new Promise((resolve, reject) => {
+		const password = encrypt(data.password);
+		const query = `UPDATE ${process.env.DATABASE_TABLE} SET Password = ? WHERE id = ?`;
+		db.query(query, [password, data.id], (err, result) => {
+			if (err) {
+				reject(err);
+			}
+			if (result.affectedRows > 0){
+				resolve();
+			} else {
+				reject();
+			}
+		})
+	})
 }
