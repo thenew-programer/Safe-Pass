@@ -49,8 +49,8 @@ export const toCSV = (arr, delimiter = ',') => {
 			if (err) {
 				reject();
 			} else {
-				resolve();
 				console.log("my-passwords.csv generated successfully");
+				resolve();
 			}
 		});
 	});

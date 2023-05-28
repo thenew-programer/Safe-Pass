@@ -108,7 +108,9 @@ export const updatePass = (req, res) => {
 export const downloadPass = (req, res) => {
 	getAll()
 		.then((response) => {
-			toCSV(response).then(res.sendFile(__dirname + '../../my-passwords.csv'))
+			toCSV(response)
+				.then(res.sendFile(__dirname + '../../my-passwords.csv'))
+				.catch(res.status(500).send('Failed to download file'))
 		}).catch(res.status(500).send('Failed to download file'));
 }
 export const root = (req, res) => {
