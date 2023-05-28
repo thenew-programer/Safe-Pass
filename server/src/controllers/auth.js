@@ -86,7 +86,7 @@ export const updatePass = (req, res) => {
 		.then((response) => {
 			console.log('response is\n' + response);
 			if (response !== false) {
-				updatePassdb({ password: req.body.password, id: response.id })
+				updatePassdb({ password: req.body.newpass, id: response.id })
 					.then(() => {
 						console.log('\n\n\npassword updated succefully\n\n\n')
 						res.send('Success')
