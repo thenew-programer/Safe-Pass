@@ -76,7 +76,6 @@ export const deleteFromdb = (data) => {
 export const updatePassdb = (data) => {
 	return new Promise((resolve, reject) => {
 		const encryption = encrypt(data.password);
-		console.log(encryption);
 		const query = `UPDATE ${process.env.DATABASE_TABLE} SET Password = ?, Iv = ? WHERE id = ?`;
 		db.query(query, [encryption.password, encryption.iv, data.id], (err, result) => {
 			if (err) {

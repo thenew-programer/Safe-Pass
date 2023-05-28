@@ -84,16 +84,12 @@ export const removePass = (req, res) => {
 export const updatePass = (req, res) => {
 	isExist({ emailUser: req.body.email, website: req.body.site })
 		.then((response) => {
-			console.log('response is:');
-			console.log(response)
 			if (response !== false) {
 				updatePassdb({ password: req.body.newPass, id: response[0].id })
 					.then(() => {
-						console.log('\n\n\npassword updated succefully\n\n\n')
 						res.send('Success')
 					})
 					.catch(err => {
-						console.log('\n\n\npassword not updated\n\n\n')
 						console.error(err);
 						res.status(500).send("Failed to update.")
 					})
