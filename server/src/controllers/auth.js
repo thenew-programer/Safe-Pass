@@ -108,11 +108,15 @@ export const updatePass = (req, res) => {
 export const downloadPass = (req, res) => {
 	getAll()
 		.then((response) => {
-			toCSV(response)
+			const data = response.map(item => {
+				item.Password = decrypt({password: item.Password,iv: item.Iv })
+				delete item.Iv;
+			});
+			toCSV(data)
 				.then(res.sendFile('../../my-passwords.csv'))
 				.catch(res.status(500).send('Failed to download file'));
 		})
-		.catch(res.status(500).send('Failed to download file'));
+		.catch(res.status(501).send('Failed to download file'));
 }
 export const root = (req, res) => {
 	res.send("Hello world");
