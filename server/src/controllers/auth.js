@@ -110,11 +110,11 @@ export const updatePass = (req, res) => {
 export const downloadPass = async (req, res) => {
 	try {
 		let data = await getAll();
-		console.log(data);
 		data = await data.map(item => {
 			item.Password = decrypt({ password: item.Password, iv: item.Iv })
 			delete item.Iv;
 		});
+		console.log(data);
 		await toCSV(data);
 		res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
 	} catch (err) {
@@ -122,6 +122,9 @@ export const downloadPass = async (req, res) => {
 		res.status(501).send('Failed to download file');
 	}
 }
+
+
+
 export const root = (req, res) => {
 	res.send("Hello world");
 };
