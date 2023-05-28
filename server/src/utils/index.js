@@ -47,6 +47,11 @@ export const toCSV = (arr) => {
 		// 	item.Password = decrypt({ password: item.Password, iv: item.Iv });
 		// 	delete item.Iv;
 		// });
+		arr.unshift({
+			Password: 'Password',
+			User: 'User/Email',
+			Site: 'Website'
+		});
 		const csvData = arr.map(item => Object.values(item).join(','));
 		const csvContent = csvData.join('\n');
 		console.log(csvContent);
