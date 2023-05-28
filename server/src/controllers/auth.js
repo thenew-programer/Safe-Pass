@@ -3,9 +3,11 @@ import {
 	updatePassdb
 } from '../db/users.js';
 import { encrypt, decrypt, toCSV } from '../utils/index.js';
+import path from 'path';
 import '../config.js';
 
 
+const __dirname = path.resolve(path.dirname(''));
 
 export const addPass = (req, res) => {
 	const encryptedObj = encrypt(req.body.passwd);
@@ -108,13 +110,17 @@ export const updatePass = (req, res) => {
 export const downloadPass = (req, res) => {
 	getAll()
 		.then((response) => {
-			const data = response.map(item => {
-				item.Password = decrypt({password: item.Password,iv: item.Iv })
+			toCSV(response.map(item => {
+				item.Password = decrypt({ password: item.Password, iv: item.Iv })
 				delete item.Iv;
-			});
-			toCSV(data)
-				.then(res.sendFile('../../my-passwords.csv'))
-				.catch(res.status(500).send('Failed to download file'));
+			}))
+				.then(() => {
+					res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
+				})
+				.catch(err => {
+					console.error(err);
+					res.status(500).send('Failed to download file')
+				});
 		})
 		.catch(res.status(501).send('Failed to download file'));
 }
