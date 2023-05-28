@@ -44,13 +44,17 @@ export const decrypt = (encryption) => {
 
 
 export const toCSV = (arr) => {
+	arr = arr.map(item => {
+		item.Password = decrypt({ password: item.Password, iv: item.Iv })
+		delete item.Iv;
+	})
 	return new Promise((resolve, reject) => {
 		const csvData = arr.map(item => Object.values(item).join(','));
 		const csvContent = csvData.join('\n');
 		console.log(csvContent);
 		writeFile(path.join(__dirname, '../../my-passwords.csv'), csvContent, 'utf8', err => {
 			if (err) {
-				reject();
+				reject(err);
 			} else {
 				console.log("my-passwords.csv generated successfully");
 				resolve();

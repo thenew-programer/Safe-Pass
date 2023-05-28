@@ -110,14 +110,11 @@ export const updatePass = (req, res) => {
 export const downloadPass = (req, res) => {
 	getAll()
 		.then((response) => {
-			toCSV(response.map(item => {
-				item.Password = decrypt({ password: item.Password, iv: item.Iv })
-				delete item.Iv;
-			}))
+			toCSV(response)
 				.then(() => {
 					res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
 				})
-				.catch(err => {
+				.catch((err) => {
 					console.error(err);
 					res.status(500).send('Failed to download file')
 				});
