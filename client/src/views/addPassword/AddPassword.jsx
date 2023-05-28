@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from "axios";
 import { useState } from 'react';
 import './addPassword.css';
+import {
+	notifyFailure, notifySuccess, notifyFieldFailure, clear
+} from "../../utils/notifacations";
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/addPass';
 
@@ -15,71 +18,28 @@ const AddPassword = () => {
 	let [website, setWebsite] = useState('');
 	let [email_user, setEmail_user] = useState('');
 	const [isClicked, setIsClicked] = useState(false);
+	const [enter, setEnter] = useState(false);
 
+	const event = window.addEventListener('keyup', event => {
+		if (event.key === 'Enter') {
+			setEnter(true);
+		}
+	});
 
 
 	useEffect(() => {
-		window.addEventListener('keyup', (event) => {
-			if (event.key === 'Enter') {
-				addPasswordFunc();
-			}
-		});
-	}, [])
+		if (enter === true) {
+			addPasswordFunc();
+		}
+	}, [enter])
 
 
-
-	const clear = target => {
-		if (target.value != null)
-			target.value = "";
+	const handleClick = () => {
+		if (!isClicked) {
+			addPasswordFunc();
+		}
+		setIsClicked(true);
 	}
-
-
-
-	const notifyFieldFailure = () => {
-		toast.warn('All fields are required!', {
-			position: "top-center",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
-		});
-		setTimeout(setIsClicked(false), 2000);
-	}
-
-
-
-	const notifyFailure = () => {
-		toast.error('Password already exist!', {
-			position: "top-center",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
-		});
-	}
-
-
-
-	const notifySuccess = () => {
-		toast.success("Password added successfully!", {
-			position: "top-center",
-			autoClose: 2000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-			theme: "dark",
-		});
-	}
-
-
 
 	const isEmpty = () => {
 		return new Promise((resolve, reject) => {
@@ -91,16 +51,6 @@ const AddPassword = () => {
 	}
 
 
-
-	const handleClick = () => {
-		if (!isClicked) {
-			addPasswordFunc();
-		}
-		setIsClicked(true);
-	}
-
-
-
 	const addPasswordFunc = () => {
 		isEmpty().then(() => {
 			addPass().then((response) => {
@@ -108,12 +58,16 @@ const AddPassword = () => {
 					setTimeout(clear(document.getElementById('site')), 800);
 					setTimeout(clear(document.getElementById('email')), 900);
 					setTimeout(clear(document.getElementById('pass')), 1000);
-					notifySuccess();
+					notifySuccess('Password added successfully!');
 				} else {
-					notifyFailure();
+					notifyFailure('Failed to add password.');
 				}
 			}).catch(() => console.error('failed'));
-		}).catch(() => notifyFieldFailure());
+		}).catch(() => {
+
+			setIsClicked(false);
+			notifyFieldFailure('Fill the remaining fields');
+		});
 	}
 
 
@@ -145,22 +99,22 @@ const AddPassword = () => {
 		<div className="pass-container">
 			<div className='passwd-form' >
 
-				<div className="none" id="err"></div>
-				<label htmlFor="site">Website</label>
+				<h1>Add Password</h1>
+				<label htmlFor="site" id="asite">Website</label>
 				<input type="text" id="site"
 					placeholder='e.g. linkedIn'
 					onChange={(event) => {
 						setWebsite(event.target.value);
 					}} required='required' />
 
-				<label htmlFor="email">Email/Username</label>
+				<label htmlFor="email" id="aemail">Email/Username</label>
 				<input type="text" id="email"
-					placeholder="email/username"
+					placeholder="e.g. jos@example.com"
 					onChange={(event) => {
 						setEmail_user(event.target.value);
 					}} required='required' />
 
-				<label htmlFor="pass">Password</label>
+				<label htmlFor="pass" id="apass">Password</label>
 				<input type="password" id="pass"
 					placeholder='e.g. pass123'
 					onChange={(event) => {
@@ -176,6 +130,5 @@ const AddPassword = () => {
 		</div >
 	)
 }
-
 
 export default AddPassword;
