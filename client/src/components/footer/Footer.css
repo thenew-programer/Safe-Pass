@@ -36,8 +36,10 @@
 	}
 	.footer {
 		left: 20%;
+		bottom: 17%;
 	}
-	.allRight {
-		display: none;
+	.footer {
+		flex-direction: column;
+		gap: 20px;
 	}
 }

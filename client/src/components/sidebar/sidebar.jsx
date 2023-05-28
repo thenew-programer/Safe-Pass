@@ -3,11 +3,13 @@ import { Route, Routes, NavLink } from 'react-router-dom';
 import AddPassword from '../../views/addPassword/AddPassword';
 import MyPasswords from '../../views/MyPasswords/MyPasswords';
 import RmPassword from '../../views/RmPassword/RmPassword';
-// import Profile from '../../views/profile/Profile';
 import Dashboard from '../../views/Dashboard/Dashboard';
+import Updatepass from '../../views/UpdatePass/Updatepass';
+// import Profile from '../../views/profile/Profile';
 import { CgAddR, CgRemoveR } from 'react-icons/cg';
 import { FaBars, FaHome } from 'react-icons/fa'
 import { BiShow } from 'react-icons/bi'
+import {MdOutlineBrowserUpdated} from 'react-icons/md'
 import './sidebar.css';
 
 const Sidebar = () => {
@@ -28,6 +30,11 @@ const Sidebar = () => {
 			path: "/show",
 			name: "My Passwords",
 			icon: <BiShow />,
+		},
+		{
+			path: "/update",
+			name: "Update Password",
+			icon: <MdOutlineBrowserUpdated />,
 		},
 		{
 			path: '/remove',
@@ -71,6 +78,7 @@ const Sidebar = () => {
 				<Route path='/home' element={<Dashboard />} />
 				<Route path='/add' element={<AddPassword />} />
 				<Route path='/show' element={<MyPasswords />} />
+				<Route path='/update' element={<Updatepass />} />
 				<Route path='/remove' element={<RmPassword />} />
 			</Routes>
 		</div>
