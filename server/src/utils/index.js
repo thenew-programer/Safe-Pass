@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import '../config.js';
+import { writeFile } from 'fs';
 
 
 const KEY = process.env.ENCRYPTION_KEY;
@@ -8,7 +9,7 @@ export const encrypt = (password) => {
 	const iv = Buffer.from(crypto.randomBytes(16));
 	const cipher = crypto.createCipheriv(
 		'aes256',
-		Buffer.from(KEY), 
+		Buffer.from(KEY),
 		iv
 	);
 
@@ -39,3 +40,18 @@ export const decrypt = (encryption) => {
 	return decryptedPass.toString('utf8');
 };
 
+
+export const toCSV = (arr, delimiter = ',') => {
+	return new Promise((resolve, reject) => {
+		const csvData = arr.map(item => Object.values(item).join(delimiter));
+		const csvContent = csvData.join('\n');
+		writeFile(__dirname + '../../my-passwords.csv', csvContent, 'utf8', err => {
+			if (err) {
+				reject();
+			} else {
+				resolve();
+				console.log("my-passwords.csv generated successfully");
+			}
+		});
+	});
+}
