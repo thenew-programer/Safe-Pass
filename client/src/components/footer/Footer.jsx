@@ -1,8 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import './Footer.css';
 import { TbBrandGithub, TbBrandTwitter, TbBrandLinkedin } from 'react-icons/tb'
+import { MdOutlineLightMode, MdOutlineDarkMode } from 'react-icons/md';
+import { AiFillCaretDown, AiOutlineSetting } from 'react-icons/ai'
 
 const Footer = () => {
+
+
+
 	return (
 		<div>
 			<div className='footer'>
@@ -17,7 +22,6 @@ const Footer = () => {
 					2023 &copy; all right Reserved.
 				</div>
 			</div>
-
 		</div>
 	)
 }

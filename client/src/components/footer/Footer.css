@@ -1,7 +1,7 @@
 .footer {
 	width: 80%;
 	margin: auto;
-	color: #fff;
+	color: var(--fg-color);
 	position: absolute;
 	bottom: 1%;
 	left: 10%;
@@ -15,13 +15,11 @@
 	margin: 0 1rem;
 }
 .footer ul li a {
-	color: #fff;
+	color: var(--fg-color);
 	cursor: pointer;
 }
 
 .footer .icon {
-	width: 25px;
-	height: 25px;
 	animation: blink 10s infinite;
 }
 
@@ -35,8 +33,7 @@
 		margin: 0 2rem;
 	}
 	.footer {
-		left: 20%;
-		bottom: 17%;
+		left: 15%;
 	}
 	.footer {
 		flex-direction: column;

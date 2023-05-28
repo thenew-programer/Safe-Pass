@@ -3,17 +3,15 @@
     padding:0;
     text-decoration: none;
 }
-.container{
+.containers{
     width: 100%;
-    padding: 30px;
-	position: fixed;
 }
 .sidebar{
-    background: #000;
-    color: #fff;
+    background: var(--bg-color);
+    color: var(--fg-color);
     height: 100vh;
     transition: all 0.25s;
-	border-right: 2px solid #fff;
+	border-right: 1px solid var(--fg-color);
 	position: relative;
 	overflow: hidden;
 	z-index: 200;
@@ -23,6 +21,7 @@
 	justify-content: space-between;
     align-items:center;
     padding:20px 15px;
+	margin: auto;
 	margin-bottom: 50px;
 }
 
@@ -40,20 +39,20 @@
 .link{
 	display: flex;
 	width: 100%;
-    color: #fff;
+    color: var(--fg-color);
     padding: 10px 15px;
     transition: all 0.5s;
 }
 
 .link:hover{
-    background: #fff;
-    color: #000;
+    background: var(--fg-color);
+    color: var(--bg-color);
     transition: all 0.5s;
 }
 
 .active{
-    background: #fff;
-    color: #000;
+    background: var(--fg-color);
+    color: var(--bg-color);
 }
 
  .link_text{

@@ -6,10 +6,11 @@ import RmPassword from '../../views/RmPassword/RmPassword';
 import Dashboard from '../../views/Dashboard/Dashboard';
 import Updatepass from '../../views/UpdatePass/Updatepass';
 // import Profile from '../../views/profile/Profile';
-import { CgAddR, CgRemoveR } from 'react-icons/cg';
+import { MdDelete } from 'react-icons/md';
 import { FaBars, FaHome } from 'react-icons/fa'
 import { BiShow } from 'react-icons/bi'
 import {MdOutlineBrowserUpdated} from 'react-icons/md'
+import {BsDatabaseFillAdd} from 'react-icons/bs'
 import './sidebar.css';
 
 const Sidebar = () => {
@@ -24,7 +25,7 @@ const Sidebar = () => {
 		{
 			path: "/add",
 			name: "Add Password",
-			icon: <CgAddR />,
+			icon: <BsDatabaseFillAdd />,
 		},
 		{
 			path: "/show",
@@ -39,7 +40,7 @@ const Sidebar = () => {
 		{
 			path: '/remove',
 			name: "Remove Pass",
-			icon: <CgRemoveR />
+			icon: <MdDelete />
 		}
 	];
 
@@ -49,7 +50,7 @@ const Sidebar = () => {
 			<div className="sidebar" style={{ width: isOpen ? '350px' : '70px' }}>
 				<div className="top_section">
 					<h1 style={{ display: isOpen ? 'block' : 'none' }}
-						onClick={toggle}>PMS</h1>
+						onClick={toggle}>SafePass</h1>
 					<div className='icon' style={{ marginLeft: isOpen ? '200px' : '0px' }}>
 						<FaBars onClick={toggle} />
 					</div>
