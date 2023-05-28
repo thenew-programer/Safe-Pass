@@ -1,8 +1,11 @@
-import { getAll, insertToDB, isExist, deleteFromdb } from '../db/users.js';
+import {
+	getAll, insertToDB, isExist, deleteFromdb,
+	updatePassdb
+} from '../db/users.js';
 import { encrypt, decrypt } from '../utils/index.js';
 import '../config.js';
 
-const URL = 'https://passwordmanager-l5wn.onrender.com/';
+
 
 export const addPass = (req, res) => {
 	const encryptedObj = encrypt(req.body.passwd);
@@ -27,10 +30,9 @@ export const addPass = (req, res) => {
 			}
 		}).catch((err) => {
 			console.error(err);
-			res.status(500).send('an error occured');
+			res.status(500).send('Failed to add password');
 		});
 };
-
 
 
 
@@ -40,10 +42,9 @@ export const showPass = (req, res) => {
 			res.send(JSON.stringify(result));
 		}).catch((err) => {
 			console.error(err)
-			res.status(500).send('An error occured in the db');
+			res.status(500).send('Failed to get passwords');
 		});
 };
-
 
 
 
@@ -54,16 +55,14 @@ export const decryptPass = (req, res) => {
 
 
 
-
 export const getPassCount = (req, res) => {
 	getAll().then((result) => {
 		res.send(JSON.stringify(result.length));
 	}).catch((err) => {
 		console.error(err);
-		res.status(500).send('An error occured');
+		res.status(500).send('Failed to get passwords count');
 	})
 }
-
 
 
 
@@ -76,10 +75,37 @@ export const removePass = (req, res) => {
 		}
 	}).catch((err) => {
 		console.error(err);
-		res.status(500).send("An error occured");
+		res.status(500).send("Failed to delete");
 	})
 }
 
+
+
+export const updatePass = (req, res) => {
+	isExist({ emailUser: req.body.email, website: req.body.site })
+		.then((response) => {
+			console.log('response is\n' + response);
+			if (response !== false) {
+				updatePassdb({ password: req.body.password, id: response.id })
+					.then(() => {
+						console.log('\n\n\npassword updated succefully\n\n\n')
+						res.send('Success')
+					})
+					.catch(err => {
+						console.log('\n\n\npassword not updated\n\n\n')
+						console.error(err);
+						res.status(500).send("Failed to update.")
+					})
+			} else {
+				console.log('Failed to update: pass doesnt exist')
+				res.send("Passowrd doesn't exist!");
+			}
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).send("Failed to update.")
+		})
+}
 
 
 
