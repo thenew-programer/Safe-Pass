@@ -107,13 +107,19 @@ export const updatePass = (req, res) => {
 }
 
 
-export const downloadPass = (req, res) => {
-	getAll()
-		.then((response) => {
-			toCSV(response);
-			res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
-		})
-		.catch(res.status(501).send('Failed to download file'));
+export const downloadPass = async (req, res) => {
+	try {
+		const data = await getAll()
+		data = data.map(item => {
+			item.Password = decrypt({ password: item.Password, iv: item.Iv })
+			delete item.Iv;
+		});
+		await toCSV(response);
+		res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
+	} catch (err) {
+		console.error(err);
+		res.status(501).send('Failed to download file');
+	}
 }
 export const root = (req, res) => {
 	res.send("Hello world");
