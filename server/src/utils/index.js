@@ -48,17 +48,14 @@ export const toCSV = (arr) => {
 		item.Password = decrypt({ password: item.Password, iv: item.Iv })
 		item.Iv = '0';
 	});
-	return new Promise((resolve, reject) => {
-		const csvData = arr.map(item => Object.values(item).join(','));
-		const csvContent = csvData.join('\n');
-		console.log(csvContent);
-		writeFile(path.join(__dirname, '../../my-passwords.csv'), csvContent, 'utf8', err => {
-			if (err) {
-				reject(err);
-			} else {
-				console.log("my-passwords.csv generated successfully");
-				resolve();
-			}
-		});
+	const csvData = arr.map(item => Object.values(item).join(','));
+	const csvContent = csvData.join('\n');
+	console.log(csvContent);
+	writeFile(path.join(__dirname, '../../my-passwords.csv'), csvContent, 'utf8', err => {
+		if (err) {
+			console.error(err);
+		} else {
+			console.log("my-passwords.csv generated successfully");
+		}
 	});
 }
