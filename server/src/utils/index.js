@@ -47,6 +47,10 @@ export const toCSV = (arr) => {
 		// 	item.Password = decrypt({ password: item.Password, iv: item.Iv });
 		// 	delete item.Iv;
 		// });
+		arr = arr.map(item => {
+			delete item.id;
+			delete item.Iv;
+		});
 		arr.unshift({
 			Password: 'Password',
 			User: 'User/Email',
