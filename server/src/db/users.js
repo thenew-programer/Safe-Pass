@@ -58,7 +58,7 @@ export const isExist = (data) => {
 export const deleteFromdb = (data) => {
 	return new Promise((resolve, reject) => {
 		const query = `DELETE FROM ${process.env.DATABASE_TABLE} WHERE USER = ? AND Site = ?;`
-		db.query(query, [ data.email, data.site ], (err, result) => {
+		db.query(query, [data.email, data.site], (err, result) => {
 			if (err) {
 				reject(err);
 			}
@@ -75,13 +75,13 @@ export const deleteFromdb = (data) => {
 
 export const updatePassdb = (data) => {
 	return new Promise((resolve, reject) => {
-		const password = encrypt(data.password);
-		const query = `UPDATE ${process.env.DATABASE_TABLE} SET Password = ? WHERE id = ?`;
-		db.query(query, [password, data.id], (err, result) => {
+		const encryption = encrypt(data.password);
+		const query = `UPDATE ${process.env.DATABASE_TABLE} SET Password = ?, Iv = ? WHERE id = ?`;
+		db.query(query, [encryption.password, encryption.iv, data.id], (err, result) => {
 			if (err) {
 				reject(err);
 			}
-			if (result.affectedRows > 0){
+			if (result.affectedRows > 0) {
 				resolve();
 			} else {
 				reject();
