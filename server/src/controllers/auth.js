@@ -2,7 +2,7 @@ import {
 	getAll, insertToDB, isExist, deleteFromdb,
 	updatePassdb
 } from '../db/users.js';
-import { encrypt, decrypt } from '../utils/index.js';
+import { encrypt, decrypt, toCSV } from '../utils/index.js';
 import '../config.js';
 
 
@@ -109,7 +109,12 @@ export const updatePass = (req, res) => {
 }
 
 
-
+export const downloadPass = (req, res) => {
+	getAll()
+		.then((response) => {
+			toCSV(response).then(res.sendFile(__dirname + '../../my-passwords.csv'))
+		}).catch(res.status(500).send('Failed to download file'));
+}
 export const root = (req, res) => {
 	res.send("Hello world");
 };
