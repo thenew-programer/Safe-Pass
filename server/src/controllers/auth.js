@@ -109,12 +109,12 @@ export const updatePass = (req, res) => {
 
 export const downloadPass = async (req, res) => {
 	try {
-		const data = await getAll()
+		let data = await getAll()
 		data = data.map(item => {
 			item.Password = decrypt({ password: item.Password, iv: item.Iv })
 			delete item.Iv;
 		});
-		await toCSV(response);
+		await toCSV(data);
 		res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
 	} catch (err) {
 		console.error(err);
