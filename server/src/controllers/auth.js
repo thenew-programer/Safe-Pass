@@ -111,6 +111,7 @@ export const downloadPass = async (req, res) => {
 		const data = arr.map(item => {
 			item.Password = decrypt({ password: item.Password, iv: item.Iv });
 			delete item.Iv;
+			delete item.id;
 			return item;
 		});
 		await toCSV(data);
