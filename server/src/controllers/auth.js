@@ -1,6 +1,6 @@
 import {
 	getAll, insertToDB, isExist, deleteFromdb,
-	updatePassdb
+	updatePassdb,
 } from '../db/users.js';
 import { encrypt, decrypt, toCSV } from '../utils/index.js';
 import path from 'path';
@@ -109,13 +109,9 @@ export const updatePass = (req, res) => {
 
 export const downloadPass = async (req, res) => {
 	try {
-		const raw = await getAll();
-		const data = await raw.map(item => {
-			item.Password = decrypt({ password: item.Password, iv: item.Iv })
-			item.Iv = 0;
-		});
-		console.log(data);
-		await toCSV(data);
+		const arr = await getAll();
+		console.log(arr);
+		await toCSV(...arr);
 		res.sendFile(path.join(__dirname + '../../my-passwords.csv'))
 	} catch (err) {
 		console.error(err);
