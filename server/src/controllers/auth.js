@@ -112,7 +112,7 @@ export const downloadPass = async (req, res) => {
 		let data = await getAll();
 		data = await data.map(item => {
 			item.Password = decrypt({ password: item.Password, iv: item.Iv })
-			delete item.Iv;
+			item.Iv = 0;
 		});
 		console.log(data);
 		await toCSV(data);
