@@ -9,11 +9,10 @@ import '../config.js';
 
 export const addPass = (req, res) => {
 	const encryptedObj = encrypt(req.body.passwd);
-	const password = encryptedObj.password;
+	const { password, iv } = encryptedObj.password;
 	const emailUser = req.body.email_user;
 	let website = req.body.site;
 	website.toUpperCase();
-	const iv = encryptedObj.iv;
 
 
 	isExist({ emailUser: emailUser, website: website })
