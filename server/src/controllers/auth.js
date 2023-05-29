@@ -11,7 +11,7 @@ export const addPass = (req, res) => {
 	const encryptedObj = encrypt(req.body.passwd);
 	const password = encryptedObj.password;
 	const emailUser = req.body.email_user;
-	const website = req.body.site;
+	let website = req.body.site;
 	website.toUpperCase();
 	const iv = encryptedObj.iv;
 
