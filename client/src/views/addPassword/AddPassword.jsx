@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Axios from "axios";
@@ -7,6 +7,7 @@ import './addPassword.css';
 import {
 	notifyFailure, notifySuccess, notifyFieldFailure, clear
 } from "../../utils/notifacations";
+
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/addPass';
 
@@ -18,20 +19,7 @@ const AddPassword = () => {
 	let [website, setWebsite] = useState('');
 	let [email_user, setEmail_user] = useState('');
 	const [isClicked, setIsClicked] = useState(false);
-	const [enter, setEnter] = useState(false);
 
-	const event = window.addEventListener('keyup', event => {
-		if (event.key === 'Enter') {
-			setEnter(true);
-		}
-	});
-
-
-	useEffect(() => {
-		if (enter === true) {
-			addPasswordFunc();
-		}
-	}, [enter])
 
 
 	const handleClick = () => {
@@ -64,7 +52,6 @@ const AddPassword = () => {
 				}
 			}).catch(() => console.error('failed'));
 		}).catch(() => {
-
 			setIsClicked(false);
 			notifyFieldFailure('Fill the remaining fields');
 		});
@@ -79,7 +66,7 @@ const AddPassword = () => {
 				passwd: password,
 				site: website
 			}).then((response) => {
-				if (response.data == 'Success') {
+				if (response.data === 'Success') {
 					console.log(response.data);
 					resolve(1)
 				} else {

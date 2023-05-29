@@ -1,8 +1,6 @@
-import React, { useState } from "react"
+import React from "react"
 import './Footer.css';
 import { TbBrandGithub, TbBrandTwitter, TbBrandLinkedin } from 'react-icons/tb'
-import { MdOutlineLightMode, MdOutlineDarkMode } from 'react-icons/md';
-import { AiFillCaretDown, AiOutlineSetting } from 'react-icons/ai'
 
 const Footer = () => {
 

@@ -13,7 +13,7 @@
 	padding: 0;
 	font-family: 'Inter', sans-serif;
 	text-decoration: none;
-	transition: all 0.4s ease-in-out;
+	transition: all 0.2s ease-in-out;
 }
 html, body {
 	background: var(--bg-color);
