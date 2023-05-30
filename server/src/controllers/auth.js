@@ -9,7 +9,7 @@ import '../config.js';
 
 export const addPass = (req, res) => {
 	const encryptedObj = encrypt(req.body.passwd);
-	const { password, iv } = encryptedObj.password;
+	const { passwd, iv } = encryptedObj.password;
 	const emailUser = req.body.email_user;
 	let website = req.body.site;
 	website.toUpperCase();
@@ -18,7 +18,7 @@ export const addPass = (req, res) => {
 	isExist({ emailUser: emailUser, website: website })
 		.then((response) => {
 			if (response === false) {
-				insertToDB(password, emailUser, website, iv)
+				insertToDB(passwd, emailUser, website, iv)
 					.then(() => {
 						res.send(JSON.stringify('Success'));
 						console.log('Success | User does\'nt exist');
