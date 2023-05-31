@@ -35,9 +35,10 @@ export const register = async (req, res) => {
 		});
 
 
-		const userTable = username + user._id;
-		user.userTable = userTable;
-		user.save();
+		const registeredUser = await getUserByEmail(email);
+		const userTable = username + registeredUser._id;
+		registeredUser.userTable = userTable;
+		registeredUser.save();
 
 		console.log('user created successfully');
 		await createTable(userTable);
