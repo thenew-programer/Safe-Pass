@@ -44,9 +44,9 @@ export const decrypt = (encryption) => {
 export const toCSV = (arr) => {
 	return new Promise((resolve, reject) => {
 		arr.unshift({
-			Password: 'Password',
+			Site: 'Website',
 			User: 'User/Email',
-			Site: 'Website'
+			Password: 'Password'
 		});
 		const csvData = arr.map(item => Object.values(item).join(','));
 		const csvContent = csvData.join('\n');

@@ -97,31 +97,7 @@ export const removePass = async (req, res, next) => {
 
 
 export const updatePass = async (req, res, next) => {
-	// console.log(req.body);
-	// isExist({ emailUser: req.body.email, website: req.body.site })
-	// 	.then((response) => {
-	// 		if (response !== false) {
-	// 			updatePassdb({ password: req.body.newPass, id: response[0].id })
-	// 				.then(() => {
-	// 					return res.send('Success')
-	// 				})
-	// 				.catch(err => {
-	// 					console.error(err);
-	// 					return res.status(500).send("Failed to update.")
-	// 				})
-	// 		} else {
-	// 			console.log('Failed to update: pass doesnt exist')
-	// 			return res.send("Passowrd doesn't exist!");
-	// 		}
-	// 	})
-	// 	.catch(err => {
-	// 		console.error(err);
-	// 		return res.status(500).send("Failed to update.")
-	// 	});
-	//
-
 	try {
-
 		const response = await isExist({ emailUser: req.body.email, website: req.body.site })
 
 		if (response === false) {
@@ -137,6 +113,7 @@ export const updatePass = async (req, res, next) => {
 		next(getError('SERVER FAILED', 500));
 	}
 }
+
 
 
 export const downloadPass = async (req, res, next) => {
