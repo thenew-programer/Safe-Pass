@@ -20,7 +20,7 @@ export const register = async (req, res) => {
 		const existingUser = await getUserByEmail(email);
 
 		if (existingUser) {
-			return res.status(400);
+			return res.status(400).send('user already exist');
 		}
 		console.log('user is not there');
 
