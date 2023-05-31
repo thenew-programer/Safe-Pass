@@ -31,6 +31,6 @@ server.listen(PORT = (process.env.PORT || 3001), () => {
 	console.log(`Server is running on http://localhost:${PORT}/`);
 });
 
-app.use(errHandler);
 
 app.use('/', router());
+app.use(errHandler);
