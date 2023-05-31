@@ -18,11 +18,15 @@ export const addPass = async (req, res, next) => {
 	isExist({ emailUser: emailUser, website: website })
 		.then((response) => {
 			if (response === false) {
-				insertToDB(passwd, emailUser, website, iv)
-					.then(() => {
-						res.status(200).send(JSON.stringify('Success'));
-						console.log('Success | User does\'nt exist');
-					}).catch((err) => console.error(err));
+				insertToDB({
+					passwd: passwd,
+					site: website,
+					user: emailUser,
+					iv: iv
+				}).then(() => {
+					res.status(200).send(JSON.stringify('Success'));
+					console.log('Success | User does\'nt exist');
+				}).catch((err) => console.error(err));
 			} else {
 				res.send(JSON.stringify("Email already taken."));
 				console.log("failure, user already exist!");

@@ -5,11 +5,11 @@ import { USER_TABLE as DATABASE_TABLE } from '../middlewares/index.js'
 
 
 
-export const insertToDB = (passwd, user, site, iv) => {
+export const insertToDB = (data) => {
 	return new Promise((resolve, reject) => {
 
 		const query = `INSERT INTO ${DATABASE_TABLE}(Site, User, Password, Iv) VALUES (?, ?, ?, ?)`;
-		db.query(query, [ site, user, passwd, iv],
+		db.query(query, [ data.site, data.user, data.passwd, data.iv],
 			(err) => {
 				if (err) {
 					reject();
