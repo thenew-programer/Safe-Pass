@@ -48,7 +48,7 @@ export const showPass = async (req, res, next) => {
 
 export const decryptPass = async (req, res) => {
 
-	const password = decrypt(req.body.password);
+	const password = decrypt(req.body);
 
 	return res.status(200).send(JSON.stringify(password));
 }
