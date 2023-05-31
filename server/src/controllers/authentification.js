@@ -6,10 +6,11 @@ export let USER_TABLE = '';
 
 export const register = async (req, res) => {
 	try {
+		console.log('register method called!');
 		const { email, password, username } = req.body;
 
 		if (!email || !password || !username) {
-			return res.status(400);
+			return res.status(400).send('no data provided');
 		}
 		console.log('req.body is not empty');
 
