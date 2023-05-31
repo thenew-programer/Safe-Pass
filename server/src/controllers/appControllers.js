@@ -13,6 +13,7 @@ export const addPass = async (req, res, next) => {
 	const emailUser = req.body.email_user;
 	let website = req.body.site;
 	website.toUpperCase();
+	console.log(req.body);
 
 
 	isExist({ emailUser: emailUser, website: website })
