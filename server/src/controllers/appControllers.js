@@ -82,16 +82,11 @@ export const showPass = async (req, res, next) => {
 
 
 
-export const decryptPass = async (req, res, next) => {
-	try {
-		const password = decrypt(req.body);
+export const decryptPass = async (req, res) => {
+	const password = decrypt(req.body);
 
-		res.send(JSON.stringify(password));
+	res.send(JSON.stringify(password));
 
-	} catch (err) {
-		console.error(err);
-		next(getError('SERVER FAILED', 500));
-	}
 }
 
 
