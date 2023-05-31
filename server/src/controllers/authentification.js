@@ -43,7 +43,7 @@ export const register = async (req, res) => {
 		await createTable(userTable);
 		console.log('table created successfully');
 
-		return res.status(201).json(user).end();
+		return res.status(201).json(registeredUser).end();
 	} catch (err) {
 		console.error(err);
 		console.log('error while registring user');
