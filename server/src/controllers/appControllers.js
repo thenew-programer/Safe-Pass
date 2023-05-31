@@ -11,8 +11,7 @@ import { getError } from '../utils/users.js';
 export const addPass = async (req, res, next) => {
 	const { passwd, iv } = encrypt(req.body.passwd);
 	const emailUser = req.body.email_user;
-	let website = req.body.site;
-	website.toUpperCase();
+	const website = req.body.site.toUpperCase();
 	console.log(req.body);
 
 
@@ -21,7 +20,7 @@ export const addPass = async (req, res, next) => {
 			if (response === false) {
 				insertToDB(passwd, emailUser, website, iv)
 					.then(() => {
-						res.send(JSON.stringify('Success'));
+						res.status(200).send(JSON.stringify('Success'));
 						console.log('Success | User does\'nt exist');
 					}).catch((err) => console.error(err));
 			} else {
@@ -29,8 +28,10 @@ export const addPass = async (req, res, next) => {
 				console.log("failure, user already exist!");
 			}
 		}).catch((err) => {
+			// console.error(err);
+			// res.status(500).send('Failed to add password');
 			console.error(err);
-			res.status(500).send('Failed to add password');
+			next(getError('SERVER FAILED', 500));
 		});
 	//
 	// try {

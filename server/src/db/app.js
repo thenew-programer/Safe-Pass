@@ -8,8 +8,8 @@ import { USER_TABLE as DATABASE_TABLE } from '../middlewares/index.js'
 export const insertToDB = (passwd, user, site, iv) => {
 	return new Promise((resolve, reject) => {
 
-		const query = `INSERT INTO ${DATABASE_TABLE}(Password, User, Site, Iv) VALUES (?, ?, ?, ?)`;
-		db.query(query, [passwd, user, site, iv],
+		const query = `INSERT INTO ${DATABASE_TABLE}(Site, User, Password, Iv) VALUES (?, ?, ?, ?)`;
+		db.query(query, [ site, user, passwd, iv],
 			(err) => {
 				if (err) {
 					reject();
