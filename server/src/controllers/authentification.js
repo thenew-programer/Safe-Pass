@@ -2,7 +2,6 @@ import { createUser, deleteUserById, getUserByEmail, getUserById } from '../db/u
 import { authentification, getError, random } from '../utils/users.js';
 import { createTable, removeTable } from '../db/app.js';
 
-export let USER_TABLE = '';
 
 export const register = async (req, res) => {
 	try {
@@ -70,7 +69,6 @@ export const login = async (req, res) => {
 			return res.status(400).send('incorrect password');
 		}
 
-		USER_TABLE = user.userTable;
 		const salt = random();
 		user.authentification.sessionToken = authentification(salt, user._id.toString());
 		await user.save();

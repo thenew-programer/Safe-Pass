@@ -1,7 +1,7 @@
 import { db } from '../index.js';
 import '../config.js';
 import { encrypt } from '../utils/index.js';
-import { USER_TABLE as DATABASE_TABLE } from '../controllers/authentification.js';
+import { USER_TABLE as DATABASE_TABLE } from '../middlewares/index.js'
 
 
 

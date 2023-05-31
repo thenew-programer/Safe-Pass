@@ -2,6 +2,7 @@ import { getUserBySessionToken } from '../db/users.js'
 import lodash from 'lodash';
 import { getError } from '../utils/users.js';
 
+export let USER_TABLE = '';
 
 const { get, merge } = lodash;
 
@@ -21,6 +22,8 @@ export const pathErrHandler = (req, res, next) => {
 
 export const isAuthenticated = async (req, res, next) => {
 	try {
+
+		// skip the login and register route from auth
 		if (req.path === '/login' || req.path === '/register') {
 			next();
 		} else {
@@ -38,6 +41,7 @@ export const isAuthenticated = async (req, res, next) => {
 			}
 
 			merge(req, { identity: user });
+			USER_TABLE = user.userTable;
 			next();
 
 		}
