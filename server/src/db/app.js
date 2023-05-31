@@ -113,7 +113,7 @@ export const createTable = (tableName) => {
 
 export const removeTable = (tableName) => {
 	return new Promise((resolve, reject) => {
-		const query = `DROP TABLE IF EXISTS ${tableName};`;
+		const query = `DROP TABLE ${tableName};`;
 		db.query(query, (err) => {
 			if (err) {
 				console.error(err);
