@@ -1,4 +1,4 @@
-import {  getUserBySessionToken } from '../db/users.js'
+import { getUserBySessionToken } from '../db/users.js'
 import lodash from 'lodash';
 import { getError } from '../utils/users.js';
 
@@ -67,3 +67,13 @@ export const isOwner = async (req, res, next) => {
 	}
 }
 
+
+export const escapeRoute = (fn) => {
+	return (req, res, next) => {
+		if (req.path === '/auth/register' && req.method === 'POST') {
+			next();
+		} else {
+			fn(req, res, next);
+		}
+	}
+}
