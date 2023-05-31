@@ -9,7 +9,8 @@ import { getError } from '../utils/users.js';
 
 
 export const addPass = async (req, res, next) => {
-	const { passwd, iv } = encrypt(req.body.passwd);
+	const { password, iv } = encrypt(req.body.passwd);
+	console.log('passwd: ', password, 'iv: ', iv)
 	const emailUser = req.body.email_user;
 	const website = req.body.site;
 	console.log(req.body);
@@ -20,7 +21,7 @@ export const addPass = async (req, res, next) => {
 			console.log('return after isExist');
 			if (response === false) {
 				insertToDB({
-					passwd: passwd,
+					passwd: password,
 					site: website,
 					user: emailUser,
 					iv: iv
