@@ -34,7 +34,7 @@ export const isAuthenticated = async (req, res, next) => {
 				return res.status(403).send('you need to login');
 			}
 
-			const user = await getUserBySessionToken(sessionToken);
+			const user = await getUserBySessionToken(sessionToken).select('+userTable');
 
 			if (!user) {
 				return res.status(403).send('no user found uder your email');
