@@ -3,14 +3,14 @@ import {
 	getPassCount, removePass, updatePass, downloadPass
 } from '../controllers/appControllers.js';
 import { deleteUser, login, register, updateUser } from '../controllers/authentification.js';
-import { isOwner, pathErrHandler } from '../middlewares/index.js';
+import { isAuthenticated, isOwner, pathErrHandler } from '../middlewares/index.js';
 
 
 export default (router) => {
 	router.post('/auth/login/', login);
 	router.post('/auth/register', register);
-	router.delete('/auth/delete/:id', isOwner, deleteUser);
-	router.patch('/aut/update/:id', isOwner, updateUser);
+	router.delete('/auth/delete/:id', isAuthenticated, isOwner, deleteUser);
+	router.patch('/aut/update/:id', isAuthenticated, isOwner, updateUser);
 	router.post('/addPass', addPass);
 	router.get('/showpasswords', showPass);
 	router.post('/decrypt', decryptPass);
