@@ -21,6 +21,12 @@ export const pathErrHandler = (req, res, next) => {
 
 export const isAuthenticated = async (req, res, next) => {
 	try {
+
+		// ignore auth in register and login routes
+		if (req.path === '/auth/register' || req.path === '/auth/login') {
+			next();
+		}
+
 		const sessionToken = req.cookies['SAFE-PASS'];
 
 		if (!sessionToken) {
@@ -67,15 +73,3 @@ export const isOwner = async (req, res, next) => {
 	}
 }
 
-
-export const escapeRoute = (fn) => {
-	return (req, res, next) => {
-		if (req.path === '/auth/register') {
-			next();
-		} else if (req.path === '/auth/login') {
-			next();
-		}else {
-			fn(req, res, next);
-		}
-	}
-}

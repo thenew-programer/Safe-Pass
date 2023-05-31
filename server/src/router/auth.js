@@ -10,7 +10,7 @@ export default (router) => {
 	router.post('/auth/login/', login);
 	router.post('/auth/register', register);
 	router.delete('/auth/delete/:id', isOwner, deleteUser);
-	router.patch('/aut/delete/:id', isOwner, updateUser);
+	router.patch('/aut/update/:id', isOwner, updateUser);
 	router.post('/addPass', addPass);
 	router.get('/showpasswords', showPass);
 	router.post('/decrypt', decryptPass);

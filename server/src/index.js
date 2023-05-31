@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
-import { escapeRoute, errHandler, isAuthenticated } from './middlewares/index.js';
+import { errHandler, isAuthenticated } from './middlewares/index.js';
 import router from './router/index.js';
 import './config.js'
 
@@ -23,7 +23,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(compression());
-app.use(escapeRoute(isAuthenticated));
+app.use(isAuthenticated);
 
 
 const server = http.createServer(app);
