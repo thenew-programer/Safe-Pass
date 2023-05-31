@@ -18,7 +18,6 @@ export const db = mysql.createPool(process.env.DATABASE_URL);
 mongoose.Promise = Promise;
 mongoose.connect(process.env.USERS_DATABASE_URL);
 mongoose.connection.on('connected', console.log('Connected Successfully'));
-mongoose.connection.on('error', (err) => console.log(err));
 
 
 app.use(cors());
