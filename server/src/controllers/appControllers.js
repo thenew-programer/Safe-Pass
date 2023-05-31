@@ -9,54 +9,51 @@ import { getError } from '../utils/users.js';
 
 
 export const addPass = async (req, res, next) => {
-	// const encryptedObj = encrypt(req.body.passwd);
-	// const { passwd, iv } = encryptedObj.password;
-	// const emailUser = req.body.email_user;
-	// let website = req.body.site;
-	// website.toUpperCase();
+	const { passwd, iv } = encrypt(req.body.passwd);
+	const emailUser = req.body.email_user;
+	let website = req.body.site;
+	website.toUpperCase();
+
+
+	isExist({ emailUser: emailUser, website: website })
+		.then((response) => {
+			if (response === false) {
+				insertToDB(passwd, emailUser, website, iv)
+					.then(() => {
+						res.send(JSON.stringify('Success'));
+						console.log('Success | User does\'nt exist');
+					}).catch((err) => console.error(err));
+			} else {
+				res.send(JSON.stringify("Email already taken."));
+				console.log("failure, user already exist!");
+			}
+		}).catch((err) => {
+			console.error(err);
+			res.status(500).send('Failed to add password');
+		});
 	//
+	// try {
+	// 	const { passwd, iv } = encrypt(req.body.passwd);
+	// 	const emailUser = req.body.email_user;
+	// 	let website = req.body.site;
+	// 	website.toUpperCase();
 	//
-	// isExist({ emailUser: emailUser, website: website })
-	// 	.then((response) => {
-	// 		if (response === false) {
-	// 			insertToDB(passwd, emailUser, website, iv)
-	// 				.then(() => {
-	// 					res.send(JSON.stringify('Success'));
-	// 					console.log('Success | User does\'nt exist');
-	// 				}).catch((err) => console.error(err));
-	// 		} else {
-	// 			res.send(JSON.stringify("Email already taken."));
-	// 			console.log("failure, user already exist!");
-	// 		}
-	// 	}).catch((err) => {
-	// 		console.error(err);
-	// 		res.status(500).send('Failed to add password');
-	// 	});
+	// 	const response = await isExist({ emailUser: emailUser, website: website });
 	//
-	try {
-
-		const encryptedObj = encrypt(req.body.passwd);
-		const { passwd, iv } = encryptedObj.password;
-		const emailUser = req.body.email_user;
-		let website = req.body.site;
-		website.toUpperCase();
-
-		const response = await isExist({ emailUser: emailUser, website: website });
-
-		if (response !== false) {
-			console.log('Failure, user already exist');
-			return res.send(JSON.stringify("Email already taken!"));
-		}
-
-		await insertToDB(passwd, emailUser, website, iv);
-
-		console.log('Success, User does not exist!');
-		return res.send(JSON.stringify('Success'));
-
-	} catch (err) {
-		console.error(err);
-		next(getError('SERVER FAILED', 500));
-	}
+	// 	if (response !== false) {
+	// 		console.log('Failure, user already exist');
+	// 		return res.send(JSON.stringify("Email already taken!"));
+	// 	}
+	//
+	// 	await insertToDB(passwd, emailUser, website, iv);
+	//
+	// 	console.log('Success, User does not exist!');
+	// 	return res.send(JSON.stringify('Success'));
+	//
+	// } catch (err) {
+	// 	console.error(err);
+	// 	next(getError('SERVER FAILED', 500));
+	// }
 };
 
 
