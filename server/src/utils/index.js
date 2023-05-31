@@ -3,7 +3,7 @@ import '../config.js';
 import { writeFile } from 'fs';
 
 
-const KEY = process.env.ENCRYPTION_KEY;
+const KEY = process.env.DATA_ENCRYPTION_KEY;
 
 export const encrypt = (password) => {
 	const iv = Buffer.from(crypto.randomBytes(16));
