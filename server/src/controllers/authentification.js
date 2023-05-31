@@ -8,10 +8,10 @@ export const register = async (req, res) => {
 	try {
 		console.log('register method called!');
 		console.log(req.body);
-		// const { email, password, username } = req.body;
-		const email = 'great@hello.com';
-		const password = 'youssef';
-		const username = 'global';
+		const { email, password, username } = req.body;
+		// const email = 'great@hello.com';
+		// const password = 'youssef';
+		// const username = 'global';
 
 		if (!email || !password || !username) {
 			return res.status(400).send('no data provided');
@@ -78,7 +78,7 @@ export const login = async (req, res) => {
 		await user.save();
 
 		res.cookie('SAFE-PASS', user.authentification.sessionToken,
-			{ domain: 'localhost', path: '/' });
+			{ domain: 'render.com', path: '/' });
 
 		return res.status(202).json(user).end();
 
