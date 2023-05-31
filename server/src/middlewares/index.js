@@ -22,12 +22,6 @@ export const pathErrHandler = (req, res, next) => {
 export const isAuthenticated = async (req, res, next) => {
 	try {
 
-		// ignore auth in register and login routes
-		if (req.originalUrl === '/auth/register' || req.originalUrl === '/auth/login') {
-			console.log('register or login requested and escaped by the auth middleware!');
-			next();
-			return;
-		}
 
 		const sessionToken = req.cookies['SAFE-PASS'];
 		console.log('login or register does not escaped');
