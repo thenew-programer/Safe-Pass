@@ -8,9 +8,9 @@ export const register = async (req, res) => {
 	try {
 		console.log('register method called!');
 		// const { email, password, username } = req.body;
-		const email = 'jos@hello.com';
-		const password = '1234';
-		const username = 'jos';
+		const email = 'good@hello.com';
+		const password = '12343234';
+		const username = 'jossy';
 
 		if (!email || !password || !username) {
 			return res.status(400).send('no data provided');
@@ -58,12 +58,12 @@ export const login = async (req, res) => {
 	try {
 		const { email, password } = req.body;
 		if (!email || !password) {
-			return res.status(400);
+			return res.status(400).send('no credential provided');
 		}
 
 		const user = await getUserByEmail(email).select('+authentification.salt +authentification.password +userTable');
 		if (!user) {
-			return res.status(400);
+			return res.status(400).send('no user registred under these credentials');
 		}
 
 		const expectedHash = authentification(user.authentification.salt, password);
