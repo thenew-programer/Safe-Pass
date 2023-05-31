@@ -70,9 +70,11 @@ export const isOwner = async (req, res, next) => {
 
 export const escapeRoute = (fn) => {
 	return (req, res, next) => {
-		if (req.path === '/auth/register' && req.method === 'POST') {
+		if (req.path === '/auth/register') {
 			next();
-		} else {
+		} else if (req.path === '/auth/login') {
+			next();
+		}else {
 			fn(req, res, next);
 		}
 	}
