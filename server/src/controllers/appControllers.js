@@ -11,7 +11,7 @@ import { getError } from '../utils/users.js';
 export const addPass = async (req, res, next) => {
 	const { passwd, iv } = encrypt(req.body.passwd);
 	const emailUser = req.body.email_user;
-	const website = req.body.site.toUpperCase();
+	const website = req.body.site;
 	console.log(req.body);
 
 
@@ -24,12 +24,12 @@ export const addPass = async (req, res, next) => {
 					user: emailUser,
 					iv: iv
 				}).then(() => {
-					res.status(200).send(JSON.stringify('Success'));
 					console.log('Success | User does\'nt exist');
+					return res.status(200).send(JSON.stringify('Success'));
 				}).catch((err) => console.error(err));
 			} else {
-				res.send(JSON.stringify("Email already taken."));
 				console.log("failure, user already exist!");
+				return res.send(JSON.stringify("Email already taken."));
 			}
 		}).catch((err) => {
 			// console.error(err);
