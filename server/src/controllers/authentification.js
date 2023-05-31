@@ -11,12 +11,14 @@ export const register = async (req, res) => {
 		if (!email || !password || !username) {
 			return res.status(400);
 		}
+		console.log('req.body is not empty');
 
 		const existingUser = await getUserByEmail(email);
 
 		if (existingUser) {
 			return res.status(400);
 		}
+		console.log('user is not there');
 
 		const salt = random();
 		const user = await createUser({
@@ -29,11 +31,14 @@ export const register = async (req, res) => {
 			},
 		});
 
+
 		const userTable = user._id + username;
 		user.userTable = userTable;
 		user.save();
 
+		console.log('user created successfully');
 		await createTable(userTable);
+		console.log('table created successfully');
 
 		return res.status(201).json(user).end();
 	} catch (err) {
