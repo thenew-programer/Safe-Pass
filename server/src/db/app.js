@@ -58,7 +58,7 @@ export const isExist = (data) => {
 
 export const deleteFromdb = (data) => {
 	return new Promise((resolve, reject) => {
-		const query = `DELETE FROM ${DATABASE_TABLE} WHERE USER = ? AND Site = ?;`
+		const query = `DELETE FROM ${DATABASE_TABLE} WHERE User = ? AND Site = ?;`
 		db.query(query, [data.email, data.site], (err, result) => {
 			if (err) {
 				reject(err);

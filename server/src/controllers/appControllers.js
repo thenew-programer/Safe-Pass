@@ -70,17 +70,6 @@ export const getPassCount = async (req, res, next) => {
 
 
 export const removePass = async (req, res, next) => {
-	// deleteFromdb(req.body).then((response) => {
-	// 	if (response === true) {
-	// 		res.send(JSON.stringify("REMOVED"));
-	// 	} else {
-	// 		res.send(JSON.stringify("FAILED TO REMOVE"))
-	// 	}
-	// }).catch((err) => {
-	// 	console.error(err);
-	// 	res.status(500).send("Failed to delete");
-	// })
-
 	try {
 		await deleteFromdb(req.body);
 
