@@ -144,44 +144,44 @@ export const removePass = async (req, res, next) => {
 
 
 export const updatePass = async (req, res, next) => {
-	// isExist({ emailUser: req.body.email, website: req.body.site })
-	// 	.then((response) => {
-	// 		if (response !== false) {
-	// 			updatePassdb({ password: req.body.newPass, id: response[0].id })
-	// 				.then(() => {
-	// 					res.send('Success')
-	// 				})
-	// 				.catch(err => {
-	// 					console.error(err);
-	// 					res.status(500).send("Failed to update.")
-	// 				})
-	// 		} else {
-	// 			console.log('Failed to update: pass doesnt exist')
-	// 			res.send("Passowrd doesn't exist!");
-	// 		}
-	// 	})
-	// 	.catch(err => {
-	// 		console.error(err);
-	// 		res.status(500).send("Failed to update.")
-	// 	});
+	isExist({ emailUser: req.body.email, website: req.body.site })
+		.then((response) => {
+			if (response !== false) {
+				updatePassdb({ password: req.body.newPass, id: response[0].id })
+					.then(() => {
+						res.send('Success')
+					})
+					.catch(err => {
+						console.error(err);
+						res.status(500).send("Failed to update.")
+					})
+			} else {
+				console.log('Failed to update: pass doesnt exist')
+				res.send("Passowrd doesn't exist!");
+			}
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).send("Failed to update.")
+		});
+
+
+	// try {
 	//
-
-	try {
-
-		const response = await isExist({ emailUser: req.body.email, website: req.body.site })
-
-		if (response === false) {
-			console.log('Failed to update: pass doesnt exist')
-			return res.status(400).send("Password doesn't exist!");
-		}
-
-		await updatePassdb({ password: req.body.newPass, id: response[0].id })
-		res.status(200).send('Success');
-
-	} catch (err) {
-		console.error(err);
-		next(getError('SERVER FAILED', 500));
-	}
+	// 	const response = await isExist({ emailUser: req.body.email, website: req.body.site })
+	//
+	// 	if (response === false) {
+	// 		console.log('Failed to update: pass doesnt exist')
+	// 		return res.status(400).send("Password doesn't exist!");
+	// 	}
+	//
+	// 	await updatePassdb({ password: req.body.newPass, id: response[0].id })
+	// 	res.status(200).send('Success');
+	//
+	// } catch (err) {
+	// 	console.error(err);
+	// 	next(getError('SERVER FAILED', 500));
+	// }
 }
 
 
