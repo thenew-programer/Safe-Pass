@@ -23,7 +23,8 @@ export const isAuthenticated = async (req, res, next) => {
 	try {
 
 		// ignore auth in register and login routes
-		if (req.path === '/auth/register' || req.path === '/auth/login') {
+		if (req.originalUrl === '/auth/register' || req.originalUrl === '/auth/login') {
+			console.log('register or login requested and escaped by the auth middleware!');
 			next();
 		}
 
