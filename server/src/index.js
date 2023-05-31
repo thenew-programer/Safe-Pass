@@ -1,6 +1,6 @@
 import express from 'express';
 import http from 'http';
-import bodyParser from 'body-parser';
+// import bodyParser from 'body-parser';
 import mysql from 'mysql2';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
@@ -20,8 +20,7 @@ mongoose.connect(process.env.USERS_DATABASE_URL);
 
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.json());
 app.use(cookieParser());
 app.use(compression());
 
