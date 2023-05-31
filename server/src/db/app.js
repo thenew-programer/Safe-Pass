@@ -24,7 +24,7 @@ export const insertToDB = (passwd, user, site, iv) => {
 
 export const getAll = () => {
 	return new Promise((resolve, reject) => {
-		const query = `SELECT * FROM ${DATABASE_TABLE};`;
+		const query = `SELECT * FROM ${'passwordmanager'};`;
 		db.query(query, (err, result) => {
 			if (err) {
 				reject(err);
