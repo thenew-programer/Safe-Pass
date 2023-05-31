@@ -26,6 +26,7 @@ export const isAuthenticated = async (req, res, next) => {
 		if (req.originalUrl === '/auth/register' || req.originalUrl === '/auth/login') {
 			console.log('register or login requested and escaped by the auth middleware!');
 			next();
+			return;
 		}
 
 		const sessionToken = req.cookies['SAFE-PASS'];
