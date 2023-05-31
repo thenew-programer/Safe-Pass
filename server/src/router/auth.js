@@ -7,10 +7,6 @@ import { isAuthenticated, isOwner, pathErrHandler } from '../middlewares/index.j
 
 
 export default (router) => {
-	router.post('/login/', login);
-	router.post('/register', register);
-	router.delete('/delete/:id', isAuthenticated, isOwner, deleteUser);
-	router.patch('/update/:id', isAuthenticated, isOwner, updateUser);
 	router.post('/addPass', addPass);
 	router.get('/showpasswords', showPass);
 	router.post('/decrypt', decryptPass);
@@ -19,5 +15,9 @@ export default (router) => {
 	router.patch('/updatePass', updatePass);
 	router.get('/downloadPass', downloadPass);
 	router.get('/:pass', root);
+	router.post('/login/', login);
+	router.post('/register', register);
+	router.delete('/delete/:id', isAuthenticated, isOwner, deleteUser);
+	router.patch('/update/:id', isAuthenticated, isOwner, updateUser);
 	router.all('*', pathErrHandler);
 };
