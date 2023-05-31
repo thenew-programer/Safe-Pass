@@ -85,7 +85,7 @@ export const showPass = async (req, res, next) => {
 export const decryptPass = async (req, res) => {
 	const password = decrypt(req.body);
 
-	res.send(JSON.stringify(password));
+	return res.send(JSON.stringify(password));
 
 }
 
@@ -139,25 +139,26 @@ export const removePass = async (req, res, next) => {
 
 
 export const updatePass = async (req, res, next) => {
+	console.log(req.body);
 	isExist({ emailUser: req.body.email, website: req.body.site })
 		.then((response) => {
 			if (response !== false) {
 				updatePassdb({ password: req.body.newPass, id: response[0].id })
 					.then(() => {
-						res.send('Success')
+						return res.send('Success')
 					})
 					.catch(err => {
 						console.error(err);
-						res.status(500).send("Failed to update.")
+						return res.status(500).send("Failed to update.")
 					})
 			} else {
 				console.log('Failed to update: pass doesnt exist')
-				res.send("Passowrd doesn't exist!");
+				return res.send("Passowrd doesn't exist!");
 			}
 		})
 		.catch(err => {
 			console.error(err);
-			res.status(500).send("Failed to update.")
+			return res.status(500).send("Failed to update.")
 		});
 
 
@@ -190,7 +191,7 @@ export const downloadPass = async (req, res, next) => {
 			return item;
 		});
 		await toCSV(data);
-		res.sendFile(path.resolve('../../my-passwords.csv'))
+		return res.sendFile(path.resolve('../../my-passwords.csv'))
 	} catch (err) {
 		console.error(err);
 		next(getError('SERVER FAILED', 500));
