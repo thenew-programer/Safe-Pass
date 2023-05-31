@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import '../config.js'
 
 const KEY = process.env.USERS_HASHING_KEY;
 
