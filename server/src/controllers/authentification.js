@@ -68,7 +68,7 @@ export const login = async (req, res) => {
 
 		const expectedHash = authentification(user.authentification.salt, password);
 		if (expectedHash !== user.authentification.password) {
-			return res.status(400);
+			return res.status(400).send('incorrect password');
 		}
 
 		USER_TABLE = user.userTable;
@@ -76,8 +76,7 @@ export const login = async (req, res) => {
 		user.authentification.sessionToken = authentification(salt, user._id.toString());
 		await user.save();
 
-		res.cookie('SAFE-PASS', user.authentification.sessionToken,
-			{ domain: 'render.com', path: '/' });
+		res.cookie('SAFE-PASS', user.authentification.sessionToken);
 
 		return res.status(202).json(user).end();
 
