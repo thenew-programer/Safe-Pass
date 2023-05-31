@@ -21,19 +21,18 @@ export const pathErrHandler = (req, res, next) => {
 
 export const isAuthenticated = async (req, res, next) => {
 	try {
-
-
-		const sessionToken = req.cookies.SAFE-PASS;
-		console.log('login or register does not escaped');
+		const sessionToken = req.cookies.safepass;
+		console.log(req.cookies);
+		console.log(sessionToken);
 
 		if (!sessionToken) {
-			return res.sendStatus(403);
+			return res.status(403).send('you need to login');
 		}
 
 		const user = await getUserBySessionToken(sessionToken);
 
 		if (!user) {
-			return res.sendStatus(403);
+			return res.status(403).send('no user found uder your email');
 		}
 
 		merge(req, { identity: user });
@@ -54,12 +53,8 @@ export const isOwner = async (req, res, next) => {
 
 		const currentUserId = get(req, 'identity._id');
 
-		if (!currentUserId) {
-			return res.sendStatus(403);
-		}
-
-		if (currentUserId.toString() !== id) {
-			return res.sendStatus(403);
+		if (!currentUserId || currentUserId.toString() !== id) {
+			return res.status(403).send('Forbiden');
 		}
 
 		next();

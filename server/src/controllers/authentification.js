@@ -76,7 +76,7 @@ export const login = async (req, res) => {
 		user.authentification.sessionToken = authentification(salt, user._id.toString());
 		await user.save();
 
-		res.cookie('SAFE-PASS', user.authentification.sessionToken);
+		res.cookie('safepass', user.authentification.sessionToken);
 
 		return res.status(202).json(user).end();
 
