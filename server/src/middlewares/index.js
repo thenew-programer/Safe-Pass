@@ -23,22 +23,24 @@ export const isAuthenticated = async (req, res, next) => {
 	try {
 		if (req.path === '/login' || req.path === '/register') {
 			next();
+		} else {
+
+			const sessionToken = req.cookies.safepass;
+
+			if (!sessionToken) {
+				return res.status(403).send('you need to login');
+			}
+
+			const user = await getUserBySessionToken(sessionToken);
+
+			if (!user) {
+				return res.status(403).send('no user found uder your email');
+			}
+
+			merge(req, { identity: user });
+			next();
+
 		}
-		const sessionToken = req.cookies.safepass;
-
-		if (!sessionToken) {
-			return res.status(403).send('you need to login');
-		}
-
-		const user = await getUserBySessionToken(sessionToken);
-
-		if (!user) {
-			return res.status(403).send('no user found uder your email');
-		}
-
-		merge(req, { identity: user });
-		next();
-
 	} catch (err) {
 		console.error(err);
 		next(getError('SERVER FAILED', 500));
