@@ -96,13 +96,7 @@ export const updatePassdb = (data) => {
 export const createTable = (tableName) => {
 	return new Promise((resolve, reject) => {
 
-		const query = `CREATE TABLE IF NOT EXISTS ${tableName} (
-			id INT AUTO_INCREMENT PRIMARY KEY,
-			Site VARCHAR(255) NOT NULL,
-			User VARCHAR(255) NOT NULL,
-			Password VARCHAR(255) NOT NULL,
-			Iv VARCHAR(255) NOT NULL
-			);`;
+		const query = `CREATE TABLE IF NOT EXISTS ${tableName}(id INT AUTO_INCREMENT PRIMARY, KEY, Site VARCHAR(255) NOT NULL, User VARCHAR(255) NOT NULL, Password VARCHAR(255) NOT NULL, Iv VARCHAR (255) NOT NULL);`
 
 		db.query(query, (err) => {
 			if (err) {
