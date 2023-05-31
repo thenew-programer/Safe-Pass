@@ -9,9 +9,9 @@ export const register = async (req, res) => {
 		console.log('register method called!');
 		const { email, password, username } = req.body;
 
-		if (!email || !password || !username) {
-			return res.status(400).send('no data provided');
-		}
+		// if (!email || !password || !username) {
+		// 	return res.status(400).send('no data provided');
+		// }
 		console.log('req.body is not empty');
 
 		const existingUser = await getUserByEmail(email);
