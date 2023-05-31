@@ -21,9 +21,10 @@ export const pathErrHandler = (req, res, next) => {
 
 export const isAuthenticated = async (req, res, next) => {
 	try {
+		if (req.path === '/login' || req.path === '/register') {
+			next();
+		}
 		const sessionToken = req.cookies.safepass;
-		console.log(req.cookies);
-		console.log(sessionToken);
 
 		if (!sessionToken) {
 			return res.status(403).send('you need to login');

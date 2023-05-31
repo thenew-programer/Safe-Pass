@@ -15,7 +15,6 @@ export const register = async (req, res) => {
 		if (!email || !password || !username) {
 			return res.status(400).send('no data provided');
 		}
-		console.log('req.body is not empty');
 
 		const existingUser = await getUserByEmail(email);
 
@@ -36,7 +35,7 @@ export const register = async (req, res) => {
 
 
 		const registeredUser = await getUserByEmail(email);
-		const userTable = 'user' + registeredUser._id.toString().slice(1,7);
+		const userTable = 'user' + registeredUser._id.toString().slice(1, 7);
 		registeredUser.userTable = userTable;
 		registeredUser.save();
 
@@ -106,7 +105,7 @@ export const deleteUser = async (req, res) => {
 export const updateUser = async (req, res, next) => {
 	try {
 		const { id } = req.params;
-		const { username, email, password } = req.body;
+		const { password } = req.body;
 
 		if (!username) {
 			return res.status(400);
@@ -115,8 +114,6 @@ export const updateUser = async (req, res, next) => {
 		const user = await getUserById(id).select('+authentification.password +authentification.salt');
 
 		salt = random();
-		user.username = username;
-		user.email = email;
 		user.authentification.password = authentification(salt, password);
 		user.authentification.salt = salt;
 		user.save();
