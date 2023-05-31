@@ -14,7 +14,7 @@ export const errHandler = (err, req, res, next) => {
 
 
 export const pathErrHandler = (req, res, next) => {
-	const err = getError(404, 'Not Found');
+	const err = getError('Not Found', 404);
 	next(err);
 }
 
