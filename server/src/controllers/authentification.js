@@ -36,7 +36,7 @@ export const register = async (req, res) => {
 
 
 		const registeredUser = await getUserByEmail(email);
-		const userTable = username + registeredUser._id;
+		const userTable = username + registeredUser._id.toString().slice(1,5);
 		registeredUser.userTable = userTable;
 		registeredUser.save();
 
