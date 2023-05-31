@@ -40,8 +40,8 @@ export const isAuthenticated = async (req, res, next) => {
 				return res.status(403).send('no user found uder your email');
 			}
 
-			merge(req, { identity: user });
 			USER_TABLE = user.userTable;
+			merge(req, { identity: user });
 			next();
 
 		}
