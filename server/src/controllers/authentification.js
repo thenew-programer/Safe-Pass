@@ -7,10 +7,11 @@ export let USER_TABLE = '';
 export const register = async (req, res) => {
 	try {
 		console.log('register method called!');
+		console.log(req.body);
 		// const { email, password, username } = req.body;
-		const email = 'good@hello.com';
-		const password = '12343234';
-		const username = 'jossy';
+		const email = 'bad@hello.com';
+		const password = 'jos';
+		const username = 'youssef';
 
 		if (!email || !password || !username) {
 			return res.status(400).send('no data provided');
