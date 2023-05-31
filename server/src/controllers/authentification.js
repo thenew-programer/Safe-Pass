@@ -9,9 +9,9 @@ export const register = async (req, res) => {
 		console.log('register method called!');
 		console.log(req.body);
 		// const { email, password, username } = req.body;
-		const email = 'bad@hello.com';
-		const password = 'jos';
-		const username = 'youssef';
+		const email = 'great@hello.com';
+		const password = 'youssef';
+		const username = 'global';
 
 		if (!email || !password || !username) {
 			return res.status(400).send('no data provided');
