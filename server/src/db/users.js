@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema({
 	userTable: { type: String, select: false },
 	authentification: {
 		password: { type: String, required: true, select: false },
-		salt: { type: String, required: true, select: false },
+		salt: { type: String, select: false },
 		sessionToken: { type: String, select: false },
 	},
 });

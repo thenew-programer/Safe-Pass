@@ -7,11 +7,14 @@ export let USER_TABLE = '';
 export const register = async (req, res) => {
 	try {
 		console.log('register method called!');
-		const { email, password, username } = req.body;
+		// const { email, password, username } = req.body;
+		const email = 'jos@hello.com';
+		const password = '1234';
+		const username = 'jos';
 
-		// if (!email || !password || !username) {
-		// 	return res.status(400).send('no data provided');
-		// }
+		if (!email || !password || !username) {
+			return res.status(400).send('no data provided');
+		}
 		console.log('req.body is not empty');
 
 		const existingUser = await getUserByEmail(email);
@@ -26,8 +29,8 @@ export const register = async (req, res) => {
 			email,
 			username,
 			authentification: {
-				salt,
 				password: authentification(salt, password),
+				salt,
 			},
 		});
 
