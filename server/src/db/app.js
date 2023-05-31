@@ -12,7 +12,7 @@ export const insertToDB = (data) => {
 		db.query(query, [ data.site, data.user, data.passwd, data.iv],
 			(err) => {
 				if (err) {
-					reject();
+					reject(err);
 				} else {
 					resolve();
 				}
