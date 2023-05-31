@@ -29,6 +29,7 @@ export const isAuthenticated = async (req, res, next) => {
 		}
 
 		const sessionToken = req.cookies['SAFE-PASS'];
+		console.log('login or register does not escaped');
 
 		if (!sessionToken) {
 			return res.sendStatus(403);
