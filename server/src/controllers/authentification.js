@@ -25,7 +25,6 @@ export const register = async (req, res) => {
 		const user = await createUser({
 			email,
 			username,
-			userTable,
 			authentification: {
 				salt,
 				password: authentification(salt, password),
