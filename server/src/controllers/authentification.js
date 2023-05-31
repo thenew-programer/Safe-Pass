@@ -33,7 +33,7 @@ export const register = async (req, res) => {
 		});
 
 
-		const userTable = user._id + username;
+		const userTable = username + user._id;
 		user.userTable = userTable;
 		user.save();
 
@@ -44,6 +44,7 @@ export const register = async (req, res) => {
 		return res.status(201).json(user).end();
 	} catch (err) {
 		console.error(err);
+		console.log('error while registring user');
 		return res.status(500);
 	}
 }
