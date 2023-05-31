@@ -39,7 +39,7 @@ export const getAll = () => {
 
 export const isExist = (data) => {
 	return new Promise((resolve, reject) => {
-		const query = `SELECT * FROM ${DATABASE_TABLE} WHERE USER = ? AND Site = ?;`;
+		const query = `SELECT * FROM ${DATABASE_TABLE} WHERE User = ? AND Site = ?;`;
 		db.query(query, [data.emailUser, data.website], (err, result) => {
 			if (err) {
 				reject(err);
