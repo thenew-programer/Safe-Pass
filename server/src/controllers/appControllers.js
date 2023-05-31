@@ -17,6 +17,7 @@ export const addPass = async (req, res, next) => {
 
 	isExist({ emailUser: emailUser, website: website })
 		.then((response) => {
+			console.log('return after isExist');
 			if (response === false) {
 				insertToDB({
 					passwd: passwd,
