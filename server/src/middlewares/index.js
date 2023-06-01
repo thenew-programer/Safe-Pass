@@ -26,18 +26,33 @@ export const isAuthenticated = async (req, res, next) => {
 		// skip the login and register route from auth
 		if (req.path === '/login' || req.path === '/register') {
 			next();
-		} else {
+		} else if (req.path === '/auth') {
 
 			const sessionToken = req.cookies.safepass;
 
 			if (!sessionToken) {
-				return res.status(403).send('you need to login');
+				return res.status(405).send('you need to login');
 			}
 
 			const user = await getUserBySessionToken(sessionToken).select('+userTable');
 
 			if (!user) {
-				return res.status(403).send('no user found uder your email');
+				return res.status(405).send('no user found uder your email');
+			}
+
+			return res.status(200).send('you\'re authenticated');
+		} else {
+
+			const sessionToken = req.cookies.safepass;
+
+			if (!sessionToken) {
+				return res.status(405).send('you need to login');
+			}
+
+			const user = await getUserBySessionToken(sessionToken).select('+userTable');
+
+			if (!user) {
+				return res.status(405).send('no user found uder your email');
 			}
 
 			USER_TABLE = user.userTable;
