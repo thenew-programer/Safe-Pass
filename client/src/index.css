@@ -1,12 +1,14 @@
 :root{
-	--bg-color: #000;
-	--fg-color: #fff;
-	--label-color: #eee;
-}
-[data-theme='light'] {
 	--bg-color: #fff;
 	--fg-color: #000;
+	--label-color: #eee;
+	--private-input: #eee;
+}
+[data-theme='dark'] {
+	--bg-color: #000;
+	--fg-color: #fff;
 	--label-color: #595050;
+	--private-input: #696969;
 }
 * {
 	margin: 0;
