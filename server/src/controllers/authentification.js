@@ -113,16 +113,23 @@ export const updateUser = async (req, res, next) => {
 		const { id } = req.params;
 		const { password } = req.body;
 
-		if (!username) {
-			return res.status(400);
+		if (!password) {
+			return res.status(400).send('unable to update password').end();
 		}
 
 		const user = await getUserById(id).select('+authentification.password +authentification.salt');
+
+		const expectedPass = authentification(user.authentification.salt, password);
+		if (expectedPass !== user.authentification.password) {
+			return res.status(400).send('old password incorrect').end();
+		}
 
 		salt = random();
 		user.authentification.password = authentification(salt, password);
 		user.authentification.salt = salt;
 		user.save();
+
+		return res.status(200).send('passoword reset successfully').end();
 
 	} catch (err) {
 		console.error(err);
