@@ -1,0 +1,72 @@
+.login-container {
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(5px);
+	position:absolute;
+	top: 0;
+	left: 0;
+	z-index: 400;
+}
+
+.login-wraper {
+	width: 40%;
+	height: 60%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transform: translate(70%, 30%);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	border: 1px solid var(--fg-color);
+	background: var(--bg-color);
+	border-radius: 10px;
+	z-index: 500;
+}
+.login-wraper > input {
+	width: 80%;
+	height: 3rem;
+	box-sizing: border-box;
+	margin: 1.2rem auto;
+	border: none;
+	border: 1px solid var(--fg-color);
+	border-radius: 10px;
+	padding: 1rem;
+	text-align: center;
+	background: var(--bg-color);
+	color: var(--fg-color);
+	font-size: 1.1rem;
+}
+
+.button-wraper {
+	font-size: 1.3rem;
+	font-weight: 800;
+	margin: auto;
+	margin-top: 20px;
+}
+.button-wraper > button {
+	display: block;
+	border-radius: 10px;
+	border: 0;
+	background: var(--fg-color);
+	color: var(--bg-color);
+	font-size: 1.3rem;
+	font-weight: 700;
+	width: 150px;
+	height: 40px;
+}
+.login-wraper > h1 {
+	color: var(--fg-color);
+	font-size: 3rem;
+	margin: 20px 0 40px;
+}
+.login-wraper > label {
+	margin: 1rem auto .6rem;
+	color: var(--fg-color);
+	font-size: 1rem;
+	font-weight: 800;
+	background: var(--bg-color);
+}
