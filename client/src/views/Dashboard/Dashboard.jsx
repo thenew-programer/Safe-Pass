@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import CountUp from 'react-countup';
 import Axios from 'axios';
+import { isAuthenticated } from '../../middlewars/navigate';
 import './Dashboard.css';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/';
@@ -13,18 +14,26 @@ const Dashboard = () => {
 
 	const getpasswordCount = () => {
 		Axios.get(SERVER + 'getpasswordcount').then((response) => {
-			setPasswordCount(+response.data);
+			if (response.status !== 200) {
+				window.location.href = '/#/login';
+			} else {
+				setPasswordCount(+response.data);
+			}
 		}).catch(() => setPasswordCount(0));
 	}
 
 
 
 	useEffect(() => {
-		if (typeof passwordCount === 'undefined') {
-			getpasswordCount();
-		}
-	})
-
+		isAuthenticated()
+			.then(() => {
+				console.log('welcome')
+				getpasswordCount();
+			})
+			.catch(() => {
+				window.location.href = '/#/login';
+			});
+	}, []);
 
 
 	return (

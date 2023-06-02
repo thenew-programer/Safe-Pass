@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import Axios from 'axios';
+import { isAuthenticated } from '../../middlewars/navigate';
 import './RmPassword.css';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/removePass';
@@ -12,9 +13,19 @@ const RmPassword = () => {
 
 
 
+	useEffect(() => {
+		isAuthenticated()
+			.then(console.log('welcome'))
+			.catch(() => {
+				window.location.href = '/#/login';
+		});
+	}, []);
+
+
+
 	const removePass = () => {
 		return new Promise((resolve, reject) => {
-			Axios.post(SERVER, {
+			Axios.delete(SERVER, {
 				site: website,
 				email: email
 			}).then((response) => {
@@ -74,7 +85,7 @@ const RmPassword = () => {
 
 	const isEmpty = () => {
 		return new Promise((resolve, reject) => {
-			if (website.length === 0 || email.length === 0) {
+			if (!website || !email) {
 				reject();
 			} else resolve();
 

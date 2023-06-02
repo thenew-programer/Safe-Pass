@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToastContainer } from "react-toastify";
 import Axios from 'axios';
 import './Updatepass.css';
@@ -6,6 +6,7 @@ import {
 	notifySuccess, notifyFailure,
 	notifyFieldFailure, clear
 } from '../../utils/notifacations'
+import { isAuthenticated } from '../../middlewars/navigate';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/updatePass';
 
@@ -18,9 +19,20 @@ const Updatepass = () => {
 
 
 
+	useEffect(() => {
+		isAuthenticated()
+			.then(console.log('welcome'))
+			.catch(() => {
+				window.location.href = '/#/login';
+			});
+	}, []);
+
+
+
+
 	const updatePass = () => {
 		return new Promise((resolve, reject) => {
-			Axios.post(SERVER, {
+			Axios.patch(SERVER, {
 				site: website,
 				email: email,
 				oldPass: oldPass,
@@ -76,8 +88,7 @@ const Updatepass = () => {
 
 	const isEmpty = () => {
 		return new Promise((resolve, reject) => {
-			if (website.length === 0 || email.length === 0 ||
-				oldPass.length === 0 || newPass.length === 0) {
+			if (!website || !email || !oldPass || !newPass) {
 				reject();
 			} else resolve();
 
