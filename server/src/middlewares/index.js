@@ -28,8 +28,7 @@ export const isAuthenticated = async (req, res, next) => {
 			next();
 		} else if (req.path === '/auth') {
 
-			const sessionToken = req.cookies.__pass;
-			console.log(req.cookies);
+			const sessionToken = req.params.cookies;
 			console.log(sessionToken);
 
 			if (!sessionToken) {
@@ -39,13 +38,12 @@ export const isAuthenticated = async (req, res, next) => {
 			const user = await getUserBySessionToken(sessionToken).select('+userTable');
 
 			if (!user) {
-				return res.status(405).send('no user found uder your email');
+				return res.status(405).send('You are a scammer.');
 			}
 
 			return res.status(200).send('you\'re authenticated');
 		} else {
-
-			const sessionToken = req.cookies.__pass;
+			const sessionToken = req.params.cookies;
 
 			if (!sessionToken) {
 				return res.status(405).send('you need to login');
@@ -54,7 +52,7 @@ export const isAuthenticated = async (req, res, next) => {
 			const user = await getUserBySessionToken(sessionToken).select('+userTable');
 
 			if (!user) {
-				return res.status(405).send('no user found uder your email');
+				return res.status(405).send('You are a scammer.');
 			}
 
 			USER_TABLE = user.userTable;
