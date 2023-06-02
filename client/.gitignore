@@ -4,3 +4,4 @@ build
 firebase.json
 .firebaserc
 .firebase
+.prettierrc.json
