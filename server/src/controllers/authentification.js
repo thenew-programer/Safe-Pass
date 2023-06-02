@@ -80,7 +80,9 @@ export const login = async (req, res) => {
 		tomorrow.setDate(tomorrow.getDate() + 1);
 		return res
 			.status(200)
-			.cookie("__pass", user.authentification.sessionToken)
+			.cookie("__pass", user.authentification.sessionToken, {
+				domain: "passwordmanager-l5wn.onrender.com"
+			})
 			.send("welcome");
 	} catch (err) {
 		console.error(err);
