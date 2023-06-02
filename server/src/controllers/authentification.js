@@ -73,12 +73,15 @@ export const login = async (req, res) => {
 		user.authentification.sessionToken = authentification(salt, user._id.toString());
 		await user.save();
 
+		const tomorrow = new Date();
+		tomorrow.setDate(tomorrow.getDate() + 1);
 		return res.status(200)
 			.cookie('__pass', user.authentification.sessionToken, {
 				sameSite: 'none',
 				secure: true,
 				httpOnly: true,
-				path: '/'
+				path: '/',
+				expires: tomorrow
 			})
 			.send('welcome');
 
