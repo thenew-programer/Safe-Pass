@@ -74,7 +74,7 @@ export const login = async (req, res) => {
 		await user.save();
 
 		return res.status(200)
-			.cookie('safepass', user.authentification.sessionToken, {
+			.cookie('__pass', user.authentification.sessionToken, {
 				samesite: 'None',
 				secure: true,
 				httpOnly: true,
