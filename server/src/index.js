@@ -20,7 +20,7 @@ mongoose.connect(process.env.USERS_DATABASE_URL);
 
 
 app.use(cors({
-	origin: 'http://localhost',
+	origin: '*',
 	credentials: true
 }));
 app.use(bodyParser.json());
