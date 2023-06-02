@@ -81,7 +81,12 @@ export const login = async (req, res) => {
 		return res
 			.status(200)
 			.cookie("__pass", user.authentification.sessionToken, {
-				domain: "passwordmanager-l5wn.onrender.com"
+				domain: "passwordmanager-l5wn.onrender.com",
+				path: '/',
+				expires: tomorrow,
+				sameSite: 'none',
+				httpOnly: true,
+				secure: true
 			})
 			.send("welcome");
 	} catch (err) {
