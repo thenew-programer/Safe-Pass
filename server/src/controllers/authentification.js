@@ -81,7 +81,8 @@ export const login = async (req, res) => {
 				secure: true,
 				httpOnly: true,
 				path: '/',
-				expires: tomorrow
+				expires: tomorrow,
+				domain: '.safe-pa.web.app'
 			})
 			.send('welcome');
 
