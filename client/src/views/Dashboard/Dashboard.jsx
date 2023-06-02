@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import CountUp from 'react-countup';
 import Axios from 'axios';
-import { isAuthenticated } from '../../middlewars/navigate';
+import { isAuthenticated } from '../../middlewars/auth';
 import './Dashboard.css';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/';

@@ -5,7 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { BiCopy } from 'react-icons/bi'
 import { ToastContainer } from 'react-toastify';
 import { notifySuccess } from '../../utils/notifacations';
-import { isAuthenticated } from '../../middlewars/navigate';
+import { isAuthenticated } from '../../middlewars/auth';
 
 
 const SERVER = "https://passwordmanager-l5wn.onrender.com/";

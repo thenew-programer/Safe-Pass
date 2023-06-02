@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import Axios from 'axios';
-import { isAuthenticated } from '../../middlewars/navigate';
+import { isAuthenticated } from '../../middlewars/auth';
 import './RmPassword.css';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/removePass';

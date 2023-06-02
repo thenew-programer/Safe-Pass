@@ -7,7 +7,7 @@ import './addPassword.css';
 import {
 	notifyFailure, notifySuccess, notifyFieldFailure, clear
 } from "../../utils/notifacations";
-import { isAuthenticated } from "../../middlewars/navigate";
+import { isAuthenticated } from "../../middlewars/auth";
 
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/addPass';
