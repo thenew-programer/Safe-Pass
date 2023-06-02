@@ -34,7 +34,6 @@
 	border: 1px solid var(--fg-color);
 	border-radius: 10px;
 	padding: 1rem;
-	font-style: italic;
 	text-align: center;
 	background: var(--bg-color);
 	color: var(--fg-color);
@@ -66,4 +65,27 @@
 	font-size: 1rem;
 	font-weight: 800;
 	background: var(--bg-color);
+}
+
+.user-data > button {
+	border-radius: 10px;
+	border: 0;
+	background: var(--fg-color);
+	color: var(--bg-color);
+	font-size: 1rem;
+	font-weight: 700;
+	width: 120px;
+	height: 40px;
+	margin: auto;
+	margin-bottom: 10px;
+}
+.visibility-top {
+	position: absolute;
+	top: 44%;
+	left: 70%;
+}
+.visibility-bottom {
+	position: absolute;
+	top: 62.5%;
+	left: 70%;
 }
