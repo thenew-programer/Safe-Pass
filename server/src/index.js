@@ -19,7 +19,10 @@ mongoose.Promise = Promise;
 mongoose.connect(process.env.USERS_DATABASE_URL);
 
 
-app.use(cors());
+app.use(cors({
+	origin: 'http://localhost',
+	credentials: true
+}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(compression());
