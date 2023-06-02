@@ -78,7 +78,6 @@ export const login = async (req, res) => {
 				sameSite: 'none',
 				secure: true,
 				httpOnly: true,
-				domain: '.onrender.com',
 				path: '/'
 			})
 			.send('welcome');
