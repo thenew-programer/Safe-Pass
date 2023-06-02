@@ -129,3 +129,14 @@ export const updateUser = async (req, res, next) => {
 		next(getError('SERVER STATUS', 500));
 	}
 }
+
+export const getUser = async (req, res, next) => {
+	try {
+		const { _id } = req.identity;
+		const user = await getUserById(_id);
+		return res.status(200).json(user).end();
+	} catch (err) {
+		console.log(err);
+		next(getError('Server STATUS', 500));
+	}
+}
