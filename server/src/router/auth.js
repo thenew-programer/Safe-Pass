@@ -2,7 +2,7 @@ import {
 	addPass, root, showPass, decryptPass,
 	getPassCount, removePass, updatePass, downloadPass
 } from '../controllers/appControllers.js';
-import { deleteUser, login, register, updateUser } from '../controllers/authentification.js';
+import { deleteUser, login, register, updateUser, getUser } from '../controllers/authentification.js';
 import { isOwner, pathErrHandler } from '../middlewares/index.js';
 
 
