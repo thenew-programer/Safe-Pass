@@ -82,7 +82,7 @@ export const login = async (req, res) => {
 				httpOnly: true,
 				path: '/',
 				expires: tomorrow,
-				domain: '.safe-pa.web.app'
+				domain: '.onrender.com'
 			})
 			.send('welcome');
 
