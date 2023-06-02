@@ -80,9 +80,8 @@ export const login = async (req, res) => {
 		tomorrow.setDate(tomorrow.getDate() + 1);
 		return res
 			.status(200)
-			.json({
-				cookie: user.authentification.sessionToken
-			}).end();
+			.send(user.authentification.sessionToken)
+			.end();
 	} catch (err) {
 		console.error(err);
 		return res.status(500);
