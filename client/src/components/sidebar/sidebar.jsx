@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { Route, Routes, NavLink } from 'react-router-dom';
-import AddPassword from '../../views/addPassword/AddPassword';
-import MyPasswords from '../../views/MyPasswords/MyPasswords';
-import RmPassword from '../../views/RmPassword/RmPassword';
-import Dashboard from '../../views/Dashboard/Dashboard';
-import Updatepass from '../../views/UpdatePass/Updatepass';
-// import Profile from '../../views/profile/Profile';
+import { NavLink } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import { FaBars, FaHome } from 'react-icons/fa'
 import { BiShow } from 'react-icons/bi'
 import {MdOutlineBrowserUpdated} from 'react-icons/md'
 import {BsDatabaseFillAdd} from 'react-icons/bs'
+import { RiAccountCircleLine } from 'react-icons/ri'
 import './sidebar.css';
-
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(!isOpen);
@@ -41,6 +35,11 @@ const Sidebar = () => {
 			path: '/remove',
 			name: "Remove Pass",
 			icon: <MdDelete />
+		},
+		{
+			path: "/profile",
+			name: "Profile",
+			icon: <RiAccountCircleLine/>
 		}
 	];
 
@@ -51,7 +50,7 @@ const Sidebar = () => {
 				<div className="top_section">
 					<h1 style={{ display: isOpen ? 'block' : 'none' }}
 						onClick={toggle}>SafePass</h1>
-					<div className='icon' style={{ marginLeft: isOpen ? '200px' : '0px' }}>
+					<div className='icon' style={{ marginLeft: isOpen ? '20px' : '0px' }}>
 						<FaBars onClick={toggle} />
 					</div>
 				</div>
@@ -74,14 +73,6 @@ const Sidebar = () => {
 					}
 				</div>
 			</div>
-			<Routes>
-				<Route exact path='/' element={<Dashboard />} />
-				<Route path='/home' element={<Dashboard />} />
-				<Route path='/add' element={<AddPassword />} />
-				<Route path='/show' element={<MyPasswords />} />
-				<Route path='/update' element={<Updatepass />} />
-				<Route path='/remove' element={<RmPassword />} />
-			</Routes>
 		</div>
 	);
 };
