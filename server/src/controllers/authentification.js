@@ -75,7 +75,7 @@ export const login = async (req, res) => {
 
 		return res.status(200)
 			.cookie('__pass', user.authentification.sessionToken, {
-				samesite: 'None',
+				sameSite: 'none',
 				secure: true,
 				httpOnly: true,
 				domain: '.onrender.com',
