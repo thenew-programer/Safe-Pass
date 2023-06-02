@@ -84,7 +84,7 @@ export const login = async (req, res) => {
 				domain: "passwordmanager-l5wn.onrender.com",
 				path: '/',
 				expires: tomorrow,
-				sameSite: 'none',
+				sameSite: 'strict',
 				httpOnly: true,
 				secure: true
 			})
