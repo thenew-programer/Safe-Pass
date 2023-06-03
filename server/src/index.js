@@ -18,14 +18,23 @@ mongoose.Promise = Promise;
 mongoose.connect(process.env.USERS_DATABASE_URL);
 
 
-app.use(cors({
-	origin: [
-		'https://safe-pa.web.app',
-		'http://localhost:3000',
-		'https://safe-pa.firebaseapp.com'
-	],
-	credentials: true
-}));
+const allowedOrigins = [
+	'https://safe-pa.web.app',
+	'http://localhost:3000',
+	'https://safe-pa.firebaseapp.com'
+];
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+			callback(null, true)
+		} else {
+			callback(new Error('Not allowed by CORS'))
+		}
+	},
+	credentials: true,
+	optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(isAuthenticated);
