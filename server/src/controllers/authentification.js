@@ -79,15 +79,8 @@ export const login = async (req, res) => {
 		const tomorrow = new Date();
 		tomorrow.setDate(tomorrow.getDate() + 1);
 		return res
-			.cookie('__pass', user.authentification.sessionToken, {
-				expires: tomorrow,
-				sameSite: 'none',
-				secure: false,
-				httpOnly: true,
-				path: '/'
-			})
 			.status(200)
-			.send('welcome')
+			.send(JSON.stringify(user.authentification.sessionToken))
 			.end();
 	} catch (err) {
 		console.error(err);
