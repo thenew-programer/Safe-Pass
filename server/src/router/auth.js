@@ -12,7 +12,7 @@ export default (router) => {
 	router.delete('/delete/:id', isOwner, deleteUser);
 	router.patch('/update/:id', isOwner, updateUser);
 	router.get('/user', getUser);
-	router.get('/auth');
+	router.get('/auth/:cookies');
 	router.post('/addPass', addPass);
 	router.get('/showpasswords', showPass);
 	router.post('/decrypt', decryptPass);
