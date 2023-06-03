@@ -1,6 +1,5 @@
 import Axios from 'axios';
 import React, { useState } from 'react';
-import SetCookies from '../../hooks/setCookies';
 import './Login.css';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/login';
@@ -17,9 +16,8 @@ const Login = () => {
 		}).then((response) => {
 			if (response.status === 200) {
 				setErrorMsg('');
+				window.localStorage.setItem('__pasa', response.data.cookies);
 				window.location.href = '/#/home';
-				console.log(response.data);
-				SetCookies('__pass', JSON.stringify(response.data.cookies));
 			} else {
 				setErrorMsg('Email or Password is incorrect.');
 			}
