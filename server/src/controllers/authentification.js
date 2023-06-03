@@ -77,7 +77,13 @@ export const login = async (req, res) => {
 		await user.save();
 
 		return res
-			.cookies('__pass', user.authentification.sessionToken)
+			.cookie('__pass', user.authentification.sessionToken, {
+				expires: tomorrow,
+				sameSite: 'none',
+				secure: false,
+				httpOnly: true,
+				path: '/'
+			})
 			.status(200)
 			.end();
 	} catch (err) {
