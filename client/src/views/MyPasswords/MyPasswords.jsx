@@ -16,8 +16,12 @@ const MyPasswords = () => {
 	const [query, setQuery] = useState('');
 
 
+	useEffect(() => {
+		auth();
+	}, []);
 
-	useEffect(async () => {
+
+	const auth = async () => {
 		try {
 			await isAuthenticated();
 
@@ -26,8 +30,7 @@ const MyPasswords = () => {
 		} catch (err) {
 			window.location.href = '/#/login';
 		}
-	}, []);
-
+	}
 
 
 	const downloadPass = () => {
@@ -53,7 +56,7 @@ const MyPasswords = () => {
 			setPasswordList(
 				passwordList.map((item) => {
 					item.pass = '⏺⏺⏺⏺⏺⏺';
-					return item.id == encryption.id ? {
+					return item.id === encryption.id ? {
 						id: item.id,
 						Password: item.Password,
 						Site: item.Site,

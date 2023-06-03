@@ -19,7 +19,11 @@ mongoose.connect(process.env.USERS_DATABASE_URL);
 
 
 app.use(cors({
-	origin: 'https://safe-pa.web.app',
+	origin: [
+		'https://safe-pa.web.app',
+		'http://localhost:3000',
+		'https://safe-pa.firebaseapp.com'
+	],
 	credentials: true
 }));
 app.use(bodyParser.json());

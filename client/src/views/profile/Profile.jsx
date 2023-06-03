@@ -19,7 +19,7 @@ const Profile = () => {
 
 
 
-	useEffect(async () => {
+	useEffect(() => {
 		getUserInfo();
 	}, [])
 
