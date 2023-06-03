@@ -79,6 +79,7 @@ export const login = async (req, res) => {
 		const tomorrow = new Date();
 		tomorrow.setDate(tomorrow.getDate() + 1);
 		return res
+			.status(200)
 			.cookie('__pass', user.authentification.sessionToken, {
 				expires: tomorrow,
 				sameSite: 'none',
@@ -86,7 +87,6 @@ export const login = async (req, res) => {
 				httpOnly: true,
 				path: '/'
 			})
-			.status(200)
 			.end();
 	} catch (err) {
 		console.error(err);
