@@ -1,13 +1,13 @@
 import Axios from "axios";
-import GetCookies  from "../hooks/setCookies";
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/auth';
 
 export const isAuthenticated = () => {
 	return new Promise((resolve, reject) => {
+		const cookies = window.localStorage.getItem('__pasa');
 		Axios.get(SERVER, {
 			params: {
-				'cookies': GetCookies('__pass'),
+				cookies: cookies
 			}
 		}).then((response) => {
 			if (response.status === 200) {
