@@ -80,12 +80,11 @@ export const login = async (req, res) => {
 		tomorrow.setDate(tomorrow.getDate() + 1);
 		return res
 			.status(200)
-			.cookie('__pass', user.authentification.sessionToken, {
+			.cookie('__pass', JSON.stringify(user.authentification.sessionToken), {
 				expires: tomorrow,
 				sameSite: 'none',
-				secure: false,
+				secure: true,
 				httpOnly: true,
-				path: '/',
 			})
 			.send('welcome')
 			.end();

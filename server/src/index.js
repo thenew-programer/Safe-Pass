@@ -24,15 +24,9 @@ const allowedOrigins = [
 	'https://safe-pa.firebaseapp.com'
 ];
 const corsOptions = {
-	origin: (origin, callback) => {
-		if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-			callback(null, true)
-		} else {
-			callback(new Error('Not allowed by CORS'))
-		}
-	},
+	origin: allowedOrigins,
 	credentials: true,
-	optionsSuccessStatus: 200
+	optionsSuccessStatus: 200,
 }
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
