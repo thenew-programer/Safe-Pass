@@ -76,11 +76,9 @@ export const login = async (req, res) => {
 		);
 		await user.save();
 
-		const tomorrow = new Date();
-		tomorrow.setDate(tomorrow.getDate() + 1);
 		return res
+			.cookies('__pass', user.authentification.sessionToken)
 			.status(200)
-			.send(JSON.stringify(user.authentification.sessionToken))
 			.end();
 	} catch (err) {
 		console.error(err);
