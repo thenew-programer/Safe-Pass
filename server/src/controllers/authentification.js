@@ -76,6 +76,8 @@ export const login = async (req, res) => {
 		);
 		await user.save();
 
+		const tomorrow = new Date();
+		tomorrow.setDate(tomorrow.getDate() + 1);
 		return res
 			.cookie('__pass', user.authentification.sessionToken, {
 				expires: tomorrow,
