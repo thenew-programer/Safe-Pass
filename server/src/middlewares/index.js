@@ -28,12 +28,13 @@ export const isAuthenticated = async (req, res, next) => {
 			next();
 		} else if (req.path === '/auth') {
 
-			const sessionToken = JSON.parse(req.cookies.__pass);
+			let sessionToken = req.cookies.__pass;
 			console.log(sessionToken);
 
 			if (!sessionToken) {
 				return res.status(405).send('you need to login');
 			}
+			sessionToken = JSON.parse(sessionToken);
 
 			const user = await getUserBySessionToken(sessionToken).select('+userTable');
 
@@ -43,12 +44,13 @@ export const isAuthenticated = async (req, res, next) => {
 
 			return res.status(200).send('you\'re authenticated');
 		} else {
-			const sessionToken = JSON.parse(req.cookies.__pass);
+			let sessionToken = req.cookies.__pass;
 
 			if (!sessionToken) {
 				return res.status(405).send('you need to login');
 			}
 
+			sessionToken = JSON.parse(sessionToken);
 			const user = await getUserBySessionToken(sessionToken).select('+userTable');
 
 			if (!user) {
