@@ -29,7 +29,6 @@ export const isAuthenticated = async (req, res, next) => {
 		} else if (req.path === '/auth') {
 
 			let sessionToken = req.cookies.__pass;
-			console.log(sessionToken);
 
 			if (!sessionToken) {
 				return res.status(405).send('you need to login');
@@ -63,7 +62,6 @@ export const isAuthenticated = async (req, res, next) => {
 
 		}
 	} catch (err) {
-		console.error(err);
 		next(getError('SERVER FAILED', 500));
 	}
 
@@ -73,7 +71,7 @@ export const isAuthenticated = async (req, res, next) => {
 
 export const isOwner = async (req, res, next) => {
 	try {
-		const { id } = req.params;
+		const id = req.identity._id;
 
 		const currentUserId = get(req, 'identity._id');
 
@@ -84,7 +82,6 @@ export const isOwner = async (req, res, next) => {
 		next();
 
 	} catch (err) {
-		console.error(err);
 		next(getError('SERVER FAILED', 500));
 	}
 }

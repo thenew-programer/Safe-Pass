@@ -6,8 +6,6 @@ import { createTable, removeTable } from "../db/app.js";
 
 export const register = async (req, res) => {
 	try {
-		console.log("register method called!");
-		console.log(req.body);
 		const email = req.body.email;
 		const password = req.body.password;
 		const username = req.body.username;
@@ -21,7 +19,6 @@ export const register = async (req, res) => {
 		if (existingUser) {
 			return res.status(400).send("user already exist");
 		}
-		console.log("user is not there");
 
 		const salt = random();
 		const user = await createUser({
@@ -38,14 +35,10 @@ export const register = async (req, res) => {
 		registeredUser.userTable = userTable;
 		registeredUser.save();
 
-		console.log("user created successfully");
 		await createTable(userTable);
-		console.log("table created successfully");
 
 		return res.status(201).json(registeredUser).end();
 	} catch (err) {
-		console.error(err);
-		console.log("error while registring user");
 		return res.status(500);
 	}
 };
@@ -84,11 +77,9 @@ export const login = async (req, res) => {
 				expires: tomorrow,
 				sameSite: 'none',
 				secure: true,
-				httpOnly: true,
 			})
 			.send('welcome')
 	} catch (err) {
-		console.error(err);
 		return res.status(500).send('Error while loging.');
 	}
 };
@@ -103,17 +94,16 @@ export const deleteUser = async (req, res) => {
 
 		return res.status(203).json(deletedUser);
 	} catch (err) {
-		console.error(err);
 		return res.status(500).json({ err: err });
 	}
 };
 
 export const updateUser = async (req, res, next) => {
 	try {
-		const { id } = req.params;
-		const { password } = req.body;
+		const id = req.identity._id;
+		const { oldPass, newPass } = req.body;
 
-		if (!password) {
+		if (!oldPass || !newPass) {
 			return res.status(400).send("unable to update password").end();
 		}
 
@@ -121,19 +111,18 @@ export const updateUser = async (req, res, next) => {
 			"+authentification.password +authentification.salt"
 		);
 
-		const expectedPass = authentification(user.authentification.salt, password);
+		const expectedPass = authentification(user.authentification.salt, oldPass);
 		if (expectedPass !== user.authentification.password) {
-			return res.status(400).send("old password incorrect").end();
+			return res.status(401).send("old password incorrect").end();
 		}
 
 		salt = random();
-		user.authentification.password = authentification(salt, password);
+		user.authentification.password = authentification(salt, newPass);
 		user.authentification.salt = salt;
 		user.save();
 
 		return res.status(200).send("passoword reset successfully").end();
 	} catch (err) {
-		console.error(err);
 		next(getError("SERVER STATUS", 500));
 	}
 };
@@ -141,11 +130,27 @@ export const updateUser = async (req, res, next) => {
 export const getUser = async (req, res, next) => {
 	try {
 		const _id = req.identity._id;
-		console.log('id: ',_id);
 		const user = await getUserById(_id);
 		return res.status(200).json(user);
 	} catch (err) {
-		console.log(err);
 		next(getError("Server STATUS", 500));
 	}
 };
+
+
+export const logout = async (req) => {
+
+	const id = req.identity._id;
+	const user = await getUserById(id).select(
+		'+authentification.password +authentification.salt'
+	);
+
+	const salt = random();
+	user.authentification.sessionToken = authentification(
+		salt,
+		user._id.toString()
+	);
+	await user.save();
+
+	return res.status(200).send('logout');
+}

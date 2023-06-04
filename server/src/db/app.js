@@ -100,10 +100,8 @@ export const createTable = (tableName) => {
 
 		db.query(query, (err) => {
 			if (err) {
-				console.error(err);
 				reject(err);
 			} else {
-				console.log('Table created successfully!');
 				resolve();
 			}
 		})
@@ -116,10 +114,8 @@ export const removeTable = (tableName) => {
 		const query = `DROP TABLE ${tableName};`;
 		db.query(query, (err) => {
 			if (err) {
-				console.error(err);
 				reject(err);
 			} else {
-				console.log('Table droped successfully');
 				resolve();
 			}
 		})
