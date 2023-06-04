@@ -140,9 +140,10 @@ export const updateUser = async (req, res, next) => {
 
 export const getUser = async (req, res, next) => {
 	try {
-		const { _id } = req.identity;
+		const _id = req.identity._id;
+		console.log('id: ',_id);
 		const user = await getUserById(_id);
-		return res.status(200).json(user).end();
+		return res.status(200).json(user);
 	} catch (err) {
 		console.log(err);
 		next(getError("Server STATUS", 500));
