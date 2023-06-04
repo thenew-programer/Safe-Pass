@@ -71,7 +71,8 @@ export const getPassCount = async (req, res, next) => {
 
 export const removePass = async (req, res, next) => {
 	try {
-		await deleteFromdb(req.body);
+		const { email, site } = req.body;
+		await deleteFromdb(email, site);
 
 		return res.status(200).send(JSON.stringify("REMOVED"));
 

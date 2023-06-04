@@ -9,7 +9,7 @@ export const insertToDB = (data) => {
 	return new Promise((resolve, reject) => {
 
 		const query = `INSERT INTO ${DATABASE_TABLE}(Site, User, Password, Iv) VALUES (?, ?, ?, ?)`;
-		db.query(query, [ data.site, data.user, data.passwd, data.iv],
+		db.query(query, [data.site, data.user, data.passwd, data.iv],
 			(err) => {
 				if (err) {
 					reject(err);
@@ -56,10 +56,10 @@ export const isExist = (data) => {
 
 
 
-export const deleteFromdb = (data) => {
+export const deleteFromdb = (email, site) => {
 	return new Promise((resolve, reject) => {
 		const query = `DELETE FROM ${DATABASE_TABLE} WHERE User = ? AND Site = ?;`
-		db.query(query, [data.email, data.site], (err, result) => {
+		db.query(query, [email, site], (err, result) => {
 			if (err) {
 				reject(err);
 			}
