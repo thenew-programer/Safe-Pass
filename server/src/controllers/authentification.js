@@ -87,7 +87,6 @@ export const login = async (req, res) => {
 				httpOnly: true,
 			})
 			.send('welcome')
-			.end();
 	} catch (err) {
 		console.error(err);
 		return res.status(500).send('Error while loging.');

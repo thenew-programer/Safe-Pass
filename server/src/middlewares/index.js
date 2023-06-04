@@ -28,7 +28,7 @@ export const isAuthenticated = async (req, res, next) => {
 			next();
 		} else if (req.path === '/auth') {
 
-			const sessionToken = req.cookies.__pass;
+			const sessionToken = JSON.parse(req.cookies.__pass);
 			console.log(sessionToken);
 
 			if (!sessionToken) {
