@@ -43,7 +43,7 @@ export const isAuthenticated = async (req, res, next) => {
 
 			return res.status(200).send('you\'re authenticated');
 		} else {
-			const sessionToken = req.cookies.__pass;
+			const sessionToken = JSON.parse(req.cookies.__pass);
 
 			if (!sessionToken) {
 				return res.status(405).send('you need to login');
