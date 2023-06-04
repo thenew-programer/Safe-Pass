@@ -138,7 +138,7 @@ export const getUser = async (req, res, next) => {
 };
 
 
-export const logout = async (req) => {
+export const logout = async (req, res) => {
 
 	const id = req.identity._id;
 	const user = await getUserById(id).select(
