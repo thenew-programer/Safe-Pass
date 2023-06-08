@@ -19,9 +19,8 @@ mongoose.connect(process.env.USERS_DATABASE_URL);
 
 
 const allowedOrigins = [
-	'https://safe-pa.web.app',
 	'http://localhost:3000',
-	'https://safe-pa.firebaseapp.com',
+	'https://safe-passfront.vercel.app',
 	'https://precious-pasca-c5a6aa.netlify.app'
 ];
 const corsOptions = {
