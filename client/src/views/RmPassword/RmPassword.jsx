@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import Axios from 'axios';
-import { isAuthenticated } from '../../middlewars/auth';
 import './RmPassword.css';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/removePass';
@@ -10,16 +9,7 @@ const RmPassword = () => {
 	const [website, setWebsite] = useState('');
 	const [email, setEmail] = useState('');
 	const [isClicked, setIsClicked] = useState(false);
-
-
-
-	useEffect(() => {
-		isAuthenticated()
-			.then(console.log('welcome'))
-			.catch(() => {
-				window.location.href = '/#/login';
-		});
-	}, []);
+	Axios.defaults.withCredentials = true;
 
 
 
@@ -28,16 +18,10 @@ const RmPassword = () => {
 			Axios.delete(SERVER, {
 				site: website,
 				email: email
-			}).then((response) => {
-				console.log(response.data);
-				if (response.data === 'REMOVED') {
-					resolve(1);
-				} else {
-					resolve(0);
-				}
+			}).then(() => {
+				resolve(1);
 			}).catch((err) => {
-				console.error(err);
-				reject();
+				reject(err);
 			});
 		})
 	}
@@ -47,19 +31,23 @@ const RmPassword = () => {
 
 	const removePassFunc = () => {
 		isEmpty().then(() => {
-			removePass().then((response) => {
-				if (response === 1) {
-					setTimeout(() => {
-						clear(document.getElementById('site'));
-						notifySuccess();
-					}, 800);
-					setTimeout(clear(document.getElementById('email')), 900);
-					setTimeout(clear(document.getElementById('pass')), 1000);
+			removePass().then(() => {
+				setTimeout(() => {
+					clear(document.getElementById('site'));
+					notifySuccess();
+				}, 800);
+				setTimeout(clear(document.getElementById('email')), 900);
+				setTimeout(clear(document.getElementById('pass')), 1000);
+			}).catch((err) => {
+				if (err.response.status === 405) {
+					window.location.href = '/#/login';
 				} else {
-					notifyFailure()
+					notifyFailure('Password does not exist.');
 				}
-			}).catch((err) => console.error('error' +err));
-		}).catch(() => notifyFieldFailure());
+			});
+		}).catch(() => {
+			notifyFieldFailure()
+		});
 	}
 
 
@@ -150,14 +138,12 @@ const RmPassword = () => {
 				<hr />
 				<label htmlFor="site" id='lsite'>Website</label>
 				<input type="text" id="site"
-					placeholder='e.g. linkedIn'
 					onChange={(event) => {
 						setWebsite(event.target.value);
 					}} required='required' />
 
 				<label htmlFor="email" id='lemail'>Email/Username</label>
 				<input type="text" id="email"
-					placeholder="email/username"
 					onChange={(event) => {
 						setEmail(event.target.value);
 					}} required='required' />

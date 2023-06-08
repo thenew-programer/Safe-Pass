@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ToastContainer } from "react-toastify";
 import Axios from 'axios';
 import './Updatepass.css';
@@ -6,7 +6,6 @@ import {
 	notifySuccess, notifyFailure,
 	notifyFieldFailure, clear
 } from '../../utils/notifacations'
-import { isAuthenticated } from '../../middlewars/auth';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/updatePass';
 
@@ -16,17 +15,7 @@ const Updatepass = () => {
 	const [oldPass, setOldPass] = useState('');
 	const [newPass, setNewPass] = useState('');
 	const [isClicked, setIsClicked] = useState(false);
-
-
-
-	useEffect(() => {
-		isAuthenticated()
-			.then(console.log('welcome'))
-			.catch(() => {
-				window.location.href = '/#/login';
-			});
-	}, []);
-
+	Axios.defaults.withCredentials = true;
 
 
 
@@ -38,15 +27,13 @@ const Updatepass = () => {
 				oldPass: oldPass,
 				newPass: newPass
 			}).then((response) => {
-				console.log(response.data);
 				if (response.data === 'Success') {
 					resolve(1);
 				} else {
 					resolve(0);
 				}
 			}).catch((err) => {
-				console.error(err);
-				reject();
+				reject(err);
 			});
 		})
 	}
@@ -68,8 +55,11 @@ const Updatepass = () => {
 					notifyFailure('Password doesn\'t exist!')
 				}
 			}).catch((err) => {
-				console.error('error' + err)
-				notifyFailure('All fields are required!');
+				if (err.response.status === 405) {
+					window.location.href = '/#/login';
+				} else {
+					notifyFailure('All fields are required!');
+				}
 			});
 		}).catch(() => notifyFieldFailure('All fields are required!'));
 	}
@@ -104,28 +94,24 @@ const Updatepass = () => {
 				<hr />
 				<label htmlFor="site" className='up-label site'>Website</label>
 				<input type="text" id="up-site"
-					placeholder='i.g. LinkedIn'
 					onChange={(event) => {
 						setWebsite(event.target.value);
 					}} required='required' />
 
 				<label htmlFor="email" className='up-label email'>Email</label>
 				<input type="text" id="up-email"
-					placeholder='i.g. jos@home.com'
 					onChange={(event) => {
 						setEmail(event.target.value);
 					}} required='required' />
 
 				<label htmlFor="pass" className='up-label passs'>Old Password</label>
 				<input type="password" id="up-pass"
-					placeholder='....'
 					onChange={(event) => {
 						setOldPass(event.target.value);
 					}} required='required' />
 
 				<label htmlFor="n-pass" className='up-label npass'>New Password</label>
 				<input type="password" id="up-npass"
-					placeholder='....'
 					onChange={(event) => {
 						setNewPass(event.target.value);
 					}} required='required' />

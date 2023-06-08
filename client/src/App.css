@@ -5,6 +5,6 @@
   margin: auto;
   background: var(--bg-color);
   border-right: 1px solid var(--fg-color);
-  border-left: 2px solid var(--fg-color);
+  border-left: 1px solid var(--fg-color);
   box-sizing: border-box;
 }

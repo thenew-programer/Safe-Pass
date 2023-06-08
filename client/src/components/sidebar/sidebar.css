@@ -63,3 +63,9 @@
 	font-size: 30px;
 	cursor: pointer;
 }
+
+.logout {
+	position: absolute;
+	bottom: .3%;
+	margin-left: 300px;
+}

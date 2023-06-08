@@ -1,7 +1,7 @@
 :root{
 	--bg-color: #fff;
 	--fg-color: #000;
-	--label-color: #eee;
+	--label-color: #696969;
 	--private-input: #eee;
 }
 [data-theme='dark'] {

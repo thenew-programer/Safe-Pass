@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
+import { ToastContainer } from 'react-toastify';
 import Axios from 'axios';
 import './profile.css';
 import { notifyFailure, notifyFieldFailure, notifySuccess } from '../../utils/notifacations';
@@ -16,6 +17,7 @@ const Profile = () => {
 	const [email, setEmail] = useState('');
 	const [id, setId] = useState('');
 	const [visible, setVisible] = useState(false);
+	Axios.defaults.withCredentials = true;
 
 
 
@@ -26,12 +28,17 @@ const Profile = () => {
 
 
 	const getUserInfo = () => {
-		Axios.get(SERVER + '/user')
+		Axios.defaults.withCredentials = true;
+		Axios.get(SERVER + 'user')
 			.then((response) => {
 				setId(response.data._id);
 				setEmail(response.data.email);
-			}).catch(() => {
-				notifyFailure('Failed requestion server, Please refresh the page');
+			}).catch((err) => {
+				if (err.response.status === 405) {
+					window.location.href = '/#/login';
+				} else {
+					notifyFailure('Failed requestion server, Please refresh the page');
+				}
 			});
 	}
 
@@ -44,13 +51,22 @@ const Profile = () => {
 			Axios.patch(SERVER + 'update', {
 				params: {
 					id: id
+				},
+				body: {
+					oldPass: oldPass,
+					newPass: newPass
 				}
 			}).then(() => {
 				setErrorMsg('');
 				notifySuccess('Password reset successfully');
-			}).catch(() => {
-				setErrorMsg('Old Password incorrect');
-				notifyFailure('Reset password Failed');
+			}).catch((err) => {
+				if (err.response.status === 405) {
+					window.location.href = '/#/login'
+				} else if (err.response.status === 401) {
+					notifyFailure('Old password incorrect')
+				} else {
+					notifyFailure('Reset password Failed');
+				}
 			})
 		}
 	}
@@ -63,7 +79,13 @@ const Profile = () => {
 			}
 		}).then(() => {
 			console.log('you fucked up');
-		}).catch(console.log());
+		}).catch((err) => {
+			if (err.response.status === 405) {
+				window.location.href = '/#/login';
+			} else {
+				notifyFailure('Failed to delete your account, try again.')
+			}
+		});
 
 	}
 
@@ -111,6 +133,7 @@ const Profile = () => {
 					<button type="button"
 						onClick={handleDeleteClick}>Delete Account</button>
 				</div>
+				<ToastContainer />
 			</div>
 		</div>
 	)

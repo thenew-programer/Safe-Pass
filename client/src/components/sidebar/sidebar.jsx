@@ -1,15 +1,32 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
-import { FaBars, FaHome } from 'react-icons/fa'
-import { BiShow } from 'react-icons/bi'
-import {MdOutlineBrowserUpdated} from 'react-icons/md'
-import {BsDatabaseFillAdd} from 'react-icons/bs'
-import { RiAccountCircleLine } from 'react-icons/ri'
+import { FaBars, FaHome } from 'react-icons/fa';
+import { BsFillEyeFill } from 'react-icons/bs';
+import { MdUpdate } from 'react-icons/md';
+import { BsDatabaseFillAdd } from 'react-icons/bs';
+import { FaUserFriends } from 'react-icons/fa'
+import { RiLogoutBoxFill } from 'react-icons/ri';
 import './sidebar.css';
+import Axios from 'axios';
+
+
+const SERVER = 'https://passwordmanager-l5wn.onrender.com/logout';
+
+
+
 const Sidebar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen(!isOpen);
+
+	const logout = () => {
+		window.location.href = '/#/login';
+		Axios.get(SERVER).then(() => {
+			console.log('you logged out');
+		}).catch(() => {
+			console.log('you logged out');
+		})
+	}
 	const menuItem = [
 		{
 			path: "/home",
@@ -24,12 +41,12 @@ const Sidebar = () => {
 		{
 			path: "/show",
 			name: "My Passwords",
-			icon: <BiShow />,
+			icon: <BsFillEyeFill />,
 		},
 		{
 			path: "/update",
 			name: "Update Password",
-			icon: <MdOutlineBrowserUpdated />,
+			icon: <MdUpdate />,
 		},
 		{
 			path: '/remove',
@@ -39,8 +56,8 @@ const Sidebar = () => {
 		{
 			path: "/profile",
 			name: "Profile",
-			icon: <RiAccountCircleLine/>
-		}
+			icon: <FaUserFriends />
+		},
 	];
 
 
@@ -71,6 +88,9 @@ const Sidebar = () => {
 							)
 						})
 					}
+				</div>
+				<div className="logout" onClick={logout}>
+					<RiLogoutBoxFill size={30} />
 				</div>
 			</div>
 		</div>

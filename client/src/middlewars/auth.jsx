@@ -2,14 +2,12 @@ import Axios from "axios";
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/auth';
 
+
 export const isAuthenticated = () => {
+	Axios.defaults.withCredentials = true;
 	return new Promise((resolve, reject) => {
-		const cookies = window.localStorage.getItem('__pasa');
-		Axios.get(SERVER, {
-			params: {
-				cookies: cookies
-			}
-		}).then((response) => {
+		Axios.get(SERVER).then((response) => {
+			console.log(response.headers);
 			if (response.status === 200) {
 				resolve();
 			} else {

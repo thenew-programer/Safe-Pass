@@ -10,13 +10,16 @@ const Login = () => {
 	const [errorMsg, setErrorMsg] = useState('');
 
 	const handleClick = () => {
+		Axios.defaults.withCredentials = true;
 		Axios.post(SERVER, {
 			email: email,
 			password: password,
+		}, {
+			withCredentials: true,
+			credentials: 'include'
 		}).then((response) => {
 			if (response.status === 200) {
 				setErrorMsg('');
-				window.localStorage.setItem('__pasa', response.data.cookies);
 				window.location.href = '/#/home';
 			} else {
 				setErrorMsg('Email or Password is incorrect.');

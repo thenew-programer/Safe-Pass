@@ -1,7 +1,7 @@
 .dark_mode {
 	position: absolute;
-	bottom: 1%;
-	left: 1%;
+	bottom: .5%;
+	left: .3%;
 	z-index: 600;
 }
 

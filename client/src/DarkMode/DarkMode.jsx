@@ -3,8 +3,6 @@ import { ReactComponent as Moon } from "./Moon.svg";
 import "./DarkMode.css";
 
 const DarkMode = () => {
-
-
 	const setDarkMode = () => {
 		document.querySelector('body').setAttribute('data-theme', 'dark');
 		localStorage.setItem('data-theme', 'dark');
@@ -20,7 +18,7 @@ const DarkMode = () => {
 	const toggleTheme = (e) => {
 		if (e.target.checked) {
 			setDarkMode();
-		}else setLightMode();
+		} else setLightMode();
 	};
 
 

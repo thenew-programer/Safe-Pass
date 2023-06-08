@@ -1,38 +1,45 @@
 import { useEffect, useState } from 'react'
 import CountUp from 'react-countup';
 import Axios from 'axios';
-import { isAuthenticated } from '../../middlewars/auth';
 import './Dashboard.css';
+import { isAuthenticated } from '../../middlewars/auth';
+import { notifyFailure } from '../../utils/notifacations';
+import { ToastContainer } from 'react-toastify';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/';
 
 const Dashboard = () => {
 
 	const [passwordCount, setPasswordCount] = useState();
+	Axios.defaults.withCredentials = true;
 
 
 
 	const getpasswordCount = () => {
 		Axios.get(SERVER + 'getpasswordcount').then((response) => {
-			if (response.status !== 200) {
+			window.localStorage.setItem('pass-count', response.data);
+			setPasswordCount(+response.data);
+		}).catch((err) => {
+			if (err.response.status === 405) {
 				window.location.href = '/#/login';
 			} else {
-				setPasswordCount(+response.data);
+				setPasswordCount(0)
 			}
-		}).catch(() => setPasswordCount(0));
+		});
 	}
 
 
 
 	useEffect(() => {
-		isAuthenticated()
-			.then(() => {
-				console.log('welcome')
-				getpasswordCount();
-			})
-			.catch(() => {
+		isAuthenticated().then(() => {
+			getpasswordCount();
+		}).catch((err) => {
+			if (err.response.status === 405) {
 				window.location.href = '/#/login';
-			});
+			} else {
+				notifyFailure('Failed to retrieve data. Try Again')
+			}
+		});
 	}, []);
 
 
@@ -58,6 +65,7 @@ const Dashboard = () => {
 						}
 					</div>
 				</div>
+				<ToastContainer />
 			</div>
 		</div >
 	)

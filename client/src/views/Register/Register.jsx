@@ -1,6 +1,9 @@
 import Axios from 'axios';
 import React, { useState } from 'react'
-import { notifyFieldFailure, notifyFailure } from '../../utils/notifacations';
+import { ToastContainer } from "react-toastify";
+import {
+	notifyFailure, notifyFieldFailure
+} from '../../utils/notifacations'
 import './Register.css';
 
 const SERVER = 'https://passwordmanager-l5wn.onrender.com/register';
@@ -51,6 +54,7 @@ const Register = () => {
 				}}>{errorMsg}</p>
 				<button type="button" onClick={handleClick}>Register</button>
 			</div>
+			<ToastContainer />
 		</div>
 	)
 }

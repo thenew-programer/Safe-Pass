@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { BiCopy } from 'react-icons/bi'
 import { ToastContainer } from 'react-toastify';
-import { notifySuccess } from '../../utils/notifacations';
-import { isAuthenticated } from '../../middlewars/auth';
+import { notifyFailure, notifySuccess } from '../../utils/notifacations';
 
 
 const SERVER = "https://passwordmanager-l5wn.onrender.com/";
@@ -14,23 +13,22 @@ const MyPasswords = () => {
 
 	const [passwordList, setPasswordList] = useState([]);
 	const [query, setQuery] = useState('');
+	Axios.defaults.withCredentials = true;
+
 
 
 	useEffect(() => {
-		auth();
+		Axios.get(SERVER + 'showpasswords').then((response) => {
+			setPasswordList(response.data)
+		}).catch((err) => {
+			if (err.response.status === 405) {
+				window.location.href = '/#/login';
+			} else {
+				notifyFailure('Failed to get your password, Try again')
+			}
+		});
 	}, []);
 
-
-	const auth = async () => {
-		try {
-			await isAuthenticated();
-
-			const response = Axios.get(SERVER + 'showpasswords');
-			setPasswordList(response.data);
-		} catch (err) {
-			window.location.href = '/#/login';
-		}
-	}
 
 
 	const downloadPass = () => {
@@ -43,7 +41,13 @@ const MyPasswords = () => {
 			link.click();
 			document.body.removeChild(link);
 			notifySuccess('Downloaded successfully!');
-		}).catch(console.log);
+		}).catch((err) => {
+			if (err.response.status === 405) {
+				Window.location.href = '/#/login';
+			} else {
+				notifyFailure('Failed to download your passwords');
+			}
+		});
 	}
 
 
@@ -67,6 +71,12 @@ const MyPasswords = () => {
 						: item;
 				})
 			);
+		}).catch((err) => {
+			if (err.response.status === 405) {
+				window.location.href = '/#/login';
+			} else {
+				notifyFailure('Failed to show password');
+			}
 		})
 	};
 
