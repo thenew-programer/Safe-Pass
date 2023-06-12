@@ -1,19 +1,116 @@
-# The App Backend
-I use `nodejs` for the backend, and I deployed it in [render.com](render.com). For free ofcourse.
 
-## The code structure
-### index.js
-The main file that calls the routes, connect with the db, and initiate the packages to be used by the app()
-### routes/index.js
-The main file of the route that communicates with the other files in the same directories
-### routes/auth.js
-contains all the routes used in the program `POST`, `GET`, and in the future `PATCH` to modify the password of the username.
-### controller/auth.js
-contains the callback function that `routes/auth.js` use
-### utiles/index.js
-contains the utility function and they are `encrypt` and `decrypt`
-### db/users.js
-contains function that communicates with the db
+# App Backend
 
-## Usage
-to use this app the only this you need to change is the `.env.example`. Add your informations as described in the files and move the name of the file from `.env.example` to `.env`.
+This is the backend for the **Safepass** app built with Node.js and Express.js. It is designed to be deployed on Vercel, a cloud platform for static websites and serverless functions.
+
+## Prerequisites
+- Node.js (version 18x)
+- npm (npm version 9x)
+- Vercel CLI
+
+## Getting Started
+To run the backend, follow these steps.
+1. Clone the repository:
+```
+get clone https://github.com/thenew-programer/safe-pass
+```
+2. Install dependencies
+```
+npm install
+```
+3. Create a `.env` file at the root of the project and configure the following variables:
+```
+DATABASE_URL=value
+
+USERS_DATABASE_URL=value
+
+DATA_ENCRYPTION_KEY=value
+
+USERS_HASHING_KEY=value
+```
+- `DATA_ENCRYPTION_KEY`: Used for storing passwords (mysql)
+- `USERS_DATABASE_URL`: Used for storing users info (mongodb)
+- `DATA_ENCRYPTION_KEY`: Used to encrypt users passwords (32 char long)
+
+- `USERS_HASHING_KEY`: Used to hash users account password
+Note: Make sure to not commit your `.env` file to version control.
+
+4. Start the developement server:
+```
+npm run dev
+```
+
+This will start the backend server on `http://localhost:3001`.
+
+## Deployment
+To deploy the backend on Vercel, follow these steps:
+
+1. Install the Vercel ClI:
+```
+npm install -g vercel
+```
+2. Login to your Vercel account:
+```
+vercel login
+```
+3. Configure your project settings: 
+```
+vercel
+```
+This will gide you through the process of linking your project to Vercel.
+
+4. Deploy your app:
+```
+vercel --prod
+```
+This will deploy the backend to Vercel and provide you with a unique URL.
+## API Documentation
+
+1. **Password Count**
+- Description: return the number of passwords you have in your account
+- Method: GET
+- Path: /showpasswordcount
+- Request: No parameters
+- Response: number of password as a string. Cast to number before use.
+
+2. **Add a password**
+- Description: add a password to user database
+- Method: POST
+- Path: /addPass
+- Request: 
+    
+    - body: website, email, password
+
+3. **List password**
+- Description: show all the password a user has in the account
+- Method: GET
+- Path: /showpasswords
+- Request: No parameters
+- Response: array of objects containing passwords.
+
+4. **Download password** (csv)
+- Description: download all the passwords in a csv file.
+- Method: GET
+- Path: /downloadPass
+- Request: No parameters
+- Response: attachement of type csv
+
+5. **Update password**
+- Description: update a password
+- Method: PATCH
+- Path: /updatePass
+- Request: 
+
+    - body: website, email, oldPass, newPass
+
+6. **Remove a password**
+- Description: remove a password
+- Method: DELETE
+- Path: /removePass
+- Request: 
+
+    - data: website, email
+## Feedback
+
+If you have any feedback, please reach out to us at youssefbouryal02@gmail.com
+
