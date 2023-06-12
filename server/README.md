@@ -110,6 +110,12 @@ This will deploy the backend to Vercel and provide you with a unique URL.
 - Request: 
 
     - data: website, email
+
+### Response Code
+1. **200** : Ok
+2. **400** : client error
+3. **405** : not authenticated
+4. **500** : server error
 ## Feedback
 
 If you have any feedback, please reach out to us at youssefbouryal02@gmail.com
