@@ -12,7 +12,7 @@ This is the backend for the **Safepass** app built with Node.js and Express.js. 
 To run the backend, follow these steps.
 1. Clone the repository:
 ```
-get clone https://github.com/thenew-programer/safe-pass
+get clone https://github.com/thenew-programer/safe-pass-backend.git
 ```
 2. Install dependencies
 ```
