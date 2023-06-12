@@ -1,4 +1,4 @@
-# Safepass
+![logo](./media/safepass-logo.png) # Safepass
 
 it's an app that manages your password, and store them in an sql db. I built it using `nodejs` and `express` in the backend and `React` for the front-end. This README provides an overview of the app's features and functionalities.
 
@@ -12,22 +12,22 @@ it's an app that manages your password, and store them in an sql db. I built it 
 
 ## Screenshots
 
-![dashboard](./media/)
+![dashboard](./media/dashboard.png)
 _In dashboard you can see how many passwords you have in your account._
 
-![add password](./media/)
+![add password](./media/addPass.png)
 _In here you can Add a password_
 
-![show passwords](./media/)
+![show passwords](./media/showpass.png)
 _Here is where you can see all passwords you have._
 
-![update passwords](./media)
+![update passwords](./media/updatepass.png)
 _Update your passwords by providing the appropriate info_
 
-![remove passwords](./media)
+![remove passwords](./media/removepass.png)
 _Remove your password by providing the appropriate info_
 
-![profile](./media)
+![profile](./media/profile.png)
 _Here is where you can see your account info as well as if you want to change the password or delete your account_
 
 ## Getting Started
