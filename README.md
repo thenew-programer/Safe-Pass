@@ -42,4 +42,4 @@ To use **Safepass**, follow these steps:
 
 ## Licence
 
-**Safepass** is licenced under [MIT](https://mit-licence.org). See the [LICENCE](LICENCE) file for more details.
+**Safepass** is licenced under [MIT](https://mit-license.org/). See the [LICENSE](LICENSE) file for more details.
