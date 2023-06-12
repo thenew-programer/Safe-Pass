@@ -11,6 +11,7 @@ import Profile from './views/profile/Profile'
 import Register from './views/Register/Register';
 import './App.css';
 import Login from './views/Login/Login';
+import Landing from './views/LandingPage/Landing';
 
 const App = () => {
 
@@ -20,7 +21,7 @@ const App = () => {
 			<DarkMode />
 			<Footer />
 			<Routes>
-				<Route exact path='/' element={<Dashboard />} />
+				<Route exact path='/' element={<Landing />} />
 				<Route path='/home' element={<Dashboard />} />
 				<Route path='/add' element={<AddPassword />} />
 				<Route path='/show' element={<MyPasswords />} />

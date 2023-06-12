@@ -6,7 +6,8 @@ import { isAuthenticated } from '../../middlewars/auth';
 import { notifyFailure } from '../../utils/notifacations';
 import { ToastContainer } from 'react-toastify';
 
-const SERVER = 'https://passwordmanager-l5wn.onrender.com/';
+// const SERVER = 'https://passwordmanager-l5wn.onrender.com/';
+const SERVER = 'https://safe-pass-backend.vercel.app/';
 
 const Dashboard = () => {
 
@@ -17,7 +18,6 @@ const Dashboard = () => {
 
 	const getpasswordCount = () => {
 		Axios.get(SERVER + 'getpasswordcount').then((response) => {
-			window.localStorage.setItem('pass-count', response.data);
 			setPasswordCount(+response.data);
 		}).catch((err) => {
 			if (err.response.status === 405) {

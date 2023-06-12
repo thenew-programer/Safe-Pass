@@ -20,6 +20,9 @@
 html, body {
 	background: var(--bg-color);
 }
+button {
+	cursor: pointer;
+}
 
 #root {
   width: 80%;

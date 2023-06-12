@@ -12,14 +12,11 @@
 }
 
 .register-wraper {
-	width: 40%;
-	height: 60%;
+	width: 400px;
+	height: 450px;
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	transform: translate(70%, 30%);
+	top: 20%;
+	left: 35%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -29,7 +26,6 @@
 	z-index: 500;
 }
 .register-wraper > button {
-	margin-top: auto;
 	width: 100px;
 	height: 50px;
 	background: var(--fg-color);
@@ -39,7 +35,7 @@
 	width: 80%;
 	height: 3rem;
 	box-sizing: border-box;
-	margin: 1.2rem auto;
+	margin: .5rem auto;
 	border: none;
 	border: 1px solid var(--fg-color);
 	border-radius: 10px;
@@ -59,12 +55,12 @@
 	width: 150px;
 	height: 50px;
 	margin: auto;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 .register-wraper > h1 {
 	color: var(--fg-color);
 	font-size: 3rem;
-	margin: 20px 0;
+	margin: 10px 0;
 }
 .register-wraper > label {
 	margin: .5rem auto .5rem;
@@ -72,42 +68,5 @@
 	font-size: 1rem;
 	font-weight: 800;
 	background: var(--bg-color);
-}
-
-@media (min-width: 1000px) {
-	.register-wraper {
-		width: 30%;
-		transform: translate(110%, 30%);
-	}
-}
-
-@media (max-width: 450px) {
-	.register-wraper {
-		width: 50%;
-		height: 43%;
-		top: 10%;
-		left: -5%;
-	}
-	.register-wraper > h1 {
-		font-size: 1.5rem;
-	}
-	.register-wraper > input {
-		font-size: .5rem;
-		width: 80%;
-		height: 2rem;
-	}
-	.register-wraper > label {
-		margin: 0;
-		font-size: .8rem;
-	}
-	.register-wraper > button {
-		width: 80px;
-		height: 30px;
-		font-size: 1rem;
-		margin: auto;
-	}
-	.register-wraper > button:last-child {
-		margin-bottom: 20px;
-	}
 }
 

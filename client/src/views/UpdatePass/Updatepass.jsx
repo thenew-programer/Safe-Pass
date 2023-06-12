@@ -7,7 +7,8 @@ import {
 	notifyFieldFailure, clear
 } from '../../utils/notifacations'
 
-const SERVER = 'https://passwordmanager-l5wn.onrender.com/updatePass';
+// const SERVER = 'https://passwordmanager-l5wn.onrender.com/updatePass';
+const SERVER = 'https://safe-pass-backend.vercel.app/updatePass';
 
 const Updatepass = () => {
 	const [website, setWebsite] = useState('');

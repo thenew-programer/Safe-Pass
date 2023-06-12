@@ -1,91 +1,164 @@
 .profile-container {
-	width: 80%;
-	position: absolute;
-	left: 15%;
-	top: 10%;
+  width: 80%;
+  position: absolute;
+  left: 15%;
+  top: 10%;
 }
 .profile-wraper {
-	width: 100%;
-	height: 700px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	border: 1px solid var(--fg-color);
-	background: var(--bg-color);
-	color: var(--fg-color);
-	border-radius: 20px;
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, .7);
-	align-items: center;
+  width: 100%;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--fg-color);
+  background: var(--bg-color);
+  color: var(--fg-color);
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+  align-items: center;
 }
 
 .user-data {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 60%;
 }
 
 .user-data > input {
-	width: 80%;
-	height: 3rem;
-	box-sizing: border-box;
-	margin: 1.2rem auto;
-	border: none;
-	border: 1px solid var(--fg-color);
-	border-radius: 10px;
-	padding: 1rem;
-	text-align: center;
-	background: var(--bg-color);
-	color: var(--fg-color);
-	font-size: 1rem;
+  width: 80%;
+  height: 3rem;
+  box-sizing: border-box;
+  margin: 1.2rem auto;
+  border: none;
+  border: 1px solid var(--fg-color);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  background: var(--bg-color);
+  color: var(--fg-color);
+  font-size: 1rem;
 }
 #profile-email {
-	background: var(--private-input);
+  background: var(--private-input);
 }
 
 .delete-account > button {
-	border-radius: 10px;
-	border: 0;
-	background: #f00;
-	color: var(--bg-color);
-	font-size: 1.3rem;
-	font-weight: 800;
-	width: 200px;
-	height: 50px;
-	margin-bottom: 10px;
+  border-radius: 10px;
+  border: 0;
+  background: #f00;
+  color: var(--bg-color);
+  font-size: 1.3rem;
+  font-weight: 800;
+  width: 200px;
+  height: 50px;
+  margin-bottom: 10px;
 }
 .user-data > h4 {
-	color: var(--fg-color);
-	font-size: 3rem;
-	margin: 20px 0;
+  color: var(--fg-color);
+  font-size: 3rem;
+  margin: 20px 0;
 }
 .user-data > label {
-	margin: 1rem auto .6rem;
-	color: var(--fg-color);
-	font-size: 1rem;
-	font-weight: 800;
-	background: var(--bg-color);
+  margin: 1rem auto 0.6rem;
+  color: var(--fg-color);
+  font-size: 1rem;
+  font-weight: 800;
+  background: var(--bg-color);
 }
 
 .user-data > button {
-	border-radius: 10px;
-	border: 0;
-	background: var(--fg-color);
-	color: var(--bg-color);
-	font-size: 1rem;
-	font-weight: 700;
-	width: 120px;
-	height: 40px;
-	margin: auto;
-	margin-bottom: 10px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--fg-color);
+  color: var(--bg-color);
+  font-size: 1rem;
+  font-weight: 700;
+  width: 120px;
+  height: 40px;
+  margin: auto;
+  margin-bottom: 10px;
 }
 .visibility-top {
-	position: absolute;
-	top: 44%;
-	left: 70%;
+  position: absolute;
+  top: 44%;
+  left: 70%;
 }
 .visibility-bottom {
-	position: absolute;
-	top: 62.5%;
-	left: 70%;
+  position: absolute;
+  top: 62.5%;
+  left: 70%;
 }
+
+.delete {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 500;
+}
+.delete-conf {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 350px;
+  height: 250px;
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  background: var(--bg-color);
+  border: 1px solid var(--fg-color);
+  border-radius: 20px;
+}
+.delete-conf > h1 {
+  margin-left: 20px;
+  color: var(--fg-color);
+}
+.verify-field > label {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--fg-color);
+}
+.sudo {
+  font-weight: 700;
+  color: #f00;
+  font-size: 1rem;
+}
+.verify-field > input {
+  width: 300px;
+  height: 40px;
+  border-radius: 10px;
+  margin-top: 5px;
+  border: 1px solid var(--fg-color);
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 1rem;
+  background: var(--bg-color);
+}
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+.buttons > button {
+  width: 80px;
+  height: 35px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--fg-color);
+  margin-right: 30px;
+  border: 1px solid var(--fg-color);
+  border-radius: 7px;
+  background: var(--bg-color);
+}
+#btn-delete {
+  margin-left: 110px;
+  background: var(--fg-color);
+  color: var(--bg-color);
+}
+

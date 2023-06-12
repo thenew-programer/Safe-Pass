@@ -9,7 +9,8 @@ import {
 } from "../../utils/notifacations";
 
 
-const SERVER = 'https://passwordmanager-l5wn.onrender.com/addPass';
+// const SERVER = 'https://passwordmanager-l5wn.onrender.com/addPass';
+const SERVER = 'https://safe-pass-backend.vercel.app/addPass';
 
 
 
