@@ -116,7 +116,9 @@ This will deploy the backend to Vercel and provide you with a unique URL.
 2. **400** : client error
 3. **405** : not authenticated
 4. **500** : server error
-## Feedback
 
+## App Architecture
+![app architecture](../media/app-architecture.png)
+## Feedback
 If you have any feedback, please reach out to us at youssefbouryal02@gmail.com
 
