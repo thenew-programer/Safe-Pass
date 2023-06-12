@@ -17,16 +17,13 @@ export const addPass = async (req, res, next) => {
 		const response = await isExist({ emailUser: emailUser, website: website });
 
 		if (response !== false) {
-			console.log('Failure, user already exist');
 			return res.send(JSON.stringify("Email already taken!"));
 		}
 
 		await insertToDB({ passwd: password, site: website, user: emailUser, iv: iv });
-		console.log('Success, User does not exist!');
 		return res.send(JSON.stringify('Success'));
 
 	} catch (err) {
-		console.error(err);
 		next(getError('SERVER FAILED', 500));
 	}
 };
@@ -39,7 +36,6 @@ export const showPass = async (req, res, next) => {
 
 		return res.status(200).send(JSON.stringify(response));
 	} catch (err) {
-		console.error(err);
 		next(getError('SERVER FAILED', 500));
 	}
 };
@@ -62,7 +58,6 @@ export const getPassCount = async (req, res, next) => {
 		return res.status(200).send(JSON.stringify(response.length));
 
 	} catch (err) {
-		console.error(err);
 		next(getError('SERVER FAILED', 500));
 	}
 }
@@ -77,7 +72,6 @@ export const removePass = async (req, res, next) => {
 		return res.status(200).send(JSON.stringify("REMOVED"));
 
 	} catch (err) {
-		console.error(err);
 		next(getError('SERVER FAILED', 500));
 	}
 
@@ -88,18 +82,25 @@ export const removePass = async (req, res, next) => {
 
 export const updatePass = async (req, res, next) => {
 	try {
+		const oldPass = req.body.oldPass;
 		const response = await isExist({ emailUser: req.body.email, website: req.body.site })
 
 		if (response === false) {
-			console.log('Failed to update: pass doesnt exist')
 			return res.status(400).send("Password doesn't exist!");
+		}
+
+		const password = decrypt({
+			password: response[0].Password,
+			iv: response[0].Iv
+		});
+		if (password !== oldPass) {
+			return res.status(400).send("Old Password incorrect");
 		}
 
 		await updatePassdb({ password: req.body.newPass, id: response[0].id })
 		res.status(200).send('Success');
 
 	} catch (err) {
-		console.error(err);
 		next(getError('SERVER FAILED', 500));
 	}
 }
@@ -115,10 +116,12 @@ export const downloadPass = async (req, res, next) => {
 			delete item.id;
 			return item;
 		});
-		await toCSV(data);
-		return res.sendFile(path.resolve('../../my-passwords.csv'))
+		const my_passwords = toCSV(data);
+		return res.setHeader('Content-Type', 'text/csv')
+			.setHeader('Content-Disposition', 'attachement; filename="my-passwords.csv"')
+			.status(200)
+			.send(my_passwords);
 	} catch (err) {
-		console.error(err);
 		next(getError('SERVER FAILED', 500));
 	}
 }

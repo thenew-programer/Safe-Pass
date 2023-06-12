@@ -29,4 +29,4 @@ export const createUser = (values) => new UserModel(values)
 
 export const deleteUserById = (id) => UserModel.findOneAndDelete({ _id: id });
 
-export const updateUserById = (id, values) => UserModel.findOneAndUpdate(id, values);
+export const updateUserById = (id, values) => UserModel.findByIdAndUpdate({ id }, values);

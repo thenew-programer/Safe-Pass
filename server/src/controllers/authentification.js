@@ -3,6 +3,7 @@ import {
 } from "../db/users.js";
 import { authentification, getError, random } from "../utils/users.js";
 import { createTable, removeTable } from "../db/app.js";
+import { updateUserById } from "../db/users.js";
 
 export const register = async (req, res) => {
 	try {
@@ -76,7 +77,7 @@ export const login = async (req, res) => {
 			.cookie('__pass', JSON.stringify(user.authentification.sessionToken), {
 				expires: tomorrow,
 				sameSite: 'none',
-				secure: true,
+				secure: true
 			})
 			.send('welcome')
 	} catch (err) {
@@ -86,13 +87,11 @@ export const login = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
 	try {
-		const { id } = req.params;
+		const id = req.identity._id;
 
 		const deletedUser = await deleteUserById(id);
 
-		await removeTable(deletedUser.userTable);
-
-		return res.status(203).json(deletedUser);
+		return res.status(200).json(deletedUser);
 	} catch (err) {
 		return res.status(500).json({ err: err });
 	}
@@ -100,11 +99,10 @@ export const deleteUser = async (req, res) => {
 
 export const updateUser = async (req, res, next) => {
 	try {
-		const id = req.identity._id;
-		const { oldPass, newPass } = req.body;
+		const { id, oldPass, newPass } = req.body;
 
-		if (!oldPass || !newPass) {
-			return res.status(400).send("unable to update password").end();
+		if (!oldPass || !newPass || !id) {
+			return res.status(400).send("unable to update password");
 		}
 
 		const user = await getUserById(id).select(
@@ -113,15 +111,13 @@ export const updateUser = async (req, res, next) => {
 
 		const expectedPass = authentification(user.authentification.salt, oldPass);
 		if (expectedPass !== user.authentification.password) {
-			return res.status(401).send("old password incorrect").end();
+			return res.status(401).send("old password incorrect");
 		}
 
-		salt = random();
-		user.authentification.password = authentification(salt, newPass);
-		user.authentification.salt = salt;
-		user.save();
+		user.authentification.password = authentification(user.authentification.salt, newPass);
+		await user.save();
 
-		return res.status(200).send("passoword reset successfully").end();
+		return res.status(200).send("passoword reset successfully");
 	} catch (err) {
 		next(getError("SERVER STATUS", 500));
 	}

@@ -42,20 +42,12 @@ export const decrypt = (encryption) => {
 
 
 export const toCSV = (arr) => {
-	return new Promise((resolve, reject) => {
-		arr.unshift({
-			Site: 'Website',
-			User: 'User/Email',
-			Password: 'Password'
-		});
-		const csvData = arr.map(item => Object.values(item).join(','));
-		const csvContent = csvData.join('\n');
-		writeFile('../../my-passwords.csv', csvContent, 'utf8', err => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve();
-			}
-		});
+	arr.unshift({
+		Site: 'Website',
+		User: 'User/Email',
+		Password: 'Password'
 	});
+	const csvData = arr.map(item => Object.values(item).join(','));
+	const csvContent = csvData.join('\n');
+	return csvContent;
 }
